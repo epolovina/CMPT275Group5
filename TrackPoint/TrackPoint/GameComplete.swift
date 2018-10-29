@@ -11,9 +11,10 @@ import UIKit
 class GameComplete: UIViewController {
 
     //MARK: Create outlets
-    @IBOutlet weak var PlayAgainButton: UIButton!
+    
     @IBOutlet weak var SaveButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!
+    @IBOutlet weak var PlayAgainButton: UIButton!
     @IBOutlet weak var MenuButton: UIButton!
     
     override func viewDidLoad() {
@@ -26,15 +27,19 @@ class GameComplete: UIViewController {
     
     //MARK: actions
     @IBAction func SaveClicked(_ sender: Any) {
-        //Enable buttons
+        //Enable/disable buttons
         PlayAgainButton.isEnabled = true
         MenuButton.isEnabled = true
+        SaveButton.isEnabled = false
+        DeleteButton.isEnabled = false
     }
     
     @IBAction func DeleteClicked(_ sender: Any) {
-        //Enable buttons
+        //Enable/disable buttons
         PlayAgainButton.isEnabled = true
         MenuButton.isEnabled = true
+        SaveButton.isEnabled = false
+        DeleteButton.isEnabled = false
     }
    
 }

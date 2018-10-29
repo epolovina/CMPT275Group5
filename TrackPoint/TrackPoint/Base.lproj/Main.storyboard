@@ -33,16 +33,32 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mG-yB-09A">
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="54"/>
+                                        <color key="backgroundColor" red="0.27056127786636353" green="0.27060544490814209" blue="0.27055162191390991" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                        <state key="normal" title="Progress"/>
+                                        <state key="normal" title="Progress">
+                                            <color key="titleColor" red="1" green="0.06974860209" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="GzW-rG-cpj" kind="show" id="2zV-sZ-Ao8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwe-Ju-VKF">
                                         <rect key="frame" x="168" y="0.0" width="95" height="54"/>
+                                        <color key="backgroundColor" red="0.27056127786636353" green="0.27060544490814209" blue="0.27055162191390991" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                        <state key="normal" title="Profile"/>
+                                        <state key="normal" title="Profile">
+                                            <color key="titleColor" red="1" green="0.06974860209" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="U4A-yT-m31" kind="show" id="3Lk-Y4-FqU"/>
                                         </connections>
@@ -62,8 +78,16 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOv-Sg-bRX">
                                         <rect key="frame" x="0.0" y="202" width="170" height="108"/>
+                                        <color key="backgroundColor" red="0.33854168653488159" green="0.33854168653488159" blue="0.33854168653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="80"/>
-                                        <state key="normal" title="Play"/>
+                                        <state key="normal" title="Play">
+                                            <color key="titleColor" red="1" green="0.069748602085306866" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="jeU-mm-bRb" kind="showDetail" id="XlF-42-8sE"/>
                                         </connections>
@@ -85,6 +109,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mlx-9o-wLr"/>
                     </view>
+                    <connections>
+                        <outlet property="PlayButton" destination="TKv-39-OgO" id="SpV-fN-7ep"/>
+                        <outlet property="ProfileButton" destination="TKv-39-OgO" id="zjc-ZZ-RUf"/>
+                        <outlet property="ProgressButton" destination="TKv-39-OgO" id="fNV-9b-XD0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxL-TJ-w3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -326,37 +355,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="ZAr-a3-TTR">
-                                <rect key="frame" x="108.5" y="309" width="158" height="168"/>
+                                <rect key="frame" x="108" y="309" width="159" height="168"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hw2-Gq-4cJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="158" height="54"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="159" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <state key="normal" title="Play Again"/>
                                         <connections>
-                                            <action selector="PlayAgainClicked:" destination="ygx-gk-IGP" eventType="touchUpInside" id="Tsi-5n-nO4"/>
-                                            <segue destination="jeU-mm-bRb" kind="show" id="mZq-6B-RD5"/>
+                                            <segue destination="jeU-mm-bRb" kind="show" id="hmW-3m-Gjn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wmt-Dq-20e">
-                                        <rect key="frame" x="0.0" y="114" width="158" height="54"/>
+                                        <rect key="frame" x="0.0" y="114" width="159" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <state key="normal" title="Menu"/>
                                         <connections>
-                                            <action selector="MenuClicked:" destination="ygx-gk-IGP" eventType="touchUpInside" id="8DZ-fJ-ObT"/>
                                             <segue destination="d0S-V0-1er" kind="show" id="Dyz-83-5eW"/>
                                         </connections>
                                     </button>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="09R-oA-C4D">
-                                <rect key="frame" x="126" y="20" width="123" height="20.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cf-kf-iH8">
-                                        <rect key="frame" x="0.0" y="0.0" width="123" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="npO-Ss-aKg">
@@ -380,26 +396,38 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="09R-oA-C4D">
+                                <rect key="frame" x="126" y="20" width="123" height="18"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Complete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cf-kf-iH8">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="09R-oA-C4D" firstAttribute="top" secondItem="asa-ND-ngt" secondAttribute="top" id="1sg-88-iwd"/>
                             <constraint firstItem="npO-Ss-aKg" firstAttribute="centerY" secondItem="0m6-6I-I89" secondAttribute="centerY" constant="-124" id="Fl5-r3-rar"/>
-                            <constraint firstItem="09R-oA-C4D" firstAttribute="leading" secondItem="asa-ND-ngt" secondAttribute="leading" constant="126" id="NXF-Wr-gcC"/>
-                            <constraint firstItem="09R-oA-C4D" firstAttribute="top" secondItem="asa-ND-ngt" secondAttribute="top" id="NcX-fY-94I"/>
+                            <constraint firstItem="ZAr-a3-TTR" firstAttribute="trailing" secondItem="npO-Ss-aKg" secondAttribute="trailing" id="RwC-4x-K4F"/>
                             <constraint firstItem="npO-Ss-aKg" firstAttribute="top" secondItem="0m6-6I-I89" secondAttribute="top" constant="188" id="SdG-wK-u7t"/>
+                            <constraint firstItem="09R-oA-C4D" firstAttribute="leading" secondItem="asa-ND-ngt" secondAttribute="leading" constant="126" id="UZe-bc-fWe"/>
+                            <constraint firstItem="ZAr-a3-TTR" firstAttribute="centerX" secondItem="npO-Ss-aKg" secondAttribute="centerX" id="Xrc-Fo-cPd"/>
+                            <constraint firstItem="09R-oA-C4D" firstAttribute="centerX" secondItem="npO-Ss-aKg" secondAttribute="centerX" id="bR6-Tt-cWk"/>
                             <constraint firstItem="npO-Ss-aKg" firstAttribute="leading" secondItem="0m6-6I-I89" secondAttribute="leading" constant="108" id="cV6-cM-swH"/>
                             <constraint firstItem="npO-Ss-aKg" firstAttribute="centerX" secondItem="0m6-6I-I89" secondAttribute="centerX" id="mee-ri-xqE"/>
-                            <constraint firstItem="ZAr-a3-TTR" firstAttribute="centerX" secondItem="0m6-6I-I89" secondAttribute="centerX" id="tnz-Wy-mYu"/>
-                            <constraint firstItem="ZAr-a3-TTR" firstAttribute="centerY" secondItem="0m6-6I-I89" secondAttribute="centerY" constant="59.5" id="uGk-H7-Trb"/>
-                            <constraint firstItem="09R-oA-C4D" firstAttribute="centerX" secondItem="0m6-6I-I89" secondAttribute="centerX" id="zIm-LM-nUL"/>
+                            <constraint firstItem="ZAr-a3-TTR" firstAttribute="top" secondItem="npO-Ss-aKg" secondAttribute="bottom" constant="78" id="pdO-0h-DYW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="asa-ND-ngt"/>
                     </view>
                     <connections>
-                        <outlet property="DeleteButton" destination="prR-Vq-Vtl" id="CBb-RT-9zh"/>
-                        <outlet property="MenuButton" destination="Wmt-Dq-20e" id="ufU-Q2-VM4"/>
-                        <outlet property="PlayAgainButton" destination="Hw2-Gq-4cJ" id="6Ek-QH-lAC"/>
-                        <outlet property="SaveButton" destination="pco-R2-OOE" id="ygR-df-yTm"/>
+                        <outlet property="DeleteButton" destination="prR-Vq-Vtl" id="mOu-K8-GZC"/>
+                        <outlet property="MenuButton" destination="Wmt-Dq-20e" id="yZN-Zb-HZP"/>
+                        <outlet property="PlayAgainButton" destination="Hw2-Gq-4cJ" id="fim-ef-VX9"/>
+                        <outlet property="SaveButton" destination="pco-R2-OOE" id="xui-oV-l5N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aET-d7-yb4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,9 +439,9 @@
         <image name="LogoV1" width="340" height="340"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mZq-6B-RD5"/>
-        <segue reference="y5f-Py-GiX"/>
-        <segue reference="jBU-EP-gqq"/>
+        <segue reference="hmW-3m-Gjn"/>
+        <segue reference="2zV-sZ-Ao8"/>
+        <segue reference="3Lk-Y4-FqU"/>
         <segue reference="Dyz-83-5eW"/>
     </inferredMetricsTieBreakers>
 </document>
