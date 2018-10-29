@@ -17,17 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wMg-uo-97V">
-                                <rect key="frame" x="78.5" y="294" width="218" height="79"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoV1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hn-7t-Yeg">
+                                <rect key="frame" x="103" y="102" width="169" height="169"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8hn-7t-Yeg" secondAttribute="height" multiplier="1:1" id="h4H-sr-ecj"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="wMg-uo-97V">
+                                <rect key="frame" x="81" y="275.5" width="213" height="116.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TrackPoint" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEh-Jv-qXW">
-                                        <rect key="frame" x="0.0" y="0.0" width="218" height="58.5"/>
-                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="49"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TrackPoint" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEh-Jv-qXW">
+                                        <rect key="frame" x="0.0" y="0.0" width="213" height="58"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="XwH-sj-3CK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="47"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Ready, Steady, Go!&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdp-Um-Shh">
-                                        <rect key="frame" x="0.0" y="58.5" width="218" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="96" width="213" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -35,12 +44,14 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.84794042408504333" green="1" blue="0.98637846962709308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wMg-uo-97V" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Lcj-2E-7QR"/>
-                            <constraint firstItem="wMg-uo-97V" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="S6k-IN-Spi"/>
-                            <constraint firstItem="wMg-uo-97V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="XC8-nj-8YO"/>
-                            <constraint firstItem="wMg-uo-97V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="tMg-TC-5OM"/>
+                            <constraint firstItem="8hn-7t-Yeg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="82" id="520-1d-PP8"/>
+                            <constraint firstItem="wMg-uo-97V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="BH6-Kl-YTs"/>
+                            <constraint firstItem="wMg-uo-97V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="C2B-Ot-JHz"/>
+                            <constraint firstItem="wMg-uo-97V" firstAttribute="centerX" secondItem="8hn-7t-Yeg" secondAttribute="centerX" id="OTe-91-7RH"/>
+                            <constraint firstItem="8hn-7t-Yeg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="lCW-sj-wX1"/>
+                            <constraint firstItem="8hn-7t-Yeg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vg7-od-h70"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -50,4 +61,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LogoV1" width="170" height="170"/>
+    </resources>
 </document>

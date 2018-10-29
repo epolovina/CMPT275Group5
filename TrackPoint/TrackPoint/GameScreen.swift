@@ -10,13 +10,17 @@ import UIKit
 
 class GameScreen: UIViewController {
 
+    @IBOutlet weak var DoneButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func DoneButton(_ sender: Any) {
+        print("Game has finished being played")
+    }
+    
     /*
     // MARK: - Navigation
 
