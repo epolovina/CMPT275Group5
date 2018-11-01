@@ -108,9 +108,9 @@
 		D255B904218011B600A011FC /* TrackPoint */ = {
 			isa = PBXGroup;
 			children = (
-				49394769218B72FD0033C16B /* collect.swift */,
 				D207840821810E5A00F653B9 /* TrackPoint.entitlements */,
 				D255B905218011B600A011FC /* AppDelegate.swift */,
+				49394769218B72FD0033C16B /* collect.swift */,
 				D255B909218011B600A011FC /* Main.storyboard */,
 				D23BEF472187F99800B944E9 /* MainMenu.swift */,
 				D2902BFE21824DC500589598 /* GameComplete.swift */,
