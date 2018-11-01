@@ -95,9 +95,6 @@ class DataRun {
     
     @objc fileprivate func get_data() //gets sensor data when not suspended, push to array
     {
-        if isSuspended{
-            return;
-        }
         if let data = self.motionManager.deviceMotion
         {
             print("getTimer: %lf,%lf,%lf\n", data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
