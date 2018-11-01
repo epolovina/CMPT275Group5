@@ -32,12 +32,12 @@ class GameScreen: UIViewController  {
     //MARK: Actions
     @IBAction func StartClicked(_ sender: Any) {
         collector.start()
-        //sensor_timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
+        sensor_timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
     }
 
     @IBAction func StopClicked(_ sender: Any) {
         collector.end()
-        //sensor_timer.invalidate();
+        sensor_timer.invalidate();
         performSegue(withIdentifier: "StopSegue", sender: self)
     }
     

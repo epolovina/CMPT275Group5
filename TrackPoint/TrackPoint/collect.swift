@@ -83,7 +83,7 @@ class DataRun {
             self.motionManager.deviceMotionUpdateInterval = 1.0 / 100.0 //frequency of 100 Hz
             self.motionManager.showsDeviceMovementDisplay = true //for now (testing purposes)
             //not sure if we need a reference frame???
-            //self.motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
+            self.motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
         }
         
         else
@@ -97,7 +97,7 @@ class DataRun {
     {
         if let data = self.motionManager.deviceMotion
         {
-            print("getTimer: %lf,%lf,%lf\n", data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
+            //print("getTimer: %lf,%lf,%lf\n", data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
             accel_curr = (data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
             rot_curr = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
             user_accel.append((data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z))
