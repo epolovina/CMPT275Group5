@@ -57,6 +57,7 @@ class GameScreen: UIViewController  {
         self.rotateX.text = String(format:"%.4f", rX)
         self.rotateY.text = String(format:"%.4f", rY)
         self.rotateZ.text = String(format:"%.4f", rZ)
+        print(curr_data[0])
     }
     
 }

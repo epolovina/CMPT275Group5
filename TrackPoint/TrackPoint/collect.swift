@@ -100,6 +100,7 @@ class DataRun {
         }
         if let data = self.motionManager.deviceMotion
         {
+            print("getTimer: %lf,%lf,%lf\n", data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
             accel_curr = (data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
             rot_curr = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
             user_accel.append((data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z))
