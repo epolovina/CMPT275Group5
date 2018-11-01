@@ -13,6 +13,8 @@ class DataRun {
     let motionManager : CMMotionManager
     fileprivate var rot_rate : [(Double, Double, Double)] = []
     fileprivate var user_accel: [(Double, Double, Double)] = []
+    fileprivate var rot_curr: (Double, Double, Double) = (0,0,0)
+     fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var isSuspended : Bool = false
     fileprivate var dataTimer: Timer!
     fileprivate var data_timestamp : Date?
@@ -63,12 +65,9 @@ class DataRun {
     }
     
     func get_last_entry() -> [(Double, Double, Double)]{
-        //
-        let accel:(Double, Double, Double) = user_accel[user_accel.count-1];
-        let gyro:(Double, Double, Double) = rot_rate[rot_rate.count-1];
         var rtn_val:[(Double, Double, Double)] = [];
-        rtn_val.append(accel);
-        rtn_val.append(gyro);
+        rtn_val.append(accel_curr);
+        rtn_val.append(rot_curr);
         
         return rtn_val
     }
@@ -101,6 +100,8 @@ class DataRun {
         }
         if let data = self.motionManager.deviceMotion
         {
+            accel_curr = (data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
+            rot_curr = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
             user_accel.append((data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z))
             rot_rate.append((data.rotationRate.x, data.rotationRate.y, data.rotationRate.z))
         }
