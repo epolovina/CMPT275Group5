@@ -12,6 +12,7 @@ class GameScreen: UIViewController  {
     //MARK: Variables
     let collector:DataRun = DataRun()
        fileprivate var sensor_timer: Timer!
+    let gameComplete = GameComplete()
 
     //MARK: Outlets
     @IBOutlet weak var StartButton: UIButton!
@@ -38,7 +39,8 @@ class GameScreen: UIViewController  {
     @IBAction func StopClicked(_ sender: Any) {
         collector.end()
         sensor_timer.invalidate();
-        performSegue(withIdentifier: "StopSegue", sender: self)
+        //performSegue(withIdentifier: "StopSegue", sender: self)
+        //self.present(gameComplete, animated: true, completion: nil)
     }
     
     

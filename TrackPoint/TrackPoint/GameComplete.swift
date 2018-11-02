@@ -25,6 +25,11 @@ class GameComplete: UIViewController {
 
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     //MARK: actions
     @IBAction func SaveClicked(_ sender: AnyObject) {
         //Enable/disable buttons
