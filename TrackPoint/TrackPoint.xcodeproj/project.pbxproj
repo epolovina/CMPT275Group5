@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */; };
 		4939476A218B72FD0033C16B /* collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49394769218B72FD0033C16B /* collect.swift */; };
 		D20784122181795400F653B9 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20784112181795400F653B9 /* GameScreen.swift */; };
 		D23BEF482187F99800B944E9 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BEF472187F99800B944E9 /* MainMenu.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationPopUpViewController.swift; sourceTree = "<group>"; };
 		49394769218B72FD0033C16B /* collect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = collect.swift; sourceTree = "<group>"; };
 		D207840821810E5A00F653B9 /* TrackPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackPoint.entitlements; sourceTree = "<group>"; };
 		D20784112181795400F653B9 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				D2902BFA21823FFD00589598 /* Progress.swift */,
 				D2902BF82182390100589598 /* Profile.swift */,
 				D20784112181795400F653B9 /* GameScreen.swift */,
+				30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */,
 				D255B90C218011B700A011FC /* Assets.xcassets */,
 				D255B90E218011B700A011FC /* LaunchScreen.storyboard */,
 				D255B911218011B700A011FC /* Info.plist */,
@@ -284,6 +287,7 @@
 				4939476A218B72FD0033C16B /* collect.swift in Sources */,
 				D2902BFF21824DC500589598 /* GameComplete.swift in Sources */,
 				D20784122181795400F653B9 /* GameScreen.swift in Sources */,
+				30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */,
 				D255B906218011B600A011FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

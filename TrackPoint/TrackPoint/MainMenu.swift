@@ -16,7 +16,9 @@ class MainMenu: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func closePopUp(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 
