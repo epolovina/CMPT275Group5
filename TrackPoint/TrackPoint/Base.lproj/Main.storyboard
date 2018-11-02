@@ -330,7 +330,7 @@
                                         </state>
                                         <connections>
                                             <action selector="StopClicked:" destination="jeU-mm-bRb" eventType="touchUpInside" id="cN2-Cr-w8U"/>
-                                            <segue destination="ygx-gk-IGP" kind="show" identifier="StopSegue" id="diQ-aB-8UV"/>
+                                            <segue destination="ygx-gk-IGP" kind="show" id="x7F-IB-xBN"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -436,7 +436,7 @@
         <!--Game Complete-->
         <scene sceneID="hoD-WD-7Ye">
             <objects>
-                <viewController id="ygx-gk-IGP" customClass="GameComplete" customModule="TrackPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameComplete" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ygx-gk-IGP" customClass="GameComplete" customModule="TrackPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0m6-6I-I89">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -521,9 +521,10 @@
         <image name="LogoV1" width="340" height="340"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XlF-42-8sE"/>
+        <segue reference="x7F-IB-xBN"/>
+        <segue reference="hmW-3m-Gjn"/>
         <segue reference="2zV-sZ-Ao8"/>
         <segue reference="3Lk-Y4-FqU"/>
-        <segue reference="GOk-TC-ljM"/>
+        <segue reference="Dyz-83-5eW"/>
     </inferredMetricsTieBreakers>
 </document>
