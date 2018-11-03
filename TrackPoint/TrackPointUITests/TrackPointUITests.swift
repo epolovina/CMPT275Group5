@@ -25,10 +25,32 @@ class TrackPointUITests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
+    //scenario 1: menu -> profile -> menu
+    
+    func testScenario1() {
         // Use recording to get started writing UI tests.
+        let app = XCUIApplication()
+        app.buttons["Profile"].tap()
+        app.buttons["Menu"].tap()
+        
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+    }
+    
+    //scenario 2: menu -> progress -> profile -> menu
+    func testScenario2() {
+        // Use recording to get started writing UI tests.
+        
+        let app = XCUIApplication()
+        app.buttons["Progress"].tap()
+        app.buttons["Profile"].tap()
+        app.buttons["Menu"].tap()
+        
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
 
+    
+    
 }
+
