@@ -9,14 +9,15 @@
   },
   "author": "epolovina",
   "license": "ISC",
+  "engines":{
+	"node":"8.10.x"
+  },
   "dependencies": {
     "express": "^4.16.4",
     "mongo": "^0.1.0",
     "mongoose": "^5.3.9"
-  },
-  {
-  "engines":{
-	"node":"8.10.0"
-	}
   }
+  
+ 
+  
 }
