@@ -30,6 +30,11 @@ class GameScreen: UIViewController  {
 
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     //MARK: Actions
     @IBAction func StartClicked(_ sender: Any) {
         collector.start()
