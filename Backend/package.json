@@ -1,0 +1,22 @@
+{
+  "name": "cmpt275",
+  "version": "1.0.0",
+  "description": "Back-end for CMPT275 swift project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "epolovina",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.3.9"
+  },
+  {
+  "engines":{
+	"node":"8.10.0"
+	}
+  }
+}
