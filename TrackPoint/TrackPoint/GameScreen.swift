@@ -11,7 +11,7 @@ import UIKit
 class GameScreen: UIViewController  {
     //MARK: Variables
     let collector:DataRun = DataRun()
-       fileprivate var sensor_timer: Timer!
+    fileprivate var sensor_timer: Timer!
     let gameComplete = GameComplete()
 
     //MARK: Outlets
@@ -43,7 +43,7 @@ class GameScreen: UIViewController  {
         //self.present(gameComplete, animated: true, completion: nil)
     }
     
-    
+    // Display update timer func
     @objc fileprivate  func updateLabels(){
         let curr_data = collector.get_last_entry();
         let aX = curr_data[0].0
