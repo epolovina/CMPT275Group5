@@ -21,6 +21,11 @@ class DataRun {
     fileprivate var data_timestamp : Date!
     fileprivate var lastSaveDir: URL?
     fileprivate let fileManager = FileManager.default
+    fileprivate enum colError: Error {
+        case SaveDataEmpty
+        case ReadDataEmpty
+        case InvalidURL
+    }
     
     //MARK: Public
     init()
@@ -55,7 +60,11 @@ class DataRun {
     {
         isRunning = false
         dataTimer.invalidate()
-        saveData()
+        if verifyWritten(){
+            print("Data saved successfully to <%s>\n", lastSaveDir?.absoluteString)
+        }else{
+            print("Save data is corrupt\n")
+        }
     }
     
     func return_accel() -> ([Double], [Double], [Double])?//function so that accel data can be accessed after a run
@@ -78,8 +87,8 @@ class DataRun {
         return rtn_val
     }
     
-    func saveData(){
-        if (isRunning || user_accel.0.isEmpty || rot_rate.0.isEmpty) {return};
+    func saveData() throws {
+        if (isRunning || user_accel.0.isEmpty || rot_rate.0.isEmpty) {throw colError.SaveDataEmpty};
         
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let _date = Date()
@@ -116,11 +125,44 @@ class DataRun {
         }
     }
     
-    func readData(url:URL) -> [[Double]] {
+    // test saves
+    func verifyWritten() -> Bool {
+        if (lastSaveDir == nil) {return false};
+        var isCorrect: Bool = true;
+        do {
+            try saveData()
+            let readArray = try readData(url: lastSaveDir!)
+            isCorrect = isCorrect && arrayCMP(src0: user_accel.0, src1: readArray[0], index: 0)
+            isCorrect = isCorrect && arrayCMP(src0: user_accel.1, src1: readArray[1], index: 1)
+            isCorrect = isCorrect && arrayCMP(src0: user_accel.2, src1: readArray[2], index: 2)
+            isCorrect = isCorrect && arrayCMP(src0: rot_rate.0, src1: readArray[3], index: 3)
+            isCorrect = isCorrect && arrayCMP(src0: rot_rate.1, src1: readArray[4], index: 4)
+            isCorrect = isCorrect && arrayCMP(src0: rot_rate.2, src1: readArray[5], index: 5)
+        } catch {
+            isCorrect = false
+        }
+        return isCorrect;
+    }
+    
+    // compares arrays, true if same
+    fileprivate func arrayCMP(src0:[Double],src1:[Double],index:Int = -1) -> Bool {
+        assert(src0.count == src1.count)
+        for i in 0..<src0.count{
+            if (src0[i] != src1[i]){
+                if(index > -1) {
+                    print("arrayCMP fail index = %d\n",index)
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    func readData(url:URL) throws -> [[Double]] {
         var rArray: [[Double]]  = [[],[],[],[],[],[]]
         
         do{
-            let rData = try! Data(contentsOf: url)
+            let rData = try Data(contentsOf: url)
             var aArray:[Double]!
             rData.withUnsafeBytes{(bytes: UnsafePointer<Double>) in aArray = Array(UnsafeBufferPointer(start: bytes, count: rData.count / MemoryLayout<Double>.size))}
             let rACount:Int = Int(rData.count/6)
@@ -128,8 +170,11 @@ class DataRun {
                 rArray[i] = Array(aArray[i*rACount..<(i+1)*rACount])
             }
         }catch {
+            throw colError.InvalidURL
         }
-
+        if (rArray[0].isEmpty){
+            throw colError.ReadDataEmpty
+        }
         return rArray
     }
     
