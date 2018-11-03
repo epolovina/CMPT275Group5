@@ -27,7 +27,7 @@ class GameScreen: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        StopButton.isEnabled = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,6 +37,7 @@ class GameScreen: UIViewController  {
     
     //MARK: Actions
     @IBAction func StartClicked(_ sender: Any) {
+        StopButton.isEnabled = true
         collector.start()
         sensor_timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
     }
