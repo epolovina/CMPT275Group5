@@ -10,13 +10,15 @@ import UIKit
 
 class MedicationPopUpViewController: UIViewController {
 
-    @IBOutlet weak var medicationTextField: UITextField!
-    @IBOutlet weak var startDate: UIDatePicker!
-    @IBOutlet weak var endDate: UIDatePicker!
+    //@IBOutlet weak var medicationTextField: UITextField!
+   // @IBOutlet weak var startDate: UIDatePicker!
+    //@IBOutlet weak var endDate: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
     
+    //@IBOutlet weak var StartDate: UIDatePicker!
     var medicationArr = [String]()
     
+    //@IBOutlet weak var EndDate: UIDatePicker!
     //verify input is correct
     @IBAction func closePopUp(_ sender: Any) {
       //  if medicationTextField.text != ""{

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		306F0A41218D114A00468250 /* menuToProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F0A40218D114A00468250 /* menuToProfile.swift */; };
+		306F0A4F218D11F500468250 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F0A4E218D11F500468250 /* test.swift */; };
+		306F0A5D218D121E00468250 /* TrackPointUITests1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F0A5C218D121E00468250 /* TrackPointUITests1.swift */; };
 		30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */; };
 		4939476A218B72FD0033C16B /* collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49394769218B72FD0033C16B /* collect.swift */; };
 		D20784122181795400F653B9 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20784112181795400F653B9 /* GameScreen.swift */; };
@@ -23,6 +26,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		306F0A43218D114A00468250 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D255B8FA218011B600A011FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D255B901218011B600A011FC;
+			remoteInfo = TrackPoint;
+		};
+		306F0A51218D11F500468250 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D255B8FA218011B600A011FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D255B901218011B600A011FC;
+			remoteInfo = TrackPoint;
+		};
+		306F0A5F218D121E00468250 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D255B8FA218011B600A011FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D255B901218011B600A011FC;
+			remoteInfo = TrackPoint;
+		};
 		D255B917218011B800A011FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D255B8FA218011B600A011FC /* Project object */;
@@ -40,6 +64,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		306F0A3E218D114900468250 /* menuToProfile.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = menuToProfile.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		306F0A40218D114A00468250 /* menuToProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuToProfile.swift; sourceTree = "<group>"; };
+		306F0A42218D114A00468250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		306F0A4C218D11F500468250 /* test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		306F0A4E218D11F500468250 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		306F0A50218D11F500468250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		306F0A5A218D121E00468250 /* TrackPointUITests1.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackPointUITests1.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		306F0A5C218D121E00468250 /* TrackPointUITests1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPointUITests1.swift; sourceTree = "<group>"; };
+		306F0A5E218D121E00468250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationPopUpViewController.swift; sourceTree = "<group>"; };
 		49394769218B72FD0033C16B /* collect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = collect.swift; sourceTree = "<group>"; };
 		D207840821810E5A00F653B9 /* TrackPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackPoint.entitlements; sourceTree = "<group>"; };
@@ -63,6 +96,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		306F0A3B218D114900468250 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		306F0A49218D11F500468250 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		306F0A57218D121E00468250 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D255B8FF218011B600A011FC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,12 +141,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		306F0A3F218D114A00468250 /* menuToProfile */ = {
+			isa = PBXGroup;
+			children = (
+				306F0A40218D114A00468250 /* menuToProfile.swift */,
+				306F0A42218D114A00468250 /* Info.plist */,
+			);
+			path = menuToProfile;
+			sourceTree = "<group>";
+		};
+		306F0A4D218D11F500468250 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				306F0A4E218D11F500468250 /* test.swift */,
+				306F0A50218D11F500468250 /* Info.plist */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		306F0A5B218D121E00468250 /* TrackPointUITests1 */ = {
+			isa = PBXGroup;
+			children = (
+				306F0A5C218D121E00468250 /* TrackPointUITests1.swift */,
+				306F0A5E218D121E00468250 /* Info.plist */,
+			);
+			path = TrackPointUITests1;
+			sourceTree = "<group>";
+		};
 		D255B8F9218011B600A011FC = {
 			isa = PBXGroup;
 			children = (
 				D255B904218011B600A011FC /* TrackPoint */,
 				D255B919218011B800A011FC /* TrackPointTests */,
 				D255B924218011B800A011FC /* TrackPointUITests */,
+				306F0A3F218D114A00468250 /* menuToProfile */,
+				306F0A4D218D11F500468250 /* test */,
+				306F0A5B218D121E00468250 /* TrackPointUITests1 */,
 				D255B903218011B600A011FC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +187,9 @@
 				D255B902218011B600A011FC /* TrackPoint.app */,
 				D255B916218011B800A011FC /* TrackPointTests.xctest */,
 				D255B921218011B800A011FC /* TrackPointUITests.xctest */,
+				306F0A3E218D114900468250 /* menuToProfile.xctest */,
+				306F0A4C218D11F500468250 /* test.xctest */,
+				306F0A5A218D121E00468250 /* TrackPointUITests1.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +235,60 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		306F0A3D218D114900468250 /* menuToProfile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 306F0A47218D114A00468250 /* Build configuration list for PBXNativeTarget "menuToProfile" */;
+			buildPhases = (
+				306F0A3A218D114900468250 /* Sources */,
+				306F0A3B218D114900468250 /* Frameworks */,
+				306F0A3C218D114900468250 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				306F0A44218D114A00468250 /* PBXTargetDependency */,
+			);
+			name = menuToProfile;
+			productName = menuToProfile;
+			productReference = 306F0A3E218D114900468250 /* menuToProfile.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		306F0A4B218D11F500468250 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 306F0A53218D11F500468250 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				306F0A48218D11F500468250 /* Sources */,
+				306F0A49218D11F500468250 /* Frameworks */,
+				306F0A4A218D11F500468250 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				306F0A52218D11F500468250 /* PBXTargetDependency */,
+			);
+			name = test;
+			productName = test;
+			productReference = 306F0A4C218D11F500468250 /* test.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		306F0A59218D121E00468250 /* TrackPointUITests1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 306F0A61218D121E00468250 /* Build configuration list for PBXNativeTarget "TrackPointUITests1" */;
+			buildPhases = (
+				306F0A56218D121E00468250 /* Sources */,
+				306F0A57218D121E00468250 /* Frameworks */,
+				306F0A58218D121E00468250 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				306F0A60218D121E00468250 /* PBXTargetDependency */,
+			);
+			name = TrackPointUITests1;
+			productName = TrackPointUITests1;
+			productReference = 306F0A5A218D121E00468250 /* TrackPointUITests1.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D255B901218011B600A011FC /* TrackPoint */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D255B92A218011B800A011FC /* Build configuration list for PBXNativeTarget "TrackPoint" */;
@@ -211,6 +352,18 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Pit Bulls";
 				TargetAttributes = {
+					306F0A3D218D114900468250 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = D255B901218011B600A011FC;
+					};
+					306F0A4B218D11F500468250 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = D255B901218011B600A011FC;
+					};
+					306F0A59218D121E00468250 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = D255B901218011B600A011FC;
+					};
 					D255B901218011B600A011FC = {
 						CreatedOnToolsVersion = 10.0;
 						SystemCapabilities = {
@@ -245,11 +398,35 @@
 				D255B901218011B600A011FC /* TrackPoint */,
 				D255B915218011B800A011FC /* TrackPointTests */,
 				D255B920218011B800A011FC /* TrackPointUITests */,
+				306F0A3D218D114900468250 /* menuToProfile */,
+				306F0A4B218D11F500468250 /* test */,
+				306F0A59218D121E00468250 /* TrackPointUITests1 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		306F0A3C218D114900468250 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		306F0A4A218D11F500468250 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		306F0A58218D121E00468250 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D255B900218011B600A011FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,6 +454,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		306F0A3A218D114900468250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				306F0A41218D114A00468250 /* menuToProfile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		306F0A48218D11F500468250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				306F0A4F218D11F500468250 /* test.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		306F0A56218D121E00468250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				306F0A5D218D121E00468250 /* TrackPointUITests1.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D255B8FE218011B600A011FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +512,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		306F0A44218D114A00468250 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D255B901218011B600A011FC /* TrackPoint */;
+			targetProxy = 306F0A43218D114A00468250 /* PBXContainerItemProxy */;
+		};
+		306F0A52218D11F500468250 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D255B901218011B600A011FC /* TrackPoint */;
+			targetProxy = 306F0A51218D11F500468250 /* PBXContainerItemProxy */;
+		};
+		306F0A60218D121E00468250 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D255B901218011B600A011FC /* TrackPoint */;
+			targetProxy = 306F0A5F218D121E00468250 /* PBXContainerItemProxy */;
+		};
 		D255B918218011B800A011FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D255B901218011B600A011FC /* TrackPoint */;
@@ -343,6 +559,116 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		306F0A45218D114A00468250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = menuToProfile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eddiezheng.menuToProfile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrackPoint.app/TrackPoint";
+			};
+			name = Debug;
+		};
+		306F0A46218D114A00468250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = menuToProfile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eddiezheng.menuToProfile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrackPoint.app/TrackPoint";
+			};
+			name = Release;
+		};
+		306F0A54218D11F500468250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eddiezheng.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrackPoint;
+			};
+			name = Debug;
+		};
+		306F0A55218D11F500468250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eddiezheng.test;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrackPoint;
+			};
+			name = Release;
+		};
+		306F0A62218D121E00468250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrackPointUITests1/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eddiezheng.TrackPointUITests1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrackPoint;
+			};
+			name = Debug;
+		};
+		306F0A63218D121E00468250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TrackPointUITests1/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eddiezheng.TrackPointUITests1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrackPoint;
+			};
+			name = Release;
+		};
 		D255B928218011B800A011FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -576,6 +902,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		306F0A47218D114A00468250 /* Build configuration list for PBXNativeTarget "menuToProfile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				306F0A45218D114A00468250 /* Debug */,
+				306F0A46218D114A00468250 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		306F0A53218D11F500468250 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				306F0A54218D11F500468250 /* Debug */,
+				306F0A55218D11F500468250 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		306F0A61218D121E00468250 /* Build configuration list for PBXNativeTarget "TrackPointUITests1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				306F0A62218D121E00468250 /* Debug */,
+				306F0A63218D121E00468250 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D255B8FD218011B600A011FC /* Build configuration list for PBXProject "TrackPoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
