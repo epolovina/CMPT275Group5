@@ -25,34 +25,41 @@ class TrackPointUITests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    //scenario 1: menu -> profile -> menu
-    
-    func testScenario1() {
+    func testProfileToMenuToProgress(){
+        
         let app = XCUIApplication()
-        XCTAssertTrue(app.buttons["Profile"].exists)
         app.buttons["Profile"].tap()
-        XCTAssertTrue(app.buttons["Menu"].exists)
-        XCTAssertTrue(app.staticTexts["Profile"].exists)
         app.buttons["Menu"].tap()
-        XCTAssertTrue(app.staticTexts["Main Menu"].exists)
-
-    }
-    
-    //scenario 2: menu -> progress -> profile -> menu
-    func testScenario2() {
-        let app = XCUIApplication()
-        XCTAssertTrue(app.buttons["Progress"].exists)
         app.buttons["Progress"].tap()
-        XCTAssertTrue(app.staticTexts["Progress"].exists)
-        XCTAssertTrue(app.buttons["Profile"].exists)
-        app.buttons["Profile"].tap()
-        XCTAssertTrue(app.staticTexts["Profile"].exists)
-        app.buttons["Menu"].tap()
-        XCTAssertTrue(app.staticTexts["Main Menu"].exists)
+        
+        
     }
     
-
+    func testProfileToPopupToProgress(){
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Profile"].tap()
+        app.buttons["Add"].tap()
+       
     
+        app.buttons["Save"].tap()
+        app.buttons["Progess"].tap()
+        app.buttons["Months"].tap()
+        app.buttons["Share"].tap()
+        app.buttons["Menu"].tap()
+        
+        
+    }
+
+    func testenuToProgress() {
+        // Use recording to get started writing UI tests.
+        
+        let app = XCUIApplication()
+        app.buttons["Progress"].tap()
+        app.buttons["Menu"].tap()
+                        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
     
 }
 
