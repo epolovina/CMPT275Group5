@@ -28,25 +28,27 @@ class TrackPointUITests: XCTestCase {
     //scenario 1: menu -> profile -> menu
     
     func testScenario1() {
-        // Use recording to get started writing UI tests.
         let app = XCUIApplication()
+        XCTAssertTrue(app.buttons["Profile"].exists)
         app.buttons["Profile"].tap()
+        XCTAssertTrue(app.buttons["Menu"].exists)
+        XCTAssertTrue(app.staticTexts["Profile"].exists)
         app.buttons["Menu"].tap()
-        
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
+        XCTAssertTrue(app.staticTexts["Main Menu"].exists)
+
     }
     
     //scenario 2: menu -> progress -> profile -> menu
     func testScenario2() {
-        // Use recording to get started writing UI tests.
-        
         let app = XCUIApplication()
+        XCTAssertTrue(app.buttons["Progress"].exists)
         app.buttons["Progress"].tap()
+        XCTAssertTrue(app.staticTexts["Progress"].exists)
+        XCTAssertTrue(app.buttons["Profile"].exists)
         app.buttons["Profile"].tap()
+        XCTAssertTrue(app.staticTexts["Profile"].exists)
         app.buttons["Menu"].tap()
-        
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssertTrue(app.staticTexts["Main Menu"].exists)
     }
     
 
