@@ -9,10 +9,14 @@
 import XCTest
 
 class TrackPointUITests: XCTestCase {
-
+    var sut: UIViewController!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
+        super.setUp()
+        sut = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        
+        UIApplication.shared.keyWindow?.rootViewController = sut
+        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
@@ -29,8 +33,11 @@ class TrackPointUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Profile"].tap()
+        XCTAssertTrue(app.staticTexts["Profile"].exists)
         app.buttons["Menu"].tap()
+        XCTAssertTrue(app.staticTexts["Main Menu"].exists)
         app.buttons["Progress"].tap()
+        XCTAssertTrue(app.staticTexts["Progress"].exists)
         
         
     }
@@ -40,13 +47,18 @@ class TrackPointUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Profile"].tap()
+        XCTAssertTrue(app.staticTexts["Profile"].exists)
         app.buttons["Add"].tap()
-       
-    
+        XCTAssertTrue(app.staticTexts["Enter Medication"].exists)
+        XCTAssertTrue(app.staticTexts["Start Date"].exists)
+        XCTAssertTrue(app.staticTexts["End Date"].exists)
         app.buttons["Save"].tap()
+        XCTAssertTrue(app.staticTexts["Profile"].exists)
         app.buttons["Progess"].tap()
-        app.buttons["Months"].tap()
+        XCTAssertTrue(app.staticTexts["Progress"].exists)
         app.buttons["Share"].tap()
+        XCTAssertTrue(sut.presentedViewController is UIAlertController)
+        XCTAssertEqual(sut.presentedViewController?.title, "Alert")
         app.buttons["Menu"].tap()
         
         
