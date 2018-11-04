@@ -518,7 +518,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoV1" width="340" height="340"/>
+        <image name="LogoV1" width="170" height="170"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="x7F-IB-xBN"/>

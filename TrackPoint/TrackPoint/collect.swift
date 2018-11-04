@@ -11,8 +11,8 @@ import CoreMotion
 class DataRun {
     
     fileprivate let motionManager : CMMotionManager
-    fileprivate var rot_rate : ([Double], [Double], [Double]) = ([],[],[])
-    fileprivate var user_accel: ([Double], [Double], [Double]) = ([],[],[])
+    fileprivate var rot_rate : ([Double], [Double], [Double]) = ([1,2,3],[1,2,3],[1,2,3])
+    fileprivate var user_accel: ([Double], [Double], [Double]) = ([1,2,3],[1,2,3],[1,2,3])
     fileprivate var rot_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var isSuspended : Bool = false
@@ -51,20 +51,21 @@ class DataRun {
     
     func start() //start the timer
     {
-        isRunning = true
-        data_timestamp = Date()
-        dataTimer = Timer.scheduledTimer(timeInterval: 1.0/100.0, target: self, selector: #selector(DataRun.get_data), userInfo: nil, repeats: true)
+        if verifyWritten(){
+            print("Data saved successfully to <%s>\n", lastSaveDir?.absoluteString ?? "nil")
+        }else{
+            print("Save data is corrupt\n")
+        }
+        //isRunning = true
+        //data_timestamp = Date()
+        //dataTimer = Timer.scheduledTimer(timeInterval: 1.0/100.0, target: self, selector: #selector(DataRun.get_data), userInfo: nil, repeats: true)
     }
     
     func end() //stop timer, write to DB
     {
         isRunning = false
         dataTimer.invalidate()
-        if verifyWritten(){
-            print("Data saved successfully to <%s>\n", lastSaveDir?.absoluteString)
-        }else{
-            print("Save data is corrupt\n")
-        }
+
     }
     
     func return_accel() -> ([Double], [Double], [Double])?//function so that accel data can be accessed after a run
@@ -99,19 +100,13 @@ class DataRun {
         let hour = calendar.component(.hour, from: data_timestamp ?? _date)
         let min = calendar.component(.minute, from: data_timestamp ?? _date)
         let sec = calendar.component(.second, from: data_timestamp ?? _date)
-        var filename = paths[0].appendingPathComponent("TrackPoint/TPGSession-")
-        filename = filename.appendingPathComponent(String(year))
-        filename = filename.appendingPathComponent("-")
-        filename = filename.appendingPathComponent(String(month))
-        filename = filename.appendingPathComponent("-")
-        filename = filename.appendingPathComponent(String(day))
-        filename = filename.appendingPathComponent("-")
-        filename = filename.appendingPathComponent(String(hour))
-        filename = filename.appendingPathComponent("-")
-        filename = filename.appendingPathComponent(String(min))
-        filename = filename.appendingPathComponent("-")
-        filename = filename.appendingPathComponent(String(sec))
-        filename = filename.appendingPathComponent(".bin")
+        var filename = paths[0].appendingPathComponent("TrackPoint", isDirectory: true)
+        let namestr = "TPGSession-"+String(year)+"-"+String(month)+"-"+String(day)+"-"+String(hour)+"-"+String(min)+"-"+String(sec)
+        filename = filename.appendingPathComponent(namestr)
+        filename = filename.appendingPathExtension("bin")
+        
+        print("saveURL: \(filename.absoluteString)\n")
+        
         
         let wData_accel = (Data(bytes: &user_accel.0, count: user_accel.0.count * MemoryLayout<Double>.stride),Data(bytes: &user_accel.1, count: user_accel.1.count * MemoryLayout<Double>.stride),Data(bytes: &user_accel.2, count: user_accel.2.count * MemoryLayout<Double>.stride))
         let wData_rot = (Data(bytes: &rot_rate.0, count: rot_rate.0.count * MemoryLayout<Double>.stride),Data(bytes: &rot_rate.1, count: rot_rate.1.count * MemoryLayout<Double>.stride),Data(bytes: &rot_rate.2, count: rot_rate.2.count * MemoryLayout<Double>.stride))
@@ -122,12 +117,13 @@ class DataRun {
             lastSaveDir = filename
         } catch {
             // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+            print("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding\n\(error)\n")
         }
     }
     
     // test saves
     func verifyWritten() -> Bool {
-        if (lastSaveDir == nil) {return false};
+        //if (lastSaveDir == nil) {return false};
         var isCorrect: Bool = true;
         do {
             try saveData()
@@ -139,6 +135,7 @@ class DataRun {
             isCorrect = isCorrect && arrayCMP(src0: rot_rate.1, src1: readArray[4], index: 4)
             isCorrect = isCorrect && arrayCMP(src0: rot_rate.2, src1: readArray[5], index: 5)
         } catch {
+            print("verify fail")
             isCorrect = false
         }
         return isCorrect;
