@@ -1,8 +1,6 @@
+// File: Profile.swift
+// Authors: Taylor Traviss, Joey Huang
 //
-//  Profile.swift
-//  TrackPoint
-//
-//  Created by Taylor Traviss on 2018-10-25.
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
