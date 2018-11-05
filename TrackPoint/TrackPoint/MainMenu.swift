@@ -1,8 +1,6 @@
+// File: Main.cpp
+// Authors: Taylor Traviss
 //
-//  MainMenu.swift
-//  TrackPoint
-//
-//  Created by Taylor Traviss on 2018-10-29.
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
