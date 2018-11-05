@@ -1,4 +1,4 @@
-// File: Main.cpp
+// File: MainMenu.swift
 // Authors: Taylor Traviss
 //
 //  Copyright © 2018 Pit Bulls. All rights reserved.
