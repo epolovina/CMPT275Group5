@@ -1,4 +1,4 @@
-// File: Main.cpp
+// File: MedicationPopUpViewController.swift
 // Authors: Taylor Traviss, Khalil Ammar, Eddie Zheng
 //
 //  Copyright © 2018 Pit Bulls. All rights reserved.
