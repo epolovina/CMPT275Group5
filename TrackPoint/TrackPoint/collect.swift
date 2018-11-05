@@ -1,9 +1,8 @@
+// File: Progress.swift
+// Authors: Joey Huang, Anysa Manhas
 //
-//  collect.swift
-//  TestProject
+//  Copyright © 2018 Pit Bulls. All rights reserved.
 //
-//  Created by Anysa Manhas on 2018-10-24.
-//  Copyright © 2018 Anysa Manhas. All rights reserved.
 
 import Foundation
 import CoreMotion
@@ -26,44 +25,51 @@ class DataRun {
         initMotionEvents()
     }
     
-    func config() //refresh rate, reinit timer
+    // TODO: set refresh rate, reinit timer
+    func config() 
     {
-        // not sure if this is needed?
     }
     
+    // disable recording, but acquire keeps running
     func suspend()
     {
         isSuspended = true
     }
     
+    // enable recording
     func resume()
     {
         isSuspended = false
     }
     
+    // start acquire
     func start() //start the timer
     {
         data_timestamp = Date()
         dataTimer = Timer.scheduledTimer(timeInterval: 1.0/100.0, target: self, selector: #selector(DataRun.get_data), userInfo: nil, repeats: true)
     }
     
+    // stop acquire
     func end() //stop timer, write to DB
     {
         dataTimer.invalidate()
     }
     
+    // gets acceleration buffer for saving
     func return_accel() -> [(Double, Double, Double)]//function so that accel data can be accessed after a run
     {
         let rtn_accel = user_accel;
         return rtn_accel
     }
     
+    // gets gyro buffer for saving
     func return_rotation() -> [(Double, Double, Double)]//function so that rotation data can be accessed after a run
     {
         let rtn_gyro = rot_rate;
         return rtn_gyro
     }
     
+    // get latest data sample
     func get_last_entry() -> [(Double, Double, Double)]{
         var rtn_val:[(Double, Double, Double)] = [];
         rtn_val.append(accel_curr);
@@ -74,6 +80,7 @@ class DataRun {
     
     //MARK: Private
     
+    // CoreMotion init
     fileprivate func initMotionEvents()
     {
         //make sure deviceMotion is available
@@ -93,6 +100,7 @@ class DataRun {
         
     }
     
+    // aquire sample from CoreMotion
     @objc fileprivate func get_data() //gets sensor data when not suspended, push to array
     {
         if let data = self.motionManager.deviceMotion
