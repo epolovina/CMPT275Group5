@@ -11,8 +11,8 @@ import CoreMotion
 class DataRun {
     
     fileprivate let motionManager : CMMotionManager
-    fileprivate var rot_rate : ([Double], [Double], [Double]) = ([1,2,3],[1,2,3],[1,2,3])
-    fileprivate var user_accel: ([Double], [Double], [Double]) = ([1,2,3],[1,2,3],[1,2,3])
+    fileprivate var rot_rate : ([Double], [Double], [Double])! //= ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
+    fileprivate var user_accel: ([Double], [Double], [Double])! //= ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
     fileprivate var rot_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var isSuspended : Bool = false
@@ -51,21 +51,21 @@ class DataRun {
     
     func start() //start the timer
     {
-        if verifyWritten(){
-            print("Data saved successfully to <%s>\n", lastSaveDir?.absoluteString ?? "nil")
-        }else{
-            print("Save data is corrupt\n")
-        }
-        //isRunning = true
-        //data_timestamp = Date()
-        //dataTimer = Timer.scheduledTimer(timeInterval: 1.0/100.0, target: self, selector: #selector(DataRun.get_data), userInfo: nil, repeats: true)
+
+        isRunning = true
+        data_timestamp = Date()
+        dataTimer = Timer.scheduledTimer(timeInterval: 1.0/100.0, target: self, selector: #selector(DataRun.get_data), userInfo: nil, repeats: true)
     }
     
     func end() //stop timer, write to DB
     {
         isRunning = false
         dataTimer.invalidate()
-
+        if verifyWritten(){
+            print("Data saved successfully to \(lastSaveDir?.absoluteString ?? "nil")\n")
+        }else{
+            print("Save data is corrupt\n")
+        }
     }
     
     func return_accel() -> ([Double], [Double], [Double])?//function so that accel data can be accessed after a run
@@ -101,19 +101,23 @@ class DataRun {
         let min = calendar.component(.minute, from: data_timestamp ?? _date)
         let sec = calendar.component(.second, from: data_timestamp ?? _date)
         var filename = paths[0].appendingPathComponent("TrackPoint", isDirectory: true)
+        try? fileManager.createDirectory(at: filename, withIntermediateDirectories: true, attributes: nil)
         let namestr = "TPGSession-"+String(year)+"-"+String(month)+"-"+String(day)+"-"+String(hour)+"-"+String(min)+"-"+String(sec)
         filename = filename.appendingPathComponent(namestr)
-        filename = filename.appendingPathExtension("bin")
+        let filename_d = filename.appendingPathExtension("bin") // array data
+        let filename_m = filename.appendingPathExtension("tps") // TODO: metadata
         
-        print("saveURL: \(filename.absoluteString)\n")
+        //print("dataURL: \(filename_d.absoluteString)\n")
+        fileManager.createFile(atPath: filename_d.absoluteString, contents: nil)
         
+        let wArray:[Double] = user_accel.0 + user_accel.1 + user_accel.2 + rot_rate.0 + rot_rate.1 + rot_rate.2
         
-        let wData_accel = (Data(bytes: &user_accel.0, count: user_accel.0.count * MemoryLayout<Double>.stride),Data(bytes: &user_accel.1, count: user_accel.1.count * MemoryLayout<Double>.stride),Data(bytes: &user_accel.2, count: user_accel.2.count * MemoryLayout<Double>.stride))
-        let wData_rot = (Data(bytes: &rot_rate.0, count: rot_rate.0.count * MemoryLayout<Double>.stride),Data(bytes: &rot_rate.1, count: rot_rate.1.count * MemoryLayout<Double>.stride),Data(bytes: &rot_rate.2, count: rot_rate.2.count * MemoryLayout<Double>.stride))
+        let wData = Data(bytes: wArray, count: wArray.count * MemoryLayout<Double>.stride)
+        
         
         do {
-            try wData_accel.0.write(to: filename)
-            try wData_rot.0.write(to: filename)
+            // TODO: append
+            try wData.write(to: filename_d)
             lastSaveDir = filename
         } catch {
             // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
@@ -127,7 +131,8 @@ class DataRun {
         var isCorrect: Bool = true;
         do {
             try saveData()
-            let readArray = try readData(url: lastSaveDir!)
+            let filename_d = lastSaveDir!.appendingPathExtension("bin")
+            let readArray = try readData(url: filename_d)
             isCorrect = isCorrect && arrayCMP(src0: user_accel.0, src1: readArray[0], index: 0)
             isCorrect = isCorrect && arrayCMP(src0: user_accel.1, src1: readArray[1], index: 1)
             isCorrect = isCorrect && arrayCMP(src0: user_accel.2, src1: readArray[2], index: 2)
@@ -162,7 +167,7 @@ class DataRun {
             let rData = try Data(contentsOf: url)
             var aArray:[Double]!
             rData.withUnsafeBytes{(bytes: UnsafePointer<Double>) in aArray = Array(UnsafeBufferPointer(start: bytes, count: rData.count / MemoryLayout<Double>.size))}
-            let rACount:Int = Int(rData.count/6)
+            let rACount:Int = Int(aArray.count/6)
             for i in 0..<6{
                 rArray[i] = Array(aArray[i*rACount..<(i+1)*rACount])
             }
