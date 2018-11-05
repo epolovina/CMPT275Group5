@@ -1,8 +1,6 @@
+// File: GameScreen.swift
+// Authors: Taylor Traviss, Joey Huang
 //
-//  GameScreen.swift
-//  TrackPoint
-//
-//  Created by Taylor Traviss on 2018-10-24.
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
@@ -35,7 +33,7 @@ class GameScreen: UIViewController  {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: Actions
+    // start data recording and label update timer
     @IBAction func StartClicked(_ sender: Any) {
         StopButton.isEnabled = true
         StartButton.isEnabled = false
@@ -43,6 +41,7 @@ class GameScreen: UIViewController  {
         sensor_timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
     }
 
+    // stop data recording and label update timer
     @IBAction func StopClicked(_ sender: Any) {
         collector.end()
         sensor_timer.invalidate();
@@ -50,7 +49,7 @@ class GameScreen: UIViewController  {
         //self.present(gameComplete, animated: true, completion: nil)
     }
     
-    
+    // timerfunc updates labels with current sensor data
     @objc fileprivate  func updateLabels(){
         let curr_data = collector.get_last_entry();
         let aX = curr_data[0].0
