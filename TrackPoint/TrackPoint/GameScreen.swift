@@ -27,11 +27,18 @@ class GameScreen: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        StopButton.isEnabled = false
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     //MARK: Actions
     @IBAction func StartClicked(_ sender: Any) {
+        StopButton.isEnabled = true
+        StartButton.isEnabled = false
         collector.start()
         sensor_timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
     }
@@ -53,12 +60,12 @@ class GameScreen: UIViewController  {
         let rY = curr_data[1].1
         let rZ = curr_data[1].2
         //Updates the labels
-        self.accelX.text = String(format:"%.4f", aX)
-        self.accelY.text = String(format:"%.4f", aY)
-        self.accelZ.text = String(format:"%.4f", aZ)
-        self.rotateX.text = String(format:"%.4f", rX)
-        self.rotateY.text = String(format:"%.4f", rY)
-        self.rotateZ.text = String(format:"%.4f", rZ)
+        self.accelX.text = String(format:"%6.3lf", aX)
+        self.accelY.text = String(format:"%6.3lf", aY)
+        self.accelZ.text = String(format:"%6.3lf", aZ)
+        self.rotateX.text = String(format:"%6.3lf", rX)
+        self.rotateY.text = String(format:"%6.3lf", rY)
+        self.rotateZ.text = String(format:"%6.3lf", rZ)
         //print(curr_data[0])
     }
     
