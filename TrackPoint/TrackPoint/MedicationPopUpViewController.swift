@@ -1,8 +1,6 @@
+// File: Main.cpp
+// Authors: Taylor Traviss, Khalil Ammar, Eddie Zheng
 //
-//  MedicationPopUpViewController.swift
-//  TrackPoint
-//
-//  Created by EZ-Hackintosh on 2018-11-01.
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
