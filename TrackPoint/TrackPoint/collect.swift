@@ -11,8 +11,8 @@ import CoreMotion
 class DataRun {
     
     fileprivate let motionManager : CMMotionManager
-    fileprivate var rot_rate : ([Double], [Double], [Double])!// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
-    fileprivate var user_accel: ([Double], [Double], [Double])!// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
+    fileprivate var rot_rate : ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
+    fileprivate var user_accel: ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
     fileprivate var rot_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var isSuspended : Bool = false
