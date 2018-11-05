@@ -1,4 +1,4 @@
-// File: Progress.swift
+// File: collect.swift
 // Authors: Joey Huang, Anysa Manhas
 //
 //  Copyright © 2018 Pit Bulls. All rights reserved.
