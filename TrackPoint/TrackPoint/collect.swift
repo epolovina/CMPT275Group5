@@ -1,8 +1,12 @@
 // File: collect.swift
 // Authors: Joey Huang, Anysa Manhas
 //
-//  Copyright © 2018 Pit Bulls. All rights reserved.
+// Copyright © 2018 Pit Bulls. All rights reserved.
 //
+// Class DataRun
+// Aquires sensor data at a fixed frequency
+// Writes data to memory buffer
+// 
 
 import Foundation
 import CoreMotion
@@ -13,7 +17,7 @@ class DataRun {
     fileprivate var rot_rate : [(Double, Double, Double)] = []
     fileprivate var user_accel: [(Double, Double, Double)] = []
     fileprivate var rot_curr: (Double, Double, Double) = (0,0,0)
-     fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
+    fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var isSuspended : Bool = false
     fileprivate var dataTimer: Timer!
     fileprivate var data_timestamp : Date?
