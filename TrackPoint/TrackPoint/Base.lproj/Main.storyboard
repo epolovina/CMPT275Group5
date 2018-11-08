@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d0S-V0-1er">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d0S-V0-1er">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -638,18 +638,22 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24z-qR-Hj5">
-                                <rect key="frame" x="47" y="65" width="284" height="443"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24z-qR-Hj5">
+                                <rect key="frame" x="44" y="65" width="287" height="335"/>
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="24z-qR-Hj5" firstAttribute="top" secondItem="dKv-el-V7R" secondAttribute="bottom" constant="24.5" id="8W3-lZ-1C7"/>
                             <constraint firstItem="GtY-Ak-g9g" firstAttribute="centerX" secondItem="tlc-jr-qgf" secondAttribute="centerX" id="Ebe-gm-PPD"/>
+                            <constraint firstItem="NYh-bC-NcV" firstAttribute="trailing" secondItem="24z-qR-Hj5" secondAttribute="trailing" constant="44" id="Ic3-Xn-vK6"/>
+                            <constraint firstItem="24z-qR-Hj5" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" constant="44" id="Jw9-wY-ez3"/>
                             <constraint firstItem="NYh-bC-NcV" firstAttribute="bottom" secondItem="GtY-Ak-g9g" secondAttribute="bottom" constant="85" id="Ya0-yI-ZRy"/>
                             <constraint firstItem="dKv-el-V7R" firstAttribute="centerX" secondItem="tlc-jr-qgf" secondAttribute="centerX" id="bdo-ip-pbG"/>
+                            <constraint firstItem="GtY-Ak-g9g" firstAttribute="top" secondItem="24z-qR-Hj5" secondAttribute="bottom" constant="134" id="iWM-L5-wwn"/>
                             <constraint firstItem="GtY-Ak-g9g" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" constant="101" id="vr1-oR-peM"/>
                             <constraint firstItem="dKv-el-V7R" firstAttribute="top" secondItem="NYh-bC-NcV" secondAttribute="top" id="xTO-Wy-gz7"/>
+                            <constraint firstItem="24z-qR-Hj5" firstAttribute="top" secondItem="dKv-el-V7R" secondAttribute="bottom" constant="24.5" id="z1a-Qp-1si"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NYh-bC-NcV"/>
                     </view>

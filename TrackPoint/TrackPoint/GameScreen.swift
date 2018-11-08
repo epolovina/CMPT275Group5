@@ -12,6 +12,7 @@ class GameScreen: UIViewController  {
     let collector:DataRun = DataRun()
     let gameComplete = GameComplete()
     let ARconfig = ARWorldTrackingConfiguration()
+    //let ARconfig = AROrientationTrackingConfiguration()
 
     //MARK: Outlets
     @IBOutlet weak var StartButton: UIButton!
