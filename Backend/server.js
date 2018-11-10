@@ -4,7 +4,7 @@ var http = require('http')
 var port = process.env.PORT || 5000; 
 var url = "mongodb://cmpt275admin:cmpt275admin@ds121464.mlab.com:21464/cmpt275"; 
 var MongoClient = require('mongodb').MongoClient;
-var bodyParser=require("body-parser");
+// var bodyParser=require("body-parser");
 
 // app.use(bodyParser.urlencoded({extended: true}));
 // app.use(bodyParser.json());
@@ -16,7 +16,7 @@ var options = {
 	dotfile: 'ignore', 
 	etag:false, 
 	extensions: ['htm','html'], 
-	index: 'login.html'
+	index: 'index.html'
 }
 
 app.use('/',express.static('./Public',options)); 
@@ -40,8 +40,8 @@ app.post('/sendDatatoDB', function(req, res) {
 		var myobj = {	firstName: req.body.firstName,
 						lastName: req.body.lastName,
 						age: req.body.age,
-						diagnosisDate: req.body.diagnosisDate, 
-						diagnosisStatus: req.body.diagnosisStatus,
+						// diagnosisDate: req.body.diagnosisDate, 
+						// diagnosisStatus: req.body.diagnosisStatus,
 						medication: [],
 						dataArray: []
 					};
@@ -53,6 +53,33 @@ app.post('/sendDatatoDB', function(req, res) {
 	});
 	// res.send("hi");
 });
+
+app.post('/getDatafromDB', function (req, res){
+
+	MongoClient.connect(url, function(err, client) {
+		if(err) {
+			console.log('Error');
+			throw(err)
+		}
+		console.log("Connected successfully to server");
+		
+		const db = client.db('cmpt275');
+		var collection = db.collection('userdata');
+		// collection.find({firstName:'joe-rogan'}).toArray(function(err,result){
+		// 	res.setHeader('Content-Type', 'application/json');
+		// 	console.log(result);
+		// 	res.send(JSON.stringify(result));
+		// 	// res.send(result);
+		// });
+		collection.findOne({firstName:"Tay", lastName:"Trav", age:"20"}, function (err, result){
+			console.log(result);
+			res.setHeader('Content-Type', 'application/json');
+			res.json(result);
+		});
+	});
+});
+	
+	
 
 app.listen(port);
 console.log("Server running on PORT: ", port);
