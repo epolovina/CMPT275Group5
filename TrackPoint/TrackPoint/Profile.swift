@@ -12,6 +12,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     //MARK: Create outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var firstNameTF: UITextField!
+    @IBOutlet weak var lastNameTF: UITextField!
+    @IBOutlet weak var ageTF: UITextField!
     
     
     var medicationArray = [String]()
@@ -23,6 +25,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         tableView.delegate = self
         tableView.dataSource = self
         firstNameTF.delegate = self
+        lastNameTF.delegate = self
+        ageTF.delegate = self
         
         medicationArray.append("Medication 1")
         medicationArray.append("Medication 2")
@@ -59,14 +63,14 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         return true
     }
     
-    func saveProfile(fName: String){
+    func saveProfile(fName: String, lName: String, age: String){
         // Saves text fields to database
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
         
         var request = URLRequest(url: url)
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-        let postString = "firstName=\(fName)&lastName"
+        let postString = "firstName=\(fName)&lastName=\(lName)&age=\(age)"
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -89,7 +93,23 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     @IBAction func firstNameChanged(_ sender: Any){
         // get input from text fields and save to database
         let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        saveProfile(fName: firstName)
+        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveProfile(fName: firstName, lName: lastName, age: age)
     }
 
+    @IBAction func lastNameChanged(_ sender: Any) {
+        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveProfile(fName: firstName, lName: lastName, age: age)
+    }
+    
+    @IBAction func ageChanged(_ sender: Any) {
+        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveProfile(fName: firstName, lName: lastName, age: age)
+        
+    }
 }
