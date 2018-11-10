@@ -138,7 +138,10 @@
                                                 <rect key="frame" x="97.5" y="0.0" width="197.5" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="firstNameChanged:" destination="U4A-yT-m31" eventType="editingDidEnd" id="fep-06-AvR"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="du5-KZ-lDD"/>
@@ -292,6 +295,7 @@
                         <viewLayoutGuide key="safeArea" id="YlO-Zc-MfE"/>
                     </view>
                     <connections>
+                        <outlet property="firstNameTF" destination="TPP-Qr-gGe" id="ck6-LN-vA1"/>
                         <outlet property="tableView" destination="dnl-Lj-4oe" id="Q1q-oa-cPg"/>
                     </connections>
                 </viewController>
@@ -914,8 +918,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hmW-3m-Gjn"/>
-        <segue reference="2zV-sZ-Ao8"/>
+        <segue reference="y5f-Py-GiX"/>
         <segue reference="3Lk-Y4-FqU"/>
-        <segue reference="Dyz-83-5eW"/>
+        <segue reference="43G-PM-1Il"/>
     </inferredMetricsTieBreakers>
 </document>
