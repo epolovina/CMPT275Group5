@@ -1,9 +1,7 @@
+// File: AppDelegate.swift
+// Authors: Taylor Traviss
 //
-//  AppDelegate.swift
-//  TrackPoint
-//
-//  Created by Taylor Traviss on 2018-10-23.
-//  Copyright © 2018 Pit Bulls. All rights reserved.
+// Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
 import UIKit

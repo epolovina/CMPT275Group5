@@ -1,8 +1,6 @@
+// File: GameComplete.swift
+// Authors: Taylor Traviss
 //
-//  GameComplete.swift
-//  TrackPoint
-//
-//  Created by Taylor Traviss on 2018-10-25.
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
@@ -30,7 +28,7 @@ class GameComplete: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: actions
+    // Save session data
     @IBAction func SaveClicked(_ sender: AnyObject) {
         //Enable/disable buttons
         PlayAgainButton.isEnabled = true
@@ -43,6 +41,7 @@ class GameComplete: UIViewController {
         //performSegue(withIdentifier: "sendIt", sender: self)
     }
     
+    // Delete session data
     @IBAction func DeleteClicked(_ sender: Any) {
         //Enable/disable buttons
         PlayAgainButton.isEnabled = true
