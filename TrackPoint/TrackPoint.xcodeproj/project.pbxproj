@@ -12,6 +12,7 @@
 		306F0A5D218D121E00468250 /* TrackPointUITests1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F0A5C218D121E00468250 /* TrackPointUITests1.swift */; };
 		30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */; };
 		4939476A218B72FD0033C16B /* collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49394769218B72FD0033C16B /* collect.swift */; };
+		D19A630F219AB23000607158 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D19A630E219AB22F00607158 /* Models.scnassets */; };
 		D20784122181795400F653B9 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20784112181795400F653B9 /* GameScreen.swift */; };
 		D23BEF482187F99800B944E9 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BEF472187F99800B944E9 /* MainMenu.swift */; };
 		D255B906218011B600A011FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255B905218011B600A011FC /* AppDelegate.swift */; };
@@ -75,6 +76,7 @@
 		306F0A5E218D121E00468250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationPopUpViewController.swift; sourceTree = "<group>"; };
 		49394769218B72FD0033C16B /* collect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = collect.swift; sourceTree = "<group>"; };
+		D19A630E219AB22F00607158 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = SOURCE_ROOT; };
 		D207840821810E5A00F653B9 /* TrackPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackPoint.entitlements; sourceTree = "<group>"; };
 		D20784112181795400F653B9 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		D23BEF472187F99800B944E9 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				D2902BF82182390100589598 /* Profile.swift */,
 				D20784112181795400F653B9 /* GameScreen.swift */,
 				30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */,
+				D19A630E219AB22F00607158 /* Models.scnassets */,
 				D255B90C218011B700A011FC /* Assets.xcassets */,
 				D255B90E218011B700A011FC /* LaunchScreen.storyboard */,
 				D255B911218011B700A011FC /* Info.plist */,
@@ -432,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D255B910218011B700A011FC /* LaunchScreen.storyboard in Resources */,
+				D19A630F219AB23000607158 /* Models.scnassets in Resources */,
 				D255B90D218011B700A011FC /* Assets.xcassets in Resources */,
 				D255B90B218011B600A011FC /* Main.storyboard in Resources */,
 			);
