@@ -597,10 +597,36 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8z-ux-XAS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KT2-P4-BZK">
+                                <rect key="frame" x="22" y="589" width="104" height="58"/>
+                                <color key="backgroundColor" red="1" green="0.18386313166375978" blue="0.50012171389132332" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="START">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressStart:" destination="jeU-mm-bRb" eventType="touchUpInside" id="fZG-Yx-qUY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TY-B9-LGB">
+                                <rect key="frame" x="252" y="589" width="107" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.18386313169999999" blue="0.50012171390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="STOP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressStop:" destination="jeU-mm-bRb" eventType="touchUpInside" id="2Kp-XZ-RWO"/>
+                                    <segue destination="ygx-gk-IGP" kind="show" id="41m-xd-oV8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f8z-ux-XAS" firstAttribute="top" secondItem="tlc-jr-qgf" secondAttribute="top" id="8Gj-GJ-dDp"/>
+                            <constraint firstItem="KT2-P4-BZK" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" constant="22" id="FkP-SM-ml7"/>
+                            <constraint firstItem="NYh-bC-NcV" firstAttribute="bottom" secondItem="KT2-P4-BZK" secondAttribute="bottom" constant="20" id="RyR-TU-yRD"/>
                             <constraint firstItem="f8z-ux-XAS" firstAttribute="bottom" secondItem="NYh-bC-NcV" secondAttribute="bottom" id="Xb9-9e-014"/>
                             <constraint firstItem="f8z-ux-XAS" firstAttribute="trailing" secondItem="NYh-bC-NcV" secondAttribute="trailing" id="owc-CU-N4E"/>
                             <constraint firstItem="f8z-ux-XAS" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" id="uCt-zF-QPp"/>
@@ -609,6 +635,8 @@
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="f8z-ux-XAS" id="ugy-v2-LhN"/>
+                        <outlet property="startButton" destination="KT2-P4-BZK" id="aJR-NF-Cke"/>
+                        <outlet property="stopButton" destination="7TY-B9-LGB" id="eiJ-Fb-sYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZK-Cn-Rjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -747,9 +775,10 @@
         <image name="LogoV1" width="170" height="170"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="41m-xd-oV8"/>
         <segue reference="hmW-3m-Gjn"/>
         <segue reference="y5f-Py-GiX"/>
         <segue reference="3Lk-Y4-FqU"/>
-        <segue reference="43G-PM-1Il"/>
+        <segue reference="Dyz-83-5eW"/>
     </inferredMetricsTieBreakers>
 </document>

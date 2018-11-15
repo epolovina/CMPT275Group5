@@ -8,32 +8,172 @@ import UIKit
 import ARKit
 import SceneKit
 
-class GameScreen: UIViewController {
+class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegate {
     //MARK: Variables
-    //let objNode = SCNNode()
-    private let objNode = SCNNode()
+    var box = SCNNode()
+    var boundary = SCNNode()
+    var pointer = SCNNode()
+    let initialDelay:TimeInterval = 3
+    let initialPosition = SCNVector3(0, -5, -5)
     let collector:DataRun = DataRun()
-    fileprivate var sensor_timer: Timer!
+    fileprivate var updatePositionTimer: Timer!
     let gameComplete = GameComplete()
+    
+    
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    
+    enum category:Int{
+        case box = 1
+        case boundary = 2
+        case pointer = 4
+    }
+    
+    struct userCameraCoordinates {
+        var x = Float()
+        var y = Float()
+        var z = Float()
+    }
 
     //MARK: Outlets
     
     @IBOutlet weak var sceneView: ARSCNView!
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let config = ARWorldTrackingConfiguration()
-        sceneView.session.run(config)
-        GenerateObject()
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        sceneView.delegate = self
+        stopButton.isEnabled = false
+        
+        //show statistics such as fps
+        sceneView.showsStatistics = true
+        
+        //create scene
+        let scene = SCNScene(named: "Models.scnassets/test.scn")!
+        
+        //assign scene to sceneView
+        sceneView.scene = scene
+        
+        sceneView.scene.physicsWorld.contactDelegate = self
+        
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
+        if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
+            
+            print("Out of bounds")
+            
+        }
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
+            
+            print("Back into playable area!")
+            
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //create configuration and run session
+        let config = ARWorldTrackingConfiguration()
+        sceneView.session.run(config)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //pause scene view session
+        sceneView.session.pause()
+    }
+    
+    // add objects and lights
+    func setupScene(){
+        
+        //define node and its position
+        //let dummyNode = self.sceneView.scene.rootNode.childNode(withName: "dummyNode", recursively: false)
+        //dummyNode?.position = SCNVector3(0,-5,-5)
+        
+        //find box node and define its physical attributes
+        self.sceneView.scene.rootNode.enumerateChildNodes{ (node,_) in
+            if (node.name == "Box" ){
+                box = node
+                box.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: box, options: nil))
+                box.physicsBody?.categoryBitMask = category.box.rawValue
+                box.position = initialPosition
+            }
+            if (node.name == "boundarySphere"){
+                boundary = node
+                boundary.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: boundary, options: nil))
+                boundary.physicsBody?.categoryBitMask = category.boundary.rawValue
+                boundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
+                boundary.position = initialPosition
+            }
+            if (node.name == "Pointer"){
+                pointer = node
+                pointer.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: pointer, options: nil))
+                pointer.physicsBody?.categoryBitMask = category.pointer.rawValue
+                pointer.physicsBody?.contactTestBitMask = category.boundary.rawValue
+                pointer.position = SCNVector3(0, 0, 0)
+                //rotate around z-axis by pi/2
+                pointer.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 0, 1)
+                updatePositionTimer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updatePointerPosition), userInfo: nil, repeats: true)
+            }
+            
+        }
+        
+        //add light to scene
+        let light = SCNLight()
+        light.type = SCNLight.LightType.omni
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(1.5, 1.5, 1.5)
+        sceneView.scene.rootNode.addChildNode(lightNode)
+    }
+    
+    @IBAction func didPressStart(_ sender: Any) {
+        startButton.isEnabled = false
+        stopButton.isEnabled = true
+        let wait:SCNAction = SCNAction.wait(duration: initialDelay)
+        let startGame:SCNAction = SCNAction.run{ _ in
+            self.setupScene()
+        }
+        // delay by "initialDelay" seconds and then start game
+        let actionSequence:SCNAction = SCNAction.sequence([wait, startGame])
+        self.sceneView.scene.rootNode.runAction(actionSequence)
+    }
+    
+    func getCameraCoordinates(sceneView: ARSCNView) -> userCameraCoordinates {
+        let cameraTransform = sceneView.session.currentFrame?.camera.transform
+        let cameraCoordinates = MDLTransform(matrix: cameraTransform!)
+        
+        var cc = userCameraCoordinates()
+        cc.x = cameraCoordinates.translation.x
+        cc.y = cameraCoordinates.translation.y
+        cc.z = cameraCoordinates.translation.z
+        
+        return cc
+    }
+    
+    @objc func updatePointerPosition(){
+        let cc : userCameraCoordinates = getCameraCoordinates(sceneView: sceneView)
+        pointer.position = SCNVector3(cc.x, cc.y, cc.z)
+    }
+    
 
+    
+    
+    
+    
+    
+    
+    
+    
     
     func GenerateObject(){
         let objNode = SCNNode()
