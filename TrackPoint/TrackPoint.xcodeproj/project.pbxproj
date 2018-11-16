@@ -12,6 +12,7 @@
 		306F0A5D218D121E00468250 /* TrackPointUITests1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306F0A5C218D121E00468250 /* TrackPointUITests1.swift */; };
 		30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */; };
 		4939476A218B72FD0033C16B /* collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49394769218B72FD0033C16B /* collect.swift */; };
+		49E009D9219F834B009152AE /* fft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E009D8219F834A009152AE /* fft.swift */; };
 		49E3C84521962FF7007297D4 /* LocalDataSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3C84421962FF7007297D4 /* LocalDataSaver.swift */; };
 		D20784122181795400F653B9 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20784112181795400F653B9 /* GameScreen.swift */; };
 		D23BEF482187F99800B944E9 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BEF472187F99800B944E9 /* MainMenu.swift */; };
@@ -76,6 +77,7 @@
 		306F0A5E218D121E00468250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationPopUpViewController.swift; sourceTree = "<group>"; };
 		49394769218B72FD0033C16B /* collect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = collect.swift; sourceTree = "<group>"; };
+		49E009D8219F834A009152AE /* fft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fft.swift; sourceTree = "<group>"; };
 		49E3C84421962FF7007297D4 /* LocalDataSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSaver.swift; sourceTree = "<group>"; };
 		D207840821810E5A00F653B9 /* TrackPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackPoint.entitlements; sourceTree = "<group>"; };
 		D20784112181795400F653B9 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				D255B90E218011B700A011FC /* LaunchScreen.storyboard */,
 				D255B911218011B700A011FC /* Info.plist */,
 				49E3C84421962FF7007297D4 /* LocalDataSaver.swift */,
+				49E009D8219F834A009152AE /* fft.swift */,
 			);
 			path = TrackPoint;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E009D9219F834B009152AE /* fft.swift in Sources */,
 				D2902BFB21823FFD00589598 /* Progress.swift in Sources */,
 				D23BEF482187F99800B944E9 /* MainMenu.swift in Sources */,
 				D2902BF92182390100589598 /* Profile.swift in Sources */,
