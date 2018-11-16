@@ -8,8 +8,9 @@ import UIKit
 
 class MedicationPopUpViewController: UIViewController {
 
-    //@IBOutlet weak var medicationTextField: UITextField!
-   // @IBOutlet weak var startDate: UIDatePicker!
+    @IBOutlet weak var medicationNameTF: UITextField!
+    
+    // @IBOutlet weak var startDate: UIDatePicker!
     //@IBOutlet weak var endDate: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
     
@@ -20,18 +21,32 @@ class MedicationPopUpViewController: UIViewController {
     //verify input is correct
     @IBAction func closePopUp(_ sender: Any) {
       //  if medicationTextField.text != ""{
-            
             dismiss(animated: true, completion: nil)
-            
         //}
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Bring up keyboard right away
+        self.medicationNameTF.becomeFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Allows keyboard to disappear when touch something else
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        // Keyboard disappears
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func medicatonNameChanged(_ sender: Any) {
+        let medicationName: String = self.medicationNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        medicationArr.append(medicationName)
         
         
     }
     
-
 }

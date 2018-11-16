@@ -13,6 +13,7 @@
 		30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F5C917218BADCC0053B6CE /* MedicationPopUpViewController.swift */; };
 		4939476A218B72FD0033C16B /* collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49394769218B72FD0033C16B /* collect.swift */; };
 		D20784122181795400F653B9 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20784112181795400F653B9 /* GameScreen.swift */; };
+		D231A791219F7F3900485240 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231A790219F7F3900485240 /* Login.swift */; };
 		D23BEF482187F99800B944E9 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23BEF472187F99800B944E9 /* MainMenu.swift */; };
 		D255B906218011B600A011FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255B905218011B600A011FC /* AppDelegate.swift */; };
 		D255B90B218011B600A011FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D255B909218011B600A011FC /* Main.storyboard */; };
@@ -77,6 +78,7 @@
 		49394769218B72FD0033C16B /* collect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = collect.swift; sourceTree = "<group>"; };
 		D207840821810E5A00F653B9 /* TrackPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackPoint.entitlements; sourceTree = "<group>"; };
 		D20784112181795400F653B9 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		D231A790219F7F3900485240 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		D23BEF472187F99800B944E9 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		D255B902218011B600A011FC /* TrackPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D255B905218011B600A011FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				D255B905218011B600A011FC /* AppDelegate.swift */,
 				49394769218B72FD0033C16B /* collect.swift */,
 				D255B909218011B600A011FC /* Main.storyboard */,
+				D231A790219F7F3900485240 /* Login.swift */,
 				D23BEF472187F99800B944E9 /* MainMenu.swift */,
 				D2902BFE21824DC500589598 /* GameComplete.swift */,
 				D2902BFA21823FFD00589598 /* Progress.swift */,
@@ -488,6 +491,7 @@
 				4939476A218B72FD0033C16B /* collect.swift in Sources */,
 				D2902BFF21824DC500589598 /* GameComplete.swift in Sources */,
 				D20784122181795400F653B9 /* GameScreen.swift in Sources */,
+				D231A791219F7F3900485240 /* Login.swift in Sources */,
 				30F5C918218BADCC0053B6CE /* MedicationPopUpViewController.swift in Sources */,
 				D255B906218011B600A011FC /* AppDelegate.swift in Sources */,
 			);

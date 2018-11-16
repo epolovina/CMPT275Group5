@@ -28,9 +28,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         lastNameTF.delegate = self
         ageTF.delegate = self
         
-        medicationArray.append("Medication 1")
-        medicationArray.append("Medication 2")
-        medicationArray.append("Medication 3")
+//        medicationArray.append("Medication 1")
+//        medicationArray.append("Medication 2")
+//        medicationArray.append("Medication 3")
         
         //load in data from database and set text fields
         
@@ -43,10 +43,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // number of rows in medication table
         return medicationArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // creates cell for each table view row
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = medicationArray[indexPath.row]
         return cell
