@@ -1,31 +1,39 @@
+// File: Profile.swift
+// Authors: Taylor Traviss, Joey Huang
 //
-//  Profile.swift
-//  TrackPoint
-//
-//  Created by Taylor Traviss on 2018-10-25.
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 
 import UIKit
 
-class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
+    
+    //MARK: Create outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var firstNameTF: UITextField!
+    @IBOutlet weak var lastNameTF: UITextField!
+    @IBOutlet weak var ageTF: UITextField!
     
     
-    var array = [String]()
+    var medicationArray = [String]()
     //var medicationName: String
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate=self
-        tableView.dataSource=self
+        tableView.delegate = self
+        tableView.dataSource = self
+        firstNameTF.delegate = self
+        lastNameTF.delegate = self
+        ageTF.delegate = self
         
-        array.append("testing data")
-        array.append("testing data")
-        array.append("testing data")
+        medicationArray.append("Medication 1")
+        medicationArray.append("Medication 2")
+        medicationArray.append("Medication 3")
+        
+        //load in data from database and set text fields
+        
     
     }
     
@@ -35,13 +43,73 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array.count
+        return medicationArray.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = array[indexPath.row]
+        cell.textLabel?.text = medicationArray[indexPath.row]
         return cell
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Allows keyboard to disappear when touch something else
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        // Keyboard disappears
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func saveProfile(fName: String, lName: String, age: String){
+        // Saves text fields to database
+        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
+        
+        var request = URLRequest(url: url)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        let postString = "firstName=\(fName)&lastName=\(lName)&age=\(age)"
+        print(postString)
+        request.httpBody = postString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        //            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+        //                print("error=\(error)")
+        //                return
+        //            }
+        //
+        //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+        //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+        //                print("response = \(response)")
+        //            }
+        //
+        //            let responseString = String(data: data, encoding: .utf8)
+        //            print("responseString = \(responseString)")
+        }
+        task.resume()
+        }
+    
+    @IBAction func firstNameChanged(_ sender: Any){
+        // get input from text fields and save to database
+        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveProfile(fName: firstName, lName: lastName, age: age)
+    }
 
+    @IBAction func lastNameChanged(_ sender: Any) {
+        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveProfile(fName: firstName, lName: lastName, age: age)
+    }
+    
+    @IBAction func ageChanged(_ sender: Any) {
+        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveProfile(fName: firstName, lName: lastName, age: age)
+        
+    }
 }
