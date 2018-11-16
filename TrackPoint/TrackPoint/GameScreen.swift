@@ -20,10 +20,15 @@ class GameScreen: UIViewController {
     @IBOutlet weak var StopButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var readyButton: UIButton!
+    @IBOutlet weak var instructionScreen: UIView!
     
     @IBAction func readyButton(_ sender: Any) {
         //start tinmer
         startTimer()
+        instructionScreen.isHidden = true;
+        readyButton.isHidden = true;
+         sceneView.session.run(ARconfig) //start the AR session
     }
     
     
@@ -38,11 +43,9 @@ class GameScreen: UIViewController {
         
         addTargetNodes()
         playBGM()
-        
-        
-    
     }
 
+    
     
     //timer
     var timer = Timer()
@@ -53,6 +56,7 @@ class GameScreen: UIViewController {
     @objc func updateTime() {
         if seconds == 0 {
             timer.invalidate()
+            removeAudioPlayer()
             gameOver()
         }else{
             seconds -= 1
@@ -65,6 +69,8 @@ class GameScreen: UIViewController {
         performSegue(withIdentifier:"StopSegue", sender: self)
         
     }
+    
+    
     
     
     
@@ -104,7 +110,9 @@ class GameScreen: UIViewController {
         audioNode.runAction(play)
         sceneView.scene.rootNode.addChildNode(audioNode)
     }
-    
+    func removeAudioPlayer(){
+         sceneView.scene.rootNode.removeAllAudioPlayers()
+    }
   
     
     override func didReceiveMemoryWarning() {
@@ -117,7 +125,7 @@ class GameScreen: UIViewController {
         StopButton.isEnabled = true
         StartButton.isEnabled = false
         collector.start()
-        sceneView.session.run(ARconfig) //start the AR session
+       
     }
 
     // stop data recording and label update timer
