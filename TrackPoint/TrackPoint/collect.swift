@@ -105,7 +105,6 @@ class DataRun {
         let namestr = "TPGSession-"+String(year)+"-"+String(month)+"-"+String(day)+"-"+String(hour)+"-"+String(min)+"-"+String(sec)
         filename = filename.appendingPathComponent(namestr)
         let filename_d = filename.appendingPathExtension("bin") // array data
-        let filename_m = filename.appendingPathExtension("tps") // TODO: metadata
         
         //print("dataURL: \(filename_d.absoluteString)\n")
         fileManager.createFile(atPath: filename_d.absoluteString, contents: nil)
