@@ -58,30 +58,34 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         //assign scene to sceneView
         sceneView.scene = scene
         
+        
         sceneView.scene.physicsWorld.contactDelegate = self
         
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
         if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
-            
-            print("Out of bounds")
+            //halt data collection when out of bounds
+            collector.suspend()
+            print("Out of bounds, data collection stopped!")
             
         }
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
-            
-            print("Back into playable area!")
+            collector.resume()
+            print("Back into playable area, data collection resumed!")
             
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //create configuration and run session
         let config = ARWorldTrackingConfiguration()
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints, SCNDebugOptions.showPhysicsShapes]
         sceneView.session.run(config)
     }
     
@@ -94,11 +98,6 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     
     // add objects and lights
     func setupScene(){
-        
-        //define node and its position
-        //let dummyNode = self.sceneView.scene.rootNode.childNode(withName: "dummyNode", recursively: false)
-        //dummyNode?.position = SCNVector3(0,-5,-5)
-        
         //find box node and define its physical attributes
         self.sceneView.scene.rootNode.enumerateChildNodes{ (node,_) in
             if (node.name == "Box" ){
@@ -125,6 +124,9 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
                 updatePositionTimer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updatePointerPosition), userInfo: nil, repeats: true)
             }
             
+            // start data collection
+            collector.start()
+            
         }
         
         //add light to scene
@@ -146,6 +148,10 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         // delay by "initialDelay" seconds and then start game
         let actionSequence:SCNAction = SCNAction.sequence([wait, startGame])
         self.sceneView.scene.rootNode.runAction(actionSequence)
+    }
+    
+    @IBAction func didPressStop(_ sender: Any) {
+        sceneView.stop(Any?.self)
     }
     
     func getCameraCoordinates(sceneView: ARSCNView) -> userCameraCoordinates {

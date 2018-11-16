@@ -594,42 +594,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8z-ux-XAS">
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f8z-ux-XAS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KT2-P4-BZK">
-                                <rect key="frame" x="22" y="589" width="104" height="58"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KT2-P4-BZK">
+                                <rect key="frame" x="16" y="589" width="97" height="58"/>
                                 <color key="backgroundColor" red="1" green="0.18386313166375978" blue="0.50012171389132332" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="15r-ji-MM8"/>
+                                    <constraint firstAttribute="width" constant="97" id="N7Z-8y-sea"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="START">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="didPressStart:" destination="jeU-mm-bRb" eventType="touchUpInside" id="fZG-Yx-qUY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TY-B9-LGB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TY-B9-LGB">
                                 <rect key="frame" x="252" y="589" width="107" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.18386313169999999" blue="0.50012171390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="107" id="E12-aH-xXI"/>
+                                    <constraint firstAttribute="height" constant="58" id="WHD-rc-nWe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="STOP">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="didPressStop:" destination="jeU-mm-bRb" eventType="touchUpInside" id="2Kp-XZ-RWO"/>
+                                    <action selector="didPressStop:" destination="jeU-mm-bRb" eventType="touchUpInside" id="qds-DF-Jj6"/>
                                     <segue destination="ygx-gk-IGP" kind="show" id="41m-xd-oV8"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="f8z-ux-XAS" firstAttribute="top" secondItem="tlc-jr-qgf" secondAttribute="top" id="8Gj-GJ-dDp"/>
-                            <constraint firstItem="KT2-P4-BZK" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" constant="22" id="FkP-SM-ml7"/>
-                            <constraint firstItem="NYh-bC-NcV" firstAttribute="bottom" secondItem="KT2-P4-BZK" secondAttribute="bottom" constant="20" id="RyR-TU-yRD"/>
-                            <constraint firstItem="f8z-ux-XAS" firstAttribute="bottom" secondItem="NYh-bC-NcV" secondAttribute="bottom" id="Xb9-9e-014"/>
-                            <constraint firstItem="f8z-ux-XAS" firstAttribute="trailing" secondItem="NYh-bC-NcV" secondAttribute="trailing" id="owc-CU-N4E"/>
-                            <constraint firstItem="f8z-ux-XAS" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" id="uCt-zF-QPp"/>
+                            <constraint firstItem="NYh-bC-NcV" firstAttribute="bottom" secondItem="KT2-P4-BZK" secondAttribute="bottom" constant="20" id="Otl-sW-Y50"/>
+                            <constraint firstItem="KT2-P4-BZK" firstAttribute="leading" secondItem="NYh-bC-NcV" secondAttribute="leading" constant="16" id="d4j-lS-vti"/>
+                            <constraint firstItem="NYh-bC-NcV" firstAttribute="trailing" secondItem="7TY-B9-LGB" secondAttribute="trailing" constant="16" id="df0-bZ-sw2"/>
+                            <constraint firstItem="NYh-bC-NcV" firstAttribute="bottom" secondItem="7TY-B9-LGB" secondAttribute="bottom" constant="20" id="gpa-eD-abw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NYh-bC-NcV"/>
                     </view>
@@ -775,9 +787,8 @@
         <image name="LogoV1" width="170" height="170"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="41m-xd-oV8"/>
-        <segue reference="hmW-3m-Gjn"/>
-        <segue reference="y5f-Py-GiX"/>
+        <segue reference="XlF-42-8sE"/>
+        <segue reference="2zV-sZ-Ao8"/>
         <segue reference="3Lk-Y4-FqU"/>
         <segue reference="Dyz-83-5eW"/>
     </inferredMetricsTieBreakers>
