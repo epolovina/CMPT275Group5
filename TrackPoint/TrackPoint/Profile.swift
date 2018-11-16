@@ -90,7 +90,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         //            print("responseString = \(responseString)")
         }
         task.resume()
-        }
+    }
     
     @IBAction func firstNameChanged(_ sender: Any){
         // get input from text fields and save to database
