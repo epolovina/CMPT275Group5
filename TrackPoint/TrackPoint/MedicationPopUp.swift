@@ -19,7 +19,10 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
     @IBAction func closePopUp(_ sender: Any) {
         //verify input is correct
         //  if medicationTextField.text != ""{
-            dismiss(animated: true, completion: nil)
+        let myVC = storyboard?.instantiateViewController(withIdentifier: "profileVC") as! Profile
+        myVC.medicationArray.append(medicationNameTF.text!)
+        //navigationController?.pushViewController(myVC, animated: true)
+        dismiss(animated: true, completion: nil)
         //}
     }
     

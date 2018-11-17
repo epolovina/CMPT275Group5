@@ -14,8 +14,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var ageTF: UITextField!
+    @IBOutlet weak var addButton: UIButton!
     
-    
+    //MARK: Variables
     var medicationArray = [String]()
     //var medicationName: String
 
@@ -92,6 +93,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         task.resume()
     }
     
+    //MARK: Actions
     @IBAction func firstNameChanged(_ sender: Any){
         // get input from text fields and save to database
         let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -112,6 +114,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         saveProfile(fName: firstName, lName: lastName, age: age)
-        
     }
+
+    
 }

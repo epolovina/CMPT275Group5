@@ -286,7 +286,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="NkM-uh-GNG" kind="presentation" id="yrU-Af-RaM"/>
+                                            <segue destination="NkM-uh-GNG" kind="show" id="WyP-lZ-vIU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -345,6 +345,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <accessibility key="accessibilityConfiguration" identifier="profileVC"/>
                         <constraints>
                             <constraint firstItem="lG3-fx-R7z" firstAttribute="centerX" secondItem="OG3-ZQ-u65" secondAttribute="centerX" id="00F-5n-XOs"/>
                             <constraint firstItem="wOY-q0-ARm" firstAttribute="centerX" secondItem="lG3-fx-R7z" secondAttribute="centerX" id="3xx-Wf-uji"/>
@@ -362,6 +363,7 @@
                         <viewLayoutGuide key="safeArea" id="YlO-Zc-MfE"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="Htf-Or-moI" id="nzG-AO-bHY"/>
                         <outlet property="ageTF" destination="mDL-xc-HPJ" id="QHj-8O-oDU"/>
                         <outlet property="firstNameTF" destination="TPP-Qr-gGe" id="ck6-LN-vA1"/>
                         <outlet property="lastNameTF" destination="mGh-yZ-mdO" id="tV7-Kt-JA8"/>
@@ -974,8 +976,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XlF-42-8sE"/>
-        <segue reference="2zV-sZ-Ao8"/>
+        <segue reference="y5f-Py-GiX"/>
         <segue reference="Vra-58-1sV"/>
-        <segue reference="XGK-Rz-dd3"/>
+        <segue reference="43G-PM-1Il"/>
     </inferredMetricsTieBreakers>
 </document>
