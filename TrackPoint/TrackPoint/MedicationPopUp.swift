@@ -6,21 +6,19 @@
 
 import UIKit
 
-class MedicationPopUpViewController: UIViewController, UITextFieldDelegate {
+class MedicationPopUp: UIViewController, UITextFieldDelegate {
 
+    //MARK: Outlets
     @IBOutlet weak var medicationNameTF: UITextField!
-    
-    // @IBOutlet weak var startDate: UIDatePicker!
-    //@IBOutlet weak var endDate: UIDatePicker!
+    @IBOutlet weak var startDateScroller: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
     
-    //@IBOutlet weak var StartDate: UIDatePicker!
+    //MARK: Variables
     var medicationArr = [String]()
     
-    //@IBOutlet weak var EndDate: UIDatePicker!
-    //verify input is correct
     @IBAction func closePopUp(_ sender: Any) {
-      //  if medicationTextField.text != ""{
+        //verify input is correct
+        //  if medicationTextField.text != ""{
             dismiss(animated: true, completion: nil)
         //}
     }
@@ -30,6 +28,8 @@ class MedicationPopUpViewController: UIViewController, UITextFieldDelegate {
         medicationNameTF.delegate = self
         // Bring up keyboard right away
         self.medicationNameTF.becomeFirstResponder()
+        //Make white font for scroller
+        startDateScroller.setValue(UIColor.white, forKeyPath: "textColor")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
