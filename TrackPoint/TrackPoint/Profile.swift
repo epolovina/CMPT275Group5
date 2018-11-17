@@ -18,6 +18,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     
     //MARK: Variables
     var medicationArray = [String]()
+    var med: String?
     //var medicationName: String
 
     

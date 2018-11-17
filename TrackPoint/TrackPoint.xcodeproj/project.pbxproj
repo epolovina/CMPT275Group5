@@ -24,6 +24,7 @@
 		D2902BF92182390100589598 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2902BF82182390100589598 /* Profile.swift */; };
 		D2902BFB21823FFD00589598 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2902BFA21823FFD00589598 /* Progress.swift */; };
 		D2902BFF21824DC500589598 /* GameComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2902BFE21824DC500589598 /* GameComplete.swift */; };
+		D2F3BF0221A0CBC4004CBB57 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F3BF0121A0CBC4004CBB57 /* Database.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		D2902BF82182390100589598 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D2902BFA21823FFD00589598 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		D2902BFE21824DC500589598 /* GameComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameComplete.swift; sourceTree = "<group>"; };
+		D2F3BF0121A0CBC4004CBB57 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				D207840821810E5A00F653B9 /* TrackPoint.entitlements */,
 				D255B905218011B600A011FC /* AppDelegate.swift */,
 				49394769218B72FD0033C16B /* collect.swift */,
+				D2F3BF0121A0CBC4004CBB57 /* Database.swift */,
 				D255B909218011B600A011FC /* Main.storyboard */,
 				D231A790219F7F3900485240 /* Login.swift */,
 				D23BEF472187F99800B944E9 /* MainMenu.swift */,
@@ -493,6 +496,7 @@
 				D20784122181795400F653B9 /* GameScreen.swift in Sources */,
 				D231A791219F7F3900485240 /* Login.swift in Sources */,
 				30F5C918218BADCC0053B6CE /* MedicationPopUp.swift in Sources */,
+				D2F3BF0221A0CBC4004CBB57 /* Database.swift in Sources */,
 				D255B906218011B600A011FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

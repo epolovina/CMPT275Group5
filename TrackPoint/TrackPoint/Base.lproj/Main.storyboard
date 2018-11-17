@@ -419,8 +419,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="closePopUp:" destination="KQt-LJ-jtt" eventType="touchUpInside" id="4hS-mv-miS"/>
-                                            <action selector="closePopUp:" destination="NkM-uh-GNG" eventType="touchUpInside" id="Kix-O3-UhC"/>
+                                            <segue destination="U4A-yT-m31" kind="show" id="QgD-AJ-7uB"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="61u-hk-WGW">
@@ -480,7 +479,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODN-4F-qig" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="KQt-LJ-jtt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1082.4000000000001" y="783.05847076461771"/>
         </scene>

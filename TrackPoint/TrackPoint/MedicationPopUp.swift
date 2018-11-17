@@ -16,14 +16,22 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
     //MARK: Variables
     var medicationArr = [String]()
     
-    @IBAction func closePopUp(_ sender: Any) {
-        //verify input is correct
-        //  if medicationTextField.text != ""{
-        let myVC = storyboard?.instantiateViewController(withIdentifier: "profileVC") as! Profile
-        myVC.medicationArray.append(medicationNameTF.text!)
-        //navigationController?.pushViewController(myVC, animated: true)
-        dismiss(animated: true, completion: nil)
-        //}
+//    @IBAction func closePopUp(_ sender: Any) {
+//        //verify input is correct
+//        //  if medicationTextField.text != ""{
+//        //let myVC = storyboard?.instantiateViewController(withIdentifier: "profileVC") as! Profile
+//        //myVC.medicationArray.append(medicationNameTF.text!)
+//        //navigationController?.pushViewController(myVC, animated: true)
+//        dismiss(animated: true, completion: nil)
+//        //}
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileVC" {
+            if let vc = segue.destination as? Profile {
+                vc.med = medicationNameTF.text!
+            }
+        }
     }
     
     override func viewDidLoad() {
