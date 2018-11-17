@@ -30,32 +30,43 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="loginButtonPressed:" destination="6k7-WO-lB0" eventType="touchUpInside" id="evP-ck-1s9"/>
                                     <segue destination="d0S-V0-1er" kind="show" id="XGK-Rz-dd3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
-                                <rect key="frame" x="101" y="297" width="173" height="30"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
-                                <rect key="frame" x="101" y="232" width="173" height="30"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
+                                <rect key="frame" x="110" y="253" width="155" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="RW2-dV-KSC" secondAttribute="height" multiplier="77:15" id="15t-Wc-rbh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6k7-WO-lB0" id="1Ta-aV-5kT"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
+                                <rect key="frame" x="111" y="329" width="153" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Zxp-Pv-vlV" secondAttribute="height" multiplier="77:15" id="2e7-eM-H7w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6k7-WO-lB0" id="iB5-KF-5Yi"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="212" id="5J5-vs-Khp"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="trailing" secondItem="Zxp-Pv-vlV" secondAttribute="trailing" id="7jS-qM-6Fu"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="Zxp-Pv-vlV" secondAttribute="leading" id="HvR-mK-TTQ"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="233" id="KZb-16-vJS"/>
+                            <constraint firstItem="Zxp-Pv-vlV" firstAttribute="top" secondItem="RW2-dV-KSC" secondAttribute="bottom" constant="46" id="LQe-yB-6bE"/>
                             <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="420" id="M3K-rm-AxX"/>
-                            <constraint firstItem="Zxp-Pv-vlV" firstAttribute="top" secondItem="RW2-dV-KSC" secondAttribute="bottom" constant="35" id="XT8-Sv-nuu"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="101" id="ZGM-Kw-njn"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="centerX" secondItem="4VW-wm-g6B" secondAttribute="centerX" id="ohz-au-cry"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="Zxp-Pv-vlV" secondAttribute="bottom" constant="81" id="eTg-zx-6jx"/>
+                            <constraint firstItem="Zxp-Pv-vlV" firstAttribute="centerX" secondItem="4VW-wm-g6B" secondAttribute="centerX" id="jT9-5D-L5R"/>
                             <constraint firstItem="4VW-wm-g6B" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="rhG-lp-gmV"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="110" id="tPP-4n-JwO"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="centerX" secondItem="4VW-wm-g6B" secondAttribute="centerX" id="vP2-FL-8ah"/>
                             <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="121" id="zCN-1Q-gL6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aJD-ek-eti"/>

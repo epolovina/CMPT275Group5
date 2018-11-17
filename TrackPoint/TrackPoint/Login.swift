@@ -19,8 +19,8 @@ class Login: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTF.delegate = self
-        passwordTF.delegate = self
+        //emailTF.delegate = self
+        //passwordTF.delegate = self
         self.emailTF.becomeFirstResponder()
 
     }
@@ -42,7 +42,7 @@ class Login: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: Actions
-    @IBAction func loginPressed(_ sender: Any) {
+    @IBAction func loginButtonPressed(_ sender: Any) {
         // Saves email and password text fields to database
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
         
@@ -72,4 +72,5 @@ class Login: UIViewController, UITextFieldDelegate {
         task.resume()
     }
     }
+    
 
