@@ -647,8 +647,8 @@
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="f8z-ux-XAS" id="ugy-v2-LhN"/>
-                        <outlet property="startButton" destination="KT2-P4-BZK" id="aJR-NF-Cke"/>
-                        <outlet property="stopButton" destination="7TY-B9-LGB" id="eiJ-Fb-sYI"/>
+                        <outlet property="startButton" destination="KT2-P4-BZK" id="4yf-pp-oI2"/>
+                        <outlet property="stopButton" destination="7TY-B9-LGB" id="33d-vx-t4y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZK-Cn-Rjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
