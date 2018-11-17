@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login-->
         <scene sceneID="PXY-OB-Dx2">
             <objects>
-                <viewController id="6k7-WO-lB0" sceneMemberID="viewController">
+                <viewController id="6k7-WO-lB0" customClass="Login" customModule="TrackPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W8K-Ai-Hxl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,57 +30,43 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginPressed:" destination="sIZ-dL-yjA" eventType="touchUpInside" id="Oeo-ku-RMh"/>
+                                    <segue destination="d0S-V0-1er" kind="show" id="XGK-Rz-dd3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NOC-CG-9ii">
-                                <rect key="frame" x="139" y="289" width="97" height="30"/>
-                                <nil key="textColor"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
+                                <rect key="frame" x="101" y="297" width="173" height="30"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o7V-KE-xbQ">
-                                <rect key="frame" x="139" y="347" width="97" height="30"/>
-                                <nil key="textColor"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
+                                <rect key="frame" x="101" y="232" width="173" height="30"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJW-z9-Vj4">
-                                <rect key="frame" x="52" y="351" width="74" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUI-mu-ipC">
-                                <rect key="frame" x="52" y="292" width="41" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="NOC-CG-9ii" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GUI-mu-ipC" secondAttribute="trailing" constant="8" symbolic="YES" id="5aU-Ib-BBJ"/>
-                            <constraint firstItem="o7V-KE-xbQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SJW-z9-Vj4" secondAttribute="trailing" constant="8" symbolic="YES" id="Bgl-2e-yoX"/>
-                            <constraint firstItem="o7V-KE-xbQ" firstAttribute="top" secondItem="NOC-CG-9ii" secondAttribute="bottom" constant="28" id="DDr-2N-E4J"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="212" id="5J5-vs-Khp"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="trailing" secondItem="Zxp-Pv-vlV" secondAttribute="trailing" id="7jS-qM-6Fu"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="Zxp-Pv-vlV" secondAttribute="leading" id="HvR-mK-TTQ"/>
                             <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="420" id="M3K-rm-AxX"/>
-                            <constraint firstItem="GUI-mu-ipC" firstAttribute="leading" secondItem="SJW-z9-Vj4" secondAttribute="leading" id="NfP-Xu-DPf"/>
-                            <constraint firstItem="NOC-CG-9ii" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="269" id="Wrt-ho-jQD"/>
-                            <constraint firstItem="GUI-mu-ipC" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="52" id="Yhx-ne-1cr"/>
-                            <constraint firstItem="SJW-z9-Vj4" firstAttribute="top" secondItem="GUI-mu-ipC" secondAttribute="bottom" constant="38" id="aYd-f4-GNC"/>
-                            <constraint firstItem="NOC-CG-9ii" firstAttribute="trailing" secondItem="o7V-KE-xbQ" secondAttribute="trailing" id="bDq-tx-zme"/>
-                            <constraint firstItem="NOC-CG-9ii" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="139" id="ggR-3z-bME"/>
-                            <constraint firstItem="GUI-mu-ipC" firstAttribute="baseline" secondItem="NOC-CG-9ii" secondAttribute="baseline" id="iL3-91-w1e"/>
-                            <constraint firstItem="NOC-CG-9ii" firstAttribute="leading" secondItem="o7V-KE-xbQ" secondAttribute="leading" id="irV-di-pFj"/>
+                            <constraint firstItem="Zxp-Pv-vlV" firstAttribute="top" secondItem="RW2-dV-KSC" secondAttribute="bottom" constant="35" id="XT8-Sv-nuu"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="101" id="ZGM-Kw-njn"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="centerX" secondItem="4VW-wm-g6B" secondAttribute="centerX" id="ohz-au-cry"/>
                             <constraint firstItem="4VW-wm-g6B" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="rhG-lp-gmV"/>
-                            <constraint firstItem="o7V-KE-xbQ" firstAttribute="centerX" secondItem="4VW-wm-g6B" secondAttribute="centerX" id="uII-ve-Fct"/>
                             <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="121" id="zCN-1Q-gL6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aJD-ek-eti"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTF" destination="RW2-dV-KSC" id="wjK-Io-p9W"/>
+                        <outlet property="loginButton" destination="4VW-wm-g6B" id="etf-6P-bgQ"/>
+                        <outlet property="passwordTF" destination="Zxp-Pv-vlV" id="Tba-3R-YcD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozQ-1B-9va" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="sIZ-dL-yjA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1332" y="26.53673163418291"/>
         </scene>
@@ -1001,12 +987,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoV1" width="170" height="170"/>
+        <image name="LogoV1" width="340" height="340"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XlF-42-8sE"/>
         <segue reference="2zV-sZ-Ao8"/>
-        <segue reference="3Lk-Y4-FqU"/>
-        <segue reference="Dyz-83-5eW"/>
+        <segue reference="Vra-58-1sV"/>
+        <segue reference="XGK-Rz-dd3"/>
     </inferredMetricsTieBreakers>
 </document>

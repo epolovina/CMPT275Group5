@@ -6,7 +6,7 @@
 
 import UIKit
 
-class MedicationPopUpViewController: UIViewController {
+class MedicationPopUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var medicationNameTF: UITextField!
     
@@ -27,6 +27,7 @@ class MedicationPopUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        medicationNameTF.delegate = self
         // Bring up keyboard right away
         self.medicationNameTF.becomeFirstResponder()
     }
