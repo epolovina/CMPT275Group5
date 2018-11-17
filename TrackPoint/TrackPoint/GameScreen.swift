@@ -13,8 +13,10 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     var box = SCNNode()
     var boundary = SCNNode()
     var pointer = SCNNode()
+    var isInside:Bool = true
     let initialDelay:TimeInterval = 3
-    let initialPosition = SCNVector3(0, -5, -5)
+    let initialPosition = SCNVector3(0, 0, -10)
+    let initialPointerPosition = SCNVector3(0, 0, -10)
     let collector:DataRun = DataRun()
     fileprivate var updatePositionTimer: Timer!
     let gameComplete = GameComplete()
@@ -64,28 +66,44 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
-        if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
-            //halt data collection when out of bounds
-            collector.suspend()
-            print("Out of bounds, data collection stopped!")
-            
+        let distance = SCNVector3(contact.contactPoint.x - boundary.position.x, contact.contactPoint.y - boundary.position.y, contact.contactPoint.z - boundary.position.z)
+        let length : Float = sqrtf(distance.x * distance.x + distance.y * distance.y + distance.z * distance.z)
+        if (length > 3 && isInside == true){
+            isInside = false
+            print ("contact ended")
+            if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
+                //halt data collection when out of bounds
+                collector.suspend()
+                print("Out of bounds, data collection stopped!")
+                
+            }
         }
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
-            collector.resume()
-            print("Back into playable area, data collection resumed!")
-            
+        let distance = SCNVector3(contact.contactPoint.x - boundary.position.x, contact.contactPoint.y - boundary.position.y, contact.contactPoint.z - boundary.position.z)
+        let length : Float = sqrtf(distance.x * distance.x + distance.y * distance.y + distance.z * distance.z)
+        
+        if (length < 3 && isInside == false){
+            isInside = true
+            print ("contact happened")
+            if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
+                collector.resume()
+                print("Back into playable area, data collection resumed!")
+                
+            }
         }
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //create configuration and run session
         let config = ARWorldTrackingConfiguration()
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints, SCNDebugOptions.showPhysicsShapes]
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+        //ARSCNDebugOptions.showFeaturePoints, SCNDebugOptions.showPhysicsShapes]
         sceneView.session.run(config)
     }
     
@@ -101,33 +119,53 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         //find box node and define its physical attributes
         self.sceneView.scene.rootNode.enumerateChildNodes{ (node,_) in
             if (node.name == "Box" ){
+                print("Found box node")
                 box = node
                 box.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: box, options: nil))
                 box.physicsBody?.categoryBitMask = category.box.rawValue
                 box.position = initialPosition
             }
             if (node.name == "boundarySphere"){
+                print("Found boundary node")
                 boundary = node
                 boundary.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: boundary, options: nil))
                 boundary.physicsBody?.categoryBitMask = category.boundary.rawValue
                 boundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
                 boundary.position = initialPosition
             }
-            if (node.name == "Pointer"){
-                pointer = node
-                pointer.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: pointer, options: nil))
-                pointer.physicsBody?.categoryBitMask = category.pointer.rawValue
-                pointer.physicsBody?.contactTestBitMask = category.boundary.rawValue
-                pointer.position = SCNVector3(0, 0, 0)
-                //rotate around z-axis by pi/2
-                pointer.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 0, 1)
-                updatePositionTimer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updatePointerPosition), userInfo: nil, repeats: true)
-            }
+//            if (node.name == "Pointer"){
+//                print("Found pointer node")
+//                pointer = node
+//                pointer.removeFromParentNode()
+//                sceneView.pointOfView?.addChildNode(pointer)
+//                pointer.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: pointer, options: nil))
+//                pointer.physicsBody?.categoryBitMask = category.pointer.rawValue
+//                pointer.physicsBody?.contactTestBitMask = category.boundary.rawValue
+//                pointer.position = initialPointerPosition
+//                //rotate around z-axis by pi/2
+//                //pointer.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 0, 1)
+//                //updatePositionTimer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.updatePointerPosition), userInfo: nil, repeats: true)
+//            }
             
-            // start data collection
-            collector.start()
             
         }
+        //add pointer node and attach it to camera
+        var pointerGeometry:SCNGeometry
+        pointerGeometry = SCNBox(width: 0.1, height: 0.1, length: 15, chamferRadius: 0)
+        pointerGeometry.firstMaterial?.diffuse.contents = UIColor.green
+        pointer = SCNNode(geometry: pointerGeometry)
+        
+        //pointer.orientation = (sceneView.pointOfView?.orientation)!
+        //sceneView.scene.rootNode.addChildNode(pointer)
+        sceneView.pointOfView?.addChildNode(pointer)
+        pointer.position = initialPointerPosition
+        //pointer.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 4)), 1, 0, 0)
+        pointer.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: pointer, options: nil))
+        pointer.physicsBody?.categoryBitMask = category.pointer.rawValue
+        pointer.physicsBody?.contactTestBitMask = category.boundary.rawValue
+        
+        // start data collection
+        collector.start()
         
         //add light to scene
         let light = SCNLight()
