@@ -49,11 +49,7 @@ class GameScreen: UIViewController  {
         //self.present(gameComplete, animated: true, completion: nil)
     }
     
-<<<<<<< HEAD
-    // Display update timer func
-=======
     // timerfunc updates labels with current sensor data
->>>>>>> master
     @objc fileprivate  func updateLabels(){
         let curr_data = collector.get_last_entry();
         let aX = curr_data[0].0

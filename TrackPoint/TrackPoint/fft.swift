@@ -49,7 +49,29 @@ class FFT {
         return (bandPassFilter, minIdx, maxIdx)
     }
     
-    func calculate(_ _values: [Double], fps: Double) -> ([Double],Double,Double) {
+    func process(_ data: [[Double]], _fps: Double) -> (([Double],[Double]),Double,Double){
+        let data_norm:[Double] = normalizeSquare(data)
+        var size:Int = 1
+        while size<data_norm.count { // find smallest size thats pow of 2
+            size = size << 1;
+        }
+        let data_pad:[Double] = data_norm + Array(repeating: 0, count: size-data_norm.count) // zero padding
+        return calculate(data_pad, fps: _fps)
+    }
+    
+    internal func normalizeSquare(_ _data:[[Double]]) -> [Double]{
+        var data_norm:[Double] = []
+        for i in 0..<_data[0].count {
+            var norm:Double = 0
+            for j in 0..<_data.count {
+                norm += _data[j][i]*_data[j][i]
+            }
+            data_norm.append(norm);
+        }
+        return data_norm
+    }
+    
+    func calculate(_ _values: [Double], fps: Double) -> (([Double],[Double]),Double,Double) {
         // ----------------------------------------------------------------
         // Copy of our input
         // ----------------------------------------------------------------
@@ -61,6 +83,15 @@ class FFT {
         let N = values.count
         let N2 = vDSP_Length(N/2)
         let LOG_N = vDSP_Length(log2(Float(values.count)))
+        
+        // ----------------------------------------------------------------
+        // Freq vector
+        // ----------------------------------------------------------------
+        var freq_plus:[Double] = []
+        for i in 1...N/2{
+            let pt:Double = Double(i)/Double(N)*fps
+            freq_plus.append(pt)
+        }
         
         // ----------------------------------------------------------------
         // FFT & Variables Setup
@@ -197,7 +228,7 @@ class FFT {
         }
         */
         
-        return (filteredSpectrum,maxFrequency,maxFrequencyResult.0)
+        return ((freq_plus,filteredSpectrum),maxFrequency,maxFrequencyResult.0)
     }
     
     // The bandpass frequencies
