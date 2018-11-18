@@ -286,7 +286,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="addButtonPressed:" destination="U4A-yT-m31" eventType="touchUpInside" id="w0H-zX-GrH"/>
                                             <segue destination="NkM-uh-GNG" kind="show" id="WyP-lZ-vIU"/>
                                         </connections>
                                     </button>
@@ -427,9 +426,6 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <action selector="medicatonNameChanged:" destination="NkM-uh-GNG" eventType="editingDidEnd" id="dTu-WM-PRk"/>
-                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTD-UV-SwO">
                                         <rect key="frame" x="17" y="66.5" width="50" height="21"/>
@@ -452,7 +448,7 @@
                                     <constraint firstItem="fTD-UV-SwO" firstAttribute="leading" secondItem="Jmg-Tu-jGq" secondAttribute="leading" constant="17" id="Q8j-22-NcQ"/>
                                     <constraint firstAttribute="trailing" secondItem="61u-hk-WGW" secondAttribute="trailing" constant="65" id="QnH-lK-575"/>
                                     <constraint firstItem="2C0-vg-YIS" firstAttribute="top" secondItem="chI-wa-yfw" secondAttribute="bottom" constant="7" id="Rve-Q3-Xyh"/>
-                                    <constraint firstItem="61u-hk-WGW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fTD-UV-SwO" secondAttribute="trailing" symbolic="YES" id="cyq-wq-bAB"/>
+                                    <constraint firstItem="61u-hk-WGW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fTD-UV-SwO" secondAttribute="trailing" constant="8" symbolic="YES" id="cyq-wq-bAB"/>
                                     <constraint firstItem="ykx-0E-gr5" firstAttribute="leading" secondItem="Jmg-Tu-jGq" secondAttribute="leading" constant="83" id="ibW-CH-3SE"/>
                                     <constraint firstItem="chI-wa-yfw" firstAttribute="trailing" secondItem="Jmg-Tu-jGq" secondAttribute="trailingMargin" id="lh3-1T-BTf"/>
                                     <constraint firstItem="61u-hk-WGW" firstAttribute="centerX" secondItem="ykx-0E-gr5" secondAttribute="centerX" id="tAa-rY-7bl"/>
@@ -973,6 +969,7 @@
         <image name="LogoV1" width="340" height="340"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WyP-lZ-vIU"/>
         <segue reference="XlF-42-8sE"/>
         <segue reference="y5f-Py-GiX"/>
         <segue reference="Vra-58-1sV"/>

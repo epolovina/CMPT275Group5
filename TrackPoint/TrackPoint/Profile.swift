@@ -17,9 +17,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     @IBOutlet weak var addButton: UIButton!
     
     //MARK: Variables
-    var medicationArray = [String]()
-    var med: String! = "ugh"
-    //var medicationName: String
+    var medicationArray = [String]() // name and start date
+    var medNameAndDateArray: [(String, String)] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +27,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         firstNameTF.delegate = self
         lastNameTF.delegate = self
         ageTF.delegate = self
-        
-        
-        //print(med)
-        
-//        medicationArray.append("Medication 1")
-//        medicationArray.append("Medication 2")
-//        medicationArray.append("Medication 3")
         
         //load in data from database and set text fields
         
@@ -138,9 +130,4 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         saveProfile(fName: firstName, lName: lastName, age: age)
     }
-    
-    @IBAction func addButtonPressed(_ sender: Any) {
-        
-    }
-    
 }

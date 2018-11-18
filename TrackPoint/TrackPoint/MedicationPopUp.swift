@@ -14,26 +14,13 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     
     
-    //MARK: Actions
-    @IBAction func savePressed(_ sender: Any) {
-        //let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC") as! Profile
-        
-//        profileVC.delegate = self
-        
-        //profileVC.med = "something"
-        
-        if let presenter = presentingViewController as? Profile {
-            presenter.medicationArray.append(self.medicationNameTF.text!)
-            presenter.tableView.reloadData()
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         medicationNameTF.delegate = self
+        
         // Bring up keyboard right away
         self.medicationNameTF.becomeFirstResponder()
+        
         //Make white font for scroller
         startDateScroller.setValue(UIColor.white, forKeyPath: "textColor")
     }
@@ -49,11 +36,20 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func medicatonNameChanged(_ sender: Any) {
-//        let medicationName: String = self.medicationNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//        medicationArr.append(medicationName)
+    //MARK: Actions
+    @IBAction func savePressed(_ sender: Any) {
+        // save medication information and return to profile
         
-        
+        if let profileVC = presentingViewController as? Profile {
+            // send data back to profile view controller
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, YYYY"
+            let strDate = dateFormatter.string(from: self.startDateScroller.date)
+            profileVC.medNameAndDateArray.append((self.medicationNameTF.text!, strDate))
+            profileVC.medicationArray.append(self.medicationNameTF.text!)
+            profileVC.tableView.reloadData()
+        }
+        dismiss(animated: true, completion: nil)
     }
     
 }
