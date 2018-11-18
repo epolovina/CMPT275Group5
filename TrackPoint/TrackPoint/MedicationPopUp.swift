@@ -13,25 +13,20 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var startDateScroller: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
     
-    //MARK: Variables
-    var medicationArr = [String]()
     
-//    @IBAction func closePopUp(_ sender: Any) {
-//        //verify input is correct
-//        //  if medicationTextField.text != ""{
-//        //let myVC = storyboard?.instantiateViewController(withIdentifier: "profileVC") as! Profile
-//        //myVC.medicationArray.append(medicationNameTF.text!)
-//        //navigationController?.pushViewController(myVC, animated: true)
-//        dismiss(animated: true, completion: nil)
-//        //}
-//    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "profileVC" {
-            if let vc = segue.destination as? Profile {
-                vc.med = medicationNameTF.text!
-            }
+    //MARK: Actions
+    @IBAction func savePressed(_ sender: Any) {
+        //let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC") as! Profile
+        
+//        profileVC.delegate = self
+        
+        //profileVC.med = "something"
+        
+        if let presenter = presentingViewController as? Profile {
+            presenter.medicationArray.append(self.medicationNameTF.text!)
+            presenter.tableView.reloadData()
         }
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -55,8 +50,8 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func medicatonNameChanged(_ sender: Any) {
-        let medicationName: String = self.medicationNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        medicationArr.append(medicationName)
+//        let medicationName: String = self.medicationNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+//        medicationArr.append(medicationName)
         
         
     }

@@ -18,10 +18,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     
     //MARK: Variables
     var medicationArray = [String]()
-    var med: String?
+    var med: String! = "ugh"
     //var medicationName: String
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -30,13 +29,15 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         lastNameTF.delegate = self
         ageTF.delegate = self
         
+        
+        //print(med)
+        
 //        medicationArray.append("Medication 1")
 //        medicationArray.append("Medication 2")
 //        medicationArray.append("Medication 3")
         
         //load in data from database and set text fields
         
-    
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +55,27 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = medicationArray[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // allows user to delete a cell in the table
+        if editingStyle == UITableViewCell.EditingStyle.delete{
+            
+            // create alert to confirm deletion
+            let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this medication?", preferredStyle: .alert)
+            
+            // if yes is pressed, delete from table
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                self.medicationArray.remove(at: indexPath.row)
+                tableView.reloadData()
+            }))
+            
+            // if no is pressed, return
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                return}))
+            
+            self.present(alert, animated: true)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -116,6 +138,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         saveProfile(fName: firstName, lName: lastName, age: age)
     }
-
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+    }
     
 }

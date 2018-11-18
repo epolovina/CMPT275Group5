@@ -178,7 +178,7 @@
         <!--Profile-->
         <scene sceneID="hHi-YN-iZx">
             <objects>
-                <viewController id="U4A-yT-m31" customClass="Profile" customModule="TrackPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileVC" id="U4A-yT-m31" customClass="Profile" customModule="TrackPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OG3-ZQ-u65">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -286,6 +286,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="addButtonPressed:" destination="U4A-yT-m31" eventType="touchUpInside" id="w0H-zX-GrH"/>
                                             <segue destination="NkM-uh-GNG" kind="show" id="WyP-lZ-vIU"/>
                                         </connections>
                                     </button>
@@ -345,7 +346,6 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <accessibility key="accessibilityConfiguration" identifier="profileVC"/>
                         <constraints>
                             <constraint firstItem="lG3-fx-R7z" firstAttribute="centerX" secondItem="OG3-ZQ-u65" secondAttribute="centerX" id="00F-5n-XOs"/>
                             <constraint firstItem="wOY-q0-ARm" firstAttribute="centerX" secondItem="lG3-fx-R7z" secondAttribute="centerX" id="3xx-Wf-uji"/>
@@ -419,7 +419,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="U4A-yT-m31" kind="show" id="QgD-AJ-7uB"/>
+                                            <action selector="savePressed:" destination="NkM-uh-GNG" eventType="touchUpInside" id="ZEv-DS-rbx"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="61u-hk-WGW">
