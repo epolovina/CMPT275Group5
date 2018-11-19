@@ -29,15 +29,17 @@ class Database {
     var password: String!
     
     var score = Double() //will send score to db and push into array
+    var scoreDate: String!
     
     var medicationArray: [(String, String)] = [] //Name and date
     var gameScoreArray: [(Double, String)] = [] //Score and date
     
     //MARK: Functions
-    func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String){
+    func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String, medsArr: (String, String)){
 //        print("self.email \(String(describing: self.email))")
         let sendjson = ["email":self.email, "password":self.password,
-                        "firstName":firstNamestring, "lastName":lastNamestring, "age":agestring]
+                        "firstName":firstNamestring, "lastName":lastNamestring, "age":agestring,
+                        "medicationArr":medsArr] as [String : Any]
         print(sendjson)
         // saves first/last names, medications and age to db
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
@@ -63,6 +65,9 @@ class Database {
             }
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+
+
+
                 print(myjson)
             }catch{
                 print("ERROR reading json")
@@ -105,6 +110,11 @@ class Database {
             }
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+                self.firstName = ((myjson) as AnyObject).value(forKey: "firsName")! as? String
+                self.lastName = ((myjson) as AnyObject).value(forKey: "lastName")! as? String
+                self.age = ((myjson) as AnyObject).value(forKey: "age")! as? String
+                self.medicationArray = (((myjson) as AnyObject).value(forKey: "firsName")! as? [(String, String)])!
+                self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "lastName")! as? [(Double, String)])!
                 print(myjson)
             }catch{
                 print("ERROR reading json")
@@ -166,8 +176,10 @@ class Database {
         task.resume()
     }
     
-    func saveScore(scorestring: String){
-        let sendjson = ["score":scorestring]
+    func saveScore(scorestring: Double, datestring: String){
+        let sendjson = ["Score":
+                        ["score":scorestring, "date":datestring]
+                       ] as [String : Any]
         // append new score to gameScoreArray and save to database
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/saveScore")!
         
@@ -216,7 +228,7 @@ class Database {
     func loadScores(emailstring: String) {
         // load gameScoreArray from database
         let sendjson = ["email":emailstring]
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
+        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/loadScores")!
         
         var request = URLRequest(url: url)
 //        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
@@ -240,6 +252,7 @@ class Database {
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
                 print(myjson)
+                self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "score")! as? [(Double, String)])!
             }catch{
                 print("ERROR reading json")
             }
