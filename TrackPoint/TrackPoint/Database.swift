@@ -31,15 +31,23 @@ class Database {
     
     //MARK: Functions
     func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String){
+        let sendjson = ["firstName":firstNamestring, "lastName":lastNamestring, "age":agestring]
         // saves first/last names, medications and age to db
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
         
         var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-        let postString = "firstName=\(firstNamestring))&lastName=\(lastNamestring)&age=\(agestring)"
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
+//        let postString = "firstName=\(firstNamestring))&lastName=\(lastNamestring)&age=\(agestring)"
+//        print(postString)
+//        request.httpBody = postString.data(using: .utf8)
+        guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
+            else{
+                print("ERROR Problem with json")
+                return
+        }
+        request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
@@ -65,15 +73,23 @@ class Database {
     }
     
     func loadProfileData(emailstring: String){
+        let sendjson = ["email":emailstring]
         // get first/last names, medications and age from db and put in variables
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
         
         var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-        let postString = "email=\(emailstring)"
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
+//        let postString = "email=\(emailstring)"
+//        print(postString)
+//        request.httpBody = postString.data(using: .utf8)
+        guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
+            else{
+                print("ERROR Problem with json")
+                return
+        }
+        request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
@@ -108,12 +124,20 @@ class Database {
 
         let postString = "email=\(emailstring)&password=\(passwordstring)"
         print(postString)
-  
+        let sendjson = ["email":emailstring, "password":passwordstring]
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
         var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
         request.httpMethod = "POST"
-        request.httpBody = postString.data(using: .utf8)
+//        request.httpBody = postString.data(using: .utf8)
+        guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
+        else{
+            print("ERROR Problem with json")
+            return
+        }
+        request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
@@ -134,18 +158,27 @@ class Database {
         task.resume()
     }
     
-    func saveScore(){
+    func saveScore(scorestring: String){
+        let sendjson = ["score":scorestring]
         // append new score to gameScoreArray and save to database
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/saveScore")!
         
-        let email: String = self.email
-        let score: Double = self.score
+//        let email: String = self.email
+//        let score: Double = self.score
         var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
         request.httpMethod = "POST"
-        let postString = "email=\(email)&score=\(score)"
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
+//        let postString = "email=\(email)&score=\(score)"
+//        print(postString)
+//        request.httpBody = postString.data(using: .utf8)
+        guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
+            else{
+                print("ERROR Problem with json")
+                return
+        }
+        request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {  // check for fundamental networking error
@@ -174,14 +207,22 @@ class Database {
     
     func loadScores(emailstring: String) {
         // load gameScoreArray from database
+        let sendjson = ["email":emailstring]
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
         
         var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        let postString = "email=\(emailstring)"
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
+            else{
+                print("ERROR Problem with json")
+                return
+        }
+        request.httpBody = httpbody
+//        request.httpMethod = "POST"
+//        let postString = "email=\(emailstring)"
+//        print(postString)
+//        request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
