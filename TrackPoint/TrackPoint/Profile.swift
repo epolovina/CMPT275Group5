@@ -34,6 +34,10 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         
         //load in data from database and set text fields
         
+        self.lastNameTF.text = DB.lastName
+        self.firstNameTF.text = DB.firstName
+        self.ageTF.text = DB.age
+        
     
     }
     
@@ -109,7 +113,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        DB.saveProfileData(firstNamestring: firstName, lastNamestring: lastName, agestring: age)
+        DB.saveProfileData(firstNamestring: firstName, lastNamestring: lastName, agestring: age, medsArr: medicationArray)
         
     }
 
@@ -117,7 +121,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        DB.saveProfileData(firstNamestring: firstName, lastNamestring: lastName, agestring: age)
+        DB.saveProfileData(firstNamestring: firstName, lastNamestring: lastName, agestring: age, medsArr: medicationArray)
 
     }
     
@@ -126,8 +130,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        DB.saveProfileData(firstNamestring: firstName, lastNamestring: lastName, agestring: age)
-        print(DB.email)
+        DB.saveProfileData(firstNamestring: firstName, lastNamestring: lastName, agestring: age, medsArr: medicationArray)
     }
 
     

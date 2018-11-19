@@ -31,15 +31,20 @@ class Database {
     var score = Double() //will send score to db and push into array
     var scoreDate: String!
     
-    var medicationArray: [(String, String)] = [] //Name and date
+    //var medicationArray: [(String, String)] = [] //Name and date
+    var medicationArray = [String]()
     var gameScoreArray: [(Double, String)] = [] //Score and date
     
     //MARK: Functions
-    func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String, medsArr: (String, String)){
+    func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String, medsArr: [String]){
 //        print("self.email \(String(describing: self.email))")
         let sendjson = ["email":self.email, "password":self.password,
                         "firstName":firstNamestring, "lastName":lastNamestring, "age":agestring,
                         "medicationArr":medsArr] as [String : Any]
+        self.firstName = firstNamestring
+        self.lastName = lastNamestring
+        self.age = agestring
+        self.medicationArray = medsArr
         print(sendjson)
         // saves first/last names, medications and age to db
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
@@ -84,8 +89,8 @@ class Database {
         task.resume()
     }
     
-    func loadProfileData(emailstring: String){
-        let sendjson = ["email":emailstring]
+    func loadProfileData(){
+        let sendjson = ["email":self.email]
         // get first/last names, medications and age from db and put in variables
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
         
@@ -110,12 +115,13 @@ class Database {
             }
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-                self.firstName = ((myjson) as AnyObject).value(forKey: "firsName")! as? String
+                self.firstName = ((myjson) as AnyObject).value(forKey: "firstName")! as? String
                 self.lastName = ((myjson) as AnyObject).value(forKey: "lastName")! as? String
                 self.age = ((myjson) as AnyObject).value(forKey: "age")! as? String
-                self.medicationArray = (((myjson) as AnyObject).value(forKey: "firsName")! as? [(String, String)])!
-                self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "lastName")! as? [(Double, String)])!
+                //self.medicationArray = (((myjson) as AnyObject).value(forKey: "medication")! as? [String])? [""]
+                //self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "score")! as? [(Double, String)])
                 print(myjson)
+                //print(self.lastName)
             }catch{
                 print("ERROR reading json")
             }
@@ -135,12 +141,9 @@ class Database {
         // check email matches password
         // save email and password to database
         
-//        emailstring = self.email
-//        passwordstring = self.password
-        
+        self.email = emailstring
+        self.password = passwordstring
 
-//        let postString = "email=\(emailstring)&password=\(passwordstring)"
-//        print(postString)
         let sendjson = ["email":emailstring, "password":passwordstring]
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
         var request = URLRequest(url: url)
