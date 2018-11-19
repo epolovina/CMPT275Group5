@@ -20,7 +20,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     var medicationArray = [String]()
     var med: String?
     //var medicationName: String
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         firstNameTF.delegate = self
         lastNameTF.delegate = self
         ageTF.delegate = self
-        
 //        medicationArray.append("Medication 1")
 //        medicationArray.append("Medication 2")
 //        medicationArray.append("Medication 3")
@@ -78,6 +76,17 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let datares = data,
+                error == nil else {             // check for fundamental networking error
+                    print("ERROR LOADING DATA")
+                    return
+            }
+            do{
+                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                print(myjson)
+            }catch{
+                print("ERROR reading json")
+            }
         //            guard let data = data, error == nil else {                                                 // check for fundamental networking error
         //                print("error=\(error)")
         //                return

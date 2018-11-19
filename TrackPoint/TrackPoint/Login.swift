@@ -42,35 +42,43 @@ class Login: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: Actions
+    let DB = Database.DB
     @IBAction func loginButtonPressed(_ sender: Any) {
+    let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+    let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        DB.verifyLogin(emailstring: email, passwordstring: password)
+        
         // Saves email and password text fields to database
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
+//        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
+//
+//        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+//
+//        var request = URLRequest(url: url)
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.httpMethod = "POST"
+//        let postString = "email=\(email)&password=\(password)"
+//        print(postString)
+//        request.httpBody = postString.data(using: .utf8)
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let datares = data,
+//                error == nil else {                                                 // check for fundamental networking error
+//                print("error loading data")
+//                return
+//            }
+//            do{
+//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                print(myjson)
+//                print((myjson as AnyObject).value(forKey: "email")!)
+//            }catch{
+//                print("ERROR reading json")
+//            }
+//        }
+//        task.resume()
         
-        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        let postString = "email=\(email)&password=\(password)"
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
-        }
-        task.resume()
     }
+    
     }
     
 
