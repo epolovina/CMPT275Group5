@@ -33,7 +33,9 @@ class Database {
     
     //var medicationArray: [(String, String)] = [] //Name and date
     var medicationArray = [String?]()
-    var gameScoreArray: [(Double, String)] = [] //Score and date
+    var scoreArray = [Double?]()
+    var dateArray = [String?]()
+    //var gameScoreArray: [(Double, String)] = [] //Score and date
     
     //MARK: Functions
     func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String, medsArr: [String]){
@@ -77,7 +79,7 @@ class Database {
         task.resume()
     }
     
-    func loadProfileData(){
+    func loadData(){
         let sendjson = ["email":self.email]
         // get first/last names, medications and age from db and put in variables
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
@@ -105,7 +107,9 @@ class Database {
                 self.lastName = ((myjson) as AnyObject).value(forKey: "lastName")! as? String
                 self.age = ((myjson) as AnyObject).value(forKey: "age")! as? String
                 self.medicationArray = (((myjson) as AnyObject).value(forKey: "medication")! as? [String?] ?? [])
-                //self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "score")! as? [(Double, String)])!
+                self.scoreArray = (((myjson) as AnyObject).value(forKey: "scoreArray")! as? [Double?] ?? [])
+                self.dateArray = (((myjson) as AnyObject).value(forKey: "dateArray")! as? [String?] ?? [])
+                
                 print(myjson)
                 
             }catch{
@@ -156,19 +160,15 @@ class Database {
         task.resume()
     }
     
-    func saveScore(scorestring: Double, datestring: String){
-        let sendjson = ["Score":
-                        ["score":scorestring, "date":datestring]
-                       ] as [String : Any]
+    func saveScore(){
+        let sendjson = ["email":self.email, "scoreArray":self.scoreArray, "dateArray":self.dateArray] as [String : Any]
+        
         // append new score to gameScoreArray and save to database
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/saveScore")!
         
-//        let email: String = self.email
-//        let score: Double = self.score
         var request = URLRequest(url: url)
 
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
         request.httpMethod = "POST"
 
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
@@ -186,40 +186,6 @@ class Database {
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
                 print(myjson)
-//                (myjson as AnyObject).value(forKey: "email")
-            }catch{
-                print("ERROR reading json")
-            }
-            
-        }
-        task.resume()
-    }
-    
-    func loadScores(emailstring: String) {
-        // load gameScoreArray from database
-        let sendjson = ["email":emailstring]
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/loadScores")!
-        
-        var request = URLRequest(url: url)
-
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
-            else{
-                print("ERROR Problem with json")
-                return
-        }
-        request.httpBody = httpbody
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let datares = data,
-                error == nil else {             // check for fundamental networking error
-                    print("ERROR LOADING DATA")
-                    return
-            }
-            do{
-                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-                print(myjson)
-                self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "score")! as? [(Double, String)])!
             }catch{
                 print("ERROR reading json")
             }
@@ -227,3 +193,4 @@ class Database {
         task.resume()
     }
 }
+

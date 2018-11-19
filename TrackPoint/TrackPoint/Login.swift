@@ -48,7 +48,7 @@ class Login: UIViewController, UITextFieldDelegate {
     let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         DB.verifyLogin(emailstring: email, passwordstring: password)
-        DB.loadProfileData()
+        DB.loadData()
         // Saves email and password text fields to database
 //        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
 //
