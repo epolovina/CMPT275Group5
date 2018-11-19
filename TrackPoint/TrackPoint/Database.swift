@@ -32,12 +32,12 @@ class Database {
     var scoreDate: String!
     
     //var medicationArray: [(String, String)] = [] //Name and date
-    var medicationArray = [String]()
+    var medicationArray = [String?]()
     var gameScoreArray: [(Double, String)] = [] //Score and date
     
     //MARK: Functions
     func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String, medsArr: [String]){
-//        print("self.email \(String(describing: self.email))")
+
         let sendjson = ["email":self.email, "password":self.password,
                         "firstName":firstNamestring, "lastName":lastNamestring, "age":agestring,
                         "medicationArr":medsArr] as [String : Any]
@@ -50,12 +50,10 @@ class Database {
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
         
         var request = URLRequest(url: url)
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-//        let postString = "firstName=\(firstNamestring))&lastName=\(lastNamestring)&age=\(agestring)"
-//        print(postString)
-//        request.httpBody = postString.data(using: .utf8)
+
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
             else{
                 print("ERROR Problem with json")
@@ -71,20 +69,10 @@ class Database {
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
 
-
-
                 print(myjson)
             }catch{
                 print("ERROR reading json")
             }
-            //
-            //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-            //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-            //                print("response = \(response)")
-            //            }
-            //
-                        //let responseString = String(data: data, encoding: .utf8)
-                       // print("responseString = \(responseString)")
         }
         task.resume()
     }
@@ -95,12 +83,10 @@ class Database {
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
         
         var request = URLRequest(url: url)
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
-//        let postString = "email=\(emailstring)"
-//        print(postString)
-//        request.httpBody = postString.data(using: .utf8)
+
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
             else{
                 print("ERROR Problem with json")
@@ -118,21 +104,14 @@ class Database {
                 self.firstName = ((myjson) as AnyObject).value(forKey: "firstName")! as? String
                 self.lastName = ((myjson) as AnyObject).value(forKey: "lastName")! as? String
                 self.age = ((myjson) as AnyObject).value(forKey: "age")! as? String
-                //self.medicationArray = (((myjson) as AnyObject).value(forKey: "medication")! as? [String])? [""]
-                //self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "score")! as? [(Double, String)])
+                self.medicationArray = (((myjson) as AnyObject).value(forKey: "medication")! as? [String?] ?? [])
+                //self.gameScoreArray = (((myjson) as AnyObject).value(forKey: "score")! as? [(Double, String)])!
                 print(myjson)
-                //print(self.lastName)
+                
             }catch{
                 print("ERROR reading json")
             }
-            //
-            //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-            //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-            //                print("response = \(response)")
-            //            }
-            //
-//                        let responseString = String(data: data, encoding: .utf8)
-//                        print("responseString = \(responseString)")
+
         }
         task.resume()
     }
@@ -147,11 +126,11 @@ class Database {
         let sendjson = ["email":emailstring, "password":passwordstring]
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
         var request = URLRequest(url: url)
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"
-//        request.httpBody = postString.data(using: .utf8)
+
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
         else{
             print("ERROR Problem with json")
@@ -172,9 +151,7 @@ class Database {
             }catch{
                 print("ERROR reading json")
             }
-//            let responseString = String(data: data, encoding: .utf8)
-//
-//            print("responseString = \(String(describing: response))")
+
         }
         task.resume()
     }
@@ -189,13 +166,11 @@ class Database {
 //        let email: String = self.email
 //        let score: Double = self.score
         var request = URLRequest(url: url)
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"
-//        let postString = "email=\(email)&score=\(score)"
-//        print(postString)
-//        request.httpBody = postString.data(using: .utf8)
+
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
             else{
                 print("ERROR Problem with json")
@@ -216,14 +191,6 @@ class Database {
                 print("ERROR reading json")
             }
             
-//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                print("response = \(response)")
-//            }
-            
-//            let responseString = String(data: data, encoding: .utf8)
-////            print(type(of: responseString))
-//            print("responseString = \(String(describing: responseString))")
         }
         task.resume()
     }
@@ -234,7 +201,7 @@ class Database {
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/loadScores")!
         
         var request = URLRequest(url: url)
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
             else{
@@ -242,10 +209,7 @@ class Database {
                 return
         }
         request.httpBody = httpbody
-//        request.httpMethod = "POST"
-//        let postString = "email=\(emailstring)"
-//        print(postString)
-//        request.httpBody = postString.data(using: .utf8)
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
@@ -259,21 +223,7 @@ class Database {
             }catch{
                 print("ERROR reading json")
             }
-            //            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-            //                print("error=\(error)")
-            //                return
-            //            }
-            //
-            //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-            //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-            //                print("response = \(response)")
-            //            }
-            //
-            //            let responseString = String(data: data, encoding: .utf8)
-            //            print("responseString = \(responseString)")
         }
         task.resume()
     }
-    
-    
 }

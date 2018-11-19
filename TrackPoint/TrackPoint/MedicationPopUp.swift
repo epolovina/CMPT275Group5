@@ -13,6 +13,7 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var startDateScroller: UIDatePicker!
     @IBOutlet weak var saveButton: UIButton!
     
+    let DB = Database.DB
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
             profileVC.medNameAndDateArray.append((self.medicationNameTF.text!, strDate))
             profileVC.medicationArray.append(self.medicationNameTF.text!)
             profileVC.tableView.reloadData()
+            DB.saveProfileData(firstNamestring: DB.firstName, lastNamestring: DB.lastName, agestring: DB.age, medsArr: profileVC.medicationArray as! [String])
         }
         dismiss(animated: true, completion: nil)
     }
