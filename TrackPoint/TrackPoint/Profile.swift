@@ -19,6 +19,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     //MARK: Variables
     var medicationArray = [String]() // name and start date
     var medNameAndDateArray: [(String, String)] = []
+    let DB = Database.DB
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         ageTF.delegate = self
         
         //load in data from database and set text fields
+        
         
     }
     
@@ -81,53 +83,27 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         return true
     }
     
-    func saveProfile(fName: String, lName: String, age: String){
-        // Saves text fields to database
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        let postString = "firstName=\(fName)&lastName=\(lName)&age=\(age)"
-        print(postString)
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        //            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-        //                print("error=\(error)")
-        //                return
-        //            }
-        //
-        //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-        //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-        //                print("response = \(response)")
-        //            }
-        //
-        //            let responseString = String(data: data, encoding: .utf8)
-        //            print("responseString = \(responseString)")
-        }
-        task.resume()
-    }
-    
-    //MARK: Actions
-    @IBAction func firstNameChanged(_ sender: Any){
+    func saveProfile(){
         // get input from text fields and save to database
         let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        saveProfile(fName: firstName, lName: lastName, age: age)
+        DB.firstName = firstName
+        DB.lastName = lastName
+        DB.age = age
+        DB.saveProfileData()
+    }
+    
+    //MARK: Actions
+    @IBAction func firstNameChanged(_ sender: Any){
+        saveProfile()
     }
 
     @IBAction func lastNameChanged(_ sender: Any) {
-        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        saveProfile(fName: firstName, lName: lastName, age: age)
+        saveProfile()
     }
     
     @IBAction func ageChanged(_ sender: Any) {
-        let firstName: String = self.firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let lastName: String = self.lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let age: String = self.ageTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        saveProfile(fName: firstName, lName: lastName, age: age)
+        saveProfile()
     }
 }

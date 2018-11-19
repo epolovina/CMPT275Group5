@@ -31,15 +31,11 @@ class GameScreen: UIViewController {
         sceneView.session.run(ARconfig) //start the AR session
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargetNodes()
         StopButton.isHidden=true //hide stop button..easier to do segue
-        
     }
-    
-    
     
     //timer
     var timer = Timer()
@@ -64,10 +60,6 @@ class GameScreen: UIViewController {
         
     }
     
-    
-    
-    
-    
     //target
     func addTargetNodes(){
         
@@ -85,8 +77,6 @@ class GameScreen: UIViewController {
         //add to scene
         sceneView.scene.rootNode.addChildNode(node)
     }
-    
-    
     
     func playBGM(){
         let audioNode = SCNNode()
@@ -117,7 +107,5 @@ class GameScreen: UIViewController {
         //performSegue(withIdentifier: "StopSegue", sender: self)
         //self.present(gameComplete, animated: true, completion: nil)
     }
-    
-    
 }
 
