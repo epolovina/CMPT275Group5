@@ -2,7 +2,11 @@
 //  Database.swift
 //  TrackPoint
 //
-//  Created by Taylor Traviss on 2018-11-17.
+//  Created by Taylor Traviss and Erlind Polovina on 2018-11-17.
+//
+//  This class has all the database calls and saves any needed results such as email and password
+//  to a glabal variable to be used later by the program.
+//
 //  Copyright © 2018 Pit Bulls. All rights reserved.
 //
 import UIKit
@@ -31,7 +35,10 @@ class Database {
     
     //MARK: Functions
     func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String){
-        let sendjson = ["firstName":firstNamestring, "lastName":lastNamestring, "age":agestring]
+//        print("self.email \(String(describing: self.email))")
+        let sendjson = ["email":self.email, "password":self.password,
+                        "firstName":firstNamestring, "lastName":lastNamestring, "age":agestring]
+        print(sendjson)
         // saves first/last names, medications and age to db
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
         
@@ -122,8 +129,8 @@ class Database {
 //        passwordstring = self.password
         
 
-        let postString = "email=\(emailstring)&password=\(passwordstring)"
-        print(postString)
+//        let postString = "email=\(emailstring)&password=\(passwordstring)"
+//        print(postString)
         let sendjson = ["email":emailstring, "password":passwordstring]
         let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
         var request = URLRequest(url: url)
@@ -148,6 +155,7 @@ class Database {
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
                 print(myjson)
                 self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we van use it later
+                self.password = ((myjson) as AnyObject).value(forKey: "password")! as? String
             }catch{
                 print("ERROR reading json")
             }
