@@ -26,6 +26,7 @@ class DataRun {
     fileprivate let fileMan = LocalDataManager.shared()
     fileprivate let procFFT = FFT()
     fileprivate var fps:Double = 100
+    internal var isDebug = true
     
     class func shared()->DataRun{
         return inst
@@ -37,28 +38,30 @@ class DataRun {
         motionManager = CMMotionManager()
         initMotionEvents()
         
-        // generate test data
-        let n:Int = Int(pow(Double(2),Double(16)))
-        
-        let frequency1:Double = 4; // Freq of test data
-        let phase1:Double = 0.0; // not used
-        let amplitude1:Double = 10; // amplitude of test data
-        let sineWave1:[Double] = (0..<n).map {
-            amplitude1 * sin(2.0 * .pi / fps * Double($0) * frequency1 + phase1)
+        if isDebug{
+            // generate test data
+            let n:Int = Int(pow(Double(2),Double(16)))
+            
+            let frequency1:Double = 4; // Freq of test data
+            let phase1:Double = 0.0; // not used
+            let amplitude1:Double = 10; // amplitude of test data
+            let sineWave1:[Double] = (0..<n).map {
+                amplitude1 * sin(2.0 * .pi / fps * Double($0) * frequency1 + phase1)
+            }
+            
+            let frequency2:Double = 7; // Freq of test data
+            let phase2:Double = 0.0; // not used
+            let amplitude2:Double = 10; // amplitude of test data
+            let sineWave2:[Double] = (0..<n).map {
+                amplitude2 * sin(2.0 * .pi / fps * Double($0) * frequency2 + phase2)
+            }
+            
+            let zeros:[Double] = (0..<n).map {Double($0) - Double($0)}
+            
+            user_accel = (sineWave1,sineWave1,sineWave1)
+            rot_rate = (sineWave2,sineWave2,sineWave2)
+            // test data end
         }
-        
-        let frequency2:Double = 7; // Freq of test data
-        let phase2:Double = 0.0; // not used
-        let amplitude2:Double = 10; // amplitude of test data
-        let sineWave2:[Double] = (0..<n).map {
-            amplitude2 * sin(2.0 * .pi / fps * Double($0) * frequency2 + phase2)
-        }
-        
-        let zeros:[Double] = (0..<n).map {Double($0) - Double($0)}
-        
-        user_accel = (sineWave1,zeros,zeros)
-        rot_rate = (sineWave2,zeros,zeros)
-        // test data end
     }
     
     // set sample rate, and possible others in future
@@ -176,15 +179,14 @@ class DataRun {
     // aquire sample from CoreMotion
     @objc fileprivate func get_data() //gets sensor data when not suspended, push to array
     {
-        if let data = self.motionManager.deviceMotion
-        {
+        if let data = self.motionManager.deviceMotion {
             //print("getTimer: %lf,%lf,%lf\n", data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
             accel_curr = (data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z)
             rot_curr = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
-            //user_accel.append((data.userAcceleration.x, data.userAcceleration.y, data.userAcceleration.z))
-            //rot_rate.append((data.rotationRate.x, data.rotationRate.y, data.rotationRate.z))
-            user_accel.0.append(accel_curr.0);user_accel.1.append(accel_curr.1);user_accel.2.append(accel_curr.2);
-            rot_rate.0.append(rot_curr.0);rot_rate.1.append(rot_curr.1);rot_rate.2.append(rot_curr.2);
+            if !isDebug {
+                user_accel.0.append(accel_curr.0);user_accel.1.append(accel_curr.1);user_accel.2.append(accel_curr.2);
+                rot_rate.0.append(rot_curr.0);rot_rate.1.append(rot_curr.1);rot_rate.2.append(rot_curr.2);
+            }
         }
     }
     

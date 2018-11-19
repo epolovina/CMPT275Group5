@@ -58,6 +58,7 @@ class FFT {
         let data_pad:[Double] = data_norm + Array(repeating: 0, count: size-data_norm.count) // zero padding
         var rtn = calculate(data_pad, fps: _fps)
         rtn.1 /= 2
+        rtn.2 *= 2
         return rtn
     }
     
