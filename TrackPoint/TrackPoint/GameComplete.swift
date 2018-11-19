@@ -7,6 +7,8 @@
 import UIKit
 
 class GameComplete: UIViewController {
+    private let collector:DataRun = DataRun.shared()
+    
 
     //MARK: Create outlets
     
@@ -35,6 +37,11 @@ class GameComplete: UIViewController {
         MenuButton.isEnabled = true
         SaveButton.isEnabled = false
         DeleteButton.isEnabled = false
+        
+        collector.save()
+        let pdata = collector.processAll()
+        print("Accel\nFreq: \(pdata[0].1), Pow: \(pdata[0].2)\n")
+        print("Gyro\nFreq: \(pdata[1].1), Pow: \(pdata[1].2)\n")
         
         //this is how to do stuff before you change screens: "sendIt" is set when segue selected in storyboard
         

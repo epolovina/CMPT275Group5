@@ -8,9 +8,9 @@ import UIKit
 
 class GameScreen: UIViewController  {
     //MARK: Variables
-    let collector:DataRun = DataRun()
-    fileprivate var sensor_timer: Timer!
-    let gameComplete = GameComplete()
+    private let collector:DataRun = DataRun.shared()
+    private var sensor_timer: Timer!
+    private let gameComplete = GameComplete()
 
     //MARK: Outlets
     @IBOutlet weak var StartButton: UIButton!

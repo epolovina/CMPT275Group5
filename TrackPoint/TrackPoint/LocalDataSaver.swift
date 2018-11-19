@@ -9,6 +9,7 @@
 import Foundation
 
 class LocalDataManager {
+    private static let inst = LocalDataManager()
     internal var lastSaveDir: URL?
     internal let fileManager = FileManager.default
     internal var rot_rate: ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
@@ -22,12 +23,20 @@ class LocalDataManager {
         case NoFilesFound
     }
     
-    init(){
+    // get shared instance
+    class func shared()->LocalDataManager{
+        return inst
+    }
+    
+    private init(){
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         dataDir = paths[0].appendingPathComponent("TrackPoint", isDirectory: true)
         
     }
     
+    public func getLastDir()->URL?{
+        return lastSaveDir
+    }
     
     public func saveData(accel:([Double], [Double], [Double])!,rot:([Double], [Double], [Double])!,timestamp:Date? = nil) throws {
         user_accel = accel
@@ -50,11 +59,9 @@ class LocalDataManager {
         try? fileManager.createDirectory(at: filename, withIntermediateDirectories: true, attributes: nil)
         let namestr = String(year)+"-"+String(month)+"-"+String(day)+"-"+String(hour)+"-"+String(min)+"-"+String(sec)
         filename = filename.appendingPathComponent(namestr)
-        let filename_d = filename//filename.appendingPathExtension("bin") // binary array data url
-        //let filename_m = filename.appendingPathExtension("tps") // TODO: metadata url
         
         //print("dataURL: \(filename_d.absoluteString)\n")
-        fileManager.createFile(atPath: filename_d.absoluteString, contents: nil)
+        fileManager.createFile(atPath: filename.absoluteString, contents: nil)
         
         let wArray:[Double] = user_accel.0 + user_accel.1 + user_accel.2 + rot_rate.0 + rot_rate.1 + rot_rate.2
         
@@ -63,7 +70,7 @@ class LocalDataManager {
         
         do {
             // TODO: append
-            try wData.write(to: filename_d)
+            try wData.write(to: filename)
             lastSaveDir = filename
         } catch {
             print("failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding\n\(error)\n")
@@ -72,12 +79,12 @@ class LocalDataManager {
     
     // test saves
     public func verifyWritten() -> Bool {
-        //if (lastSaveDir == nil) {return false};
+        if (lastSaveDir == nil) {return false};
         var isCorrect: Bool = true;
         do {
             //try saveData()
-            let filename_d = lastSaveDir!.appendingPathExtension("bin")
-            let readArray = try readData(url: filename_d)
+            let filename = lastSaveDir!
+            let readArray = try readData(url: filename)
             isCorrect = isCorrect && arrayCMP(src0: user_accel.0, src1: readArray[0], index: 0)
             isCorrect = isCorrect && arrayCMP(src0: user_accel.1, src1: readArray[1], index: 1)
             isCorrect = isCorrect && arrayCMP(src0: user_accel.2, src1: readArray[2], index: 2)

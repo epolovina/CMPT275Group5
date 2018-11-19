@@ -56,7 +56,21 @@ class FFT {
             size = size << 1;
         }
         let data_pad:[Double] = data_norm + Array(repeating: 0, count: size-data_norm.count) // zero padding
-        return calculate(data_pad, fps: _fps)
+        var rtn = calculate(data_pad, fps: _fps)
+        rtn.1 /= 2
+        return rtn
+    }
+    
+    internal func dotsum(_ _data:[[Double]]) -> [Double]{
+        var data_norm:[Double] = []
+        for i in 0..<_data[0].count {
+            var norm:Double = 0
+            for j in 0..<_data.count {
+                norm += _data[j][i]
+            }
+            data_norm.append(norm);
+        }
+        return data_norm
     }
     
     internal func normalizeSquare(_ _data:[[Double]]) -> [Double]{
