@@ -26,7 +26,7 @@ class DataRun {
     fileprivate let fileMan = LocalDataManager.shared()
     fileprivate let procFFT = FFT()
     fileprivate var fps:Double = 100
-    internal var isDebug = true
+    internal var isDebug = false
     
     class func shared()->DataRun{
         return inst

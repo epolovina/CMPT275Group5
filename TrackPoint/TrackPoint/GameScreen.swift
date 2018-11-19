@@ -10,7 +10,8 @@ import SceneKit
 
 class GameScreen: UIViewController {
     //MARK: Variables
-    let collector:DataRun = DataRun()
+    let collector:DataRun = DataRun.shared()
+    private var sensor_timer: Timer!
     let gameComplete = GameComplete()
     let ARconfig = ARWorldTrackingConfiguration()
     //let ARconfig = AROrientationTrackingConfiguration()
