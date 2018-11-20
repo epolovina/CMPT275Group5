@@ -653,6 +653,9 @@
                                                 <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="XE4-TV-xBb" kind="show" id="1cH-jT-R2W"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wmt-Dq-20e">
                                         <rect key="frame" x="0.0" y="114" width="159" height="54"/>
@@ -894,8 +897,9 @@
         <image name="target_PNG9.png" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="1cH-jT-R2W"/>
         <segue reference="2zV-sZ-Ao8"/>
         <segue reference="jBU-EP-gqq"/>
-        <segue reference="GOk-TC-ljM"/>
+        <segue reference="Dyz-83-5eW"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -68,13 +68,13 @@ class Database {
                 print("ERROR LOADING DATA")
                 return
             }
-            do{
-                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-
-                print(myjson)
-            }catch{
-                print("ERROR reading json")
-            }
+//            do{
+//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+//
+////                print(myjson)
+//            }catch{
+//                print("ERROR reading json")
+//            }
         }
         task.resume()
     }
@@ -184,12 +184,12 @@ class Database {
                     print("ERROR LOADING DATA")
                     return
             }
-            do{
-                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-                print(myjson)
-            }catch{
-                print("ERROR reading json")
-            }
+//            do{
+//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                print(myjson)
+//            }catch{
+//                print("ERROR reading json")
+//            }
         }
         task.resume()
     }
