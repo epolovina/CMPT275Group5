@@ -48,7 +48,7 @@ class GameComplete: UIViewController {
         print("Gyro\nFreq: \(pdata[1].1), Pow: \(pdata[1].2)\n")
         
         // send score and date to database
-        let timestamp = Date()
+        let timestamp:Date = collector.getDate() ?? Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         let strDate = dateFormatter.string(from: timestamp)

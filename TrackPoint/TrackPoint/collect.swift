@@ -14,14 +14,14 @@ import CoreMotion
 class DataRun {
     private static let inst = DataRun()
     fileprivate let motionManager : CMMotionManager
-    fileprivate var rot_rate : ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
-    fileprivate var user_accel: ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
+    fileprivate var rot_rate : ([Double], [Double], [Double]) = ([],[],[])
+    fileprivate var user_accel: ([Double], [Double], [Double]) = ([],[],[])
     fileprivate var rot_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var accel_curr: (Double, Double, Double) = (0,0,0)
     fileprivate var isSuspended : Bool = false
     fileprivate var isRunning : Bool = false
     fileprivate var dataTimer: Timer?
-    fileprivate var data_timestamp : Date!
+    fileprivate var data_timestamp : Date?
     fileprivate var lastSaveDir: URL?
     fileprivate let fileMan = LocalDataManager.shared()
     fileprivate let procFFT = FFT()
@@ -32,7 +32,10 @@ class DataRun {
         return inst
     }
     
-    //MARK: Public
+    public func getDate()->Date?{
+        return data_timestamp
+    }
+    
     private init()
     {
         motionManager = CMMotionManager()
@@ -56,7 +59,7 @@ class DataRun {
                 amplitude2 * sin(2.0 * .pi / fps * Double($0) * frequency2 + phase2)
             }
             
-            let zeros:[Double] = (0..<n).map {Double($0) - Double($0)}
+            //let zeros:[Double] = (0..<n).map {Double($0) - Double($0)}
             
             user_accel = (sineWave1,sineWave1,sineWave1)
             rot_rate = (sineWave2,sineWave2,sineWave2)
@@ -67,8 +70,8 @@ class DataRun {
     // set sample rate, and possible others in future
     func config(_fps:Double = 100)
     {
-        if (fps == _fps) {return}
-        fps = _fps
+        if (fps == _fps) {return};
+        fps = _fps;
         if isRunning{
             end()
             rot_rate = ([],[],[])
@@ -108,7 +111,7 @@ class DataRun {
     }
     
     //saves current session to disk
-    func save(){
+    func save(_ verify:Bool = true){
         do{
             try fileMan.saveData(accel: user_accel, rot: rot_rate, timestamp: data_timestamp)
         } catch{
@@ -116,6 +119,7 @@ class DataRun {
             return
         }
         
+        if !verify{return;}
         if fileMan.verifyWritten(){
             print("Data saved successfully to \(fileMan.getLastDir()?.absoluteString ?? "nil")\n")
         }else{
