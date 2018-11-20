@@ -24,7 +24,7 @@ router.post('/sendDatatoDB', (req, res)=>{
 			email: req.body.email,
 			password:req.body.password,
 			age: req.body.age,
-			score: [],
+			scoreArray: [],
 			// diagnosisDate: req.body.diagnosisDate, 
 			// diagnosisStatus: req.body.diagnosisStatus,
 			medication: [],
@@ -132,21 +132,21 @@ router.post("/saveScore", (req, res)=>{
 			throw(err)
 		}
 		console.log("Connected successfully to server");
+		res.setHeader('Content-Type', 'application/json');
 		
 		const db = client.db('cmpt275');
 		var collection = db.collection('userdata');
 		collection.findOne({email:req.body.email},(err,result)=>{
 			if(result != null){
-				result.scoreArray = req.body.score;
+				result.scoreArray = req.body.scoreArray;
 				result.dateArray = req.body.dateArray
-				collection.update({email:req.body.email}, {$set:{scoreArray:result.score, dateArray:result.dateArray}}, (req,res)=>{
+				collection.update({email:req.body.email}, {$set:{scoreArray:result.scoreArray, dateArray:result.dateArray}}, (req,res)=>{
 					console.log("updated score");
-					res.send(200);
 				});
+				res.send(200);
 			}else{
 				res.send(404);
 			}
-			res.setHeader('Content-Type', 'application/json');
 			console.log("RES", result);
 
 		// res.send(result);
