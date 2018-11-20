@@ -110,7 +110,7 @@ class Database {
                 self.scoreArray = (((myjson) as AnyObject).value(forKey: "scoreArray")! as? [Double?] ?? [])
                 self.dateArray = (((myjson) as AnyObject).value(forKey: "dateArray")! as? [String?] ?? [])
                 
-                print(myjson)
+//                print(myjson)
                 
             }catch{
                 print("ERROR reading json")
@@ -161,6 +161,7 @@ class Database {
     }
     
     func saveScore(){
+        // saves score array and date array to database
         let sendjson = ["email":self.email, "scoreArray":self.scoreArray, "dateArray":self.dateArray] as [String : Any]
         
         // append new score to gameScoreArray and save to database

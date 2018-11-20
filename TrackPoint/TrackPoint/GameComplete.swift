@@ -7,7 +7,9 @@
 import UIKit
 
 class GameComplete: UIViewController {
+    
     private let collector:DataRun = DataRun.shared()
+    let DB = Database.DB
     
 
     //MARK: Create outlets
@@ -40,12 +42,20 @@ class GameComplete: UIViewController {
         
         collector.save()
         let pdata = collector.processAll()
+        
+        // print processed data
         print("Accel\nFreq: \(pdata[0].1), Pow: \(pdata[0].2)\n")
         print("Gyro\nFreq: \(pdata[1].1), Pow: \(pdata[1].2)\n")
         
-        //this is how to do stuff before you change screens: "sendIt" is set when segue selected in storyboard
+        // send score and date to database
+        let timestamp = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        let strDate = dateFormatter.string(from: timestamp)
+        DB.dateArray.append(strDate)
+        DB.scoreArray.append(pdata[1].1)
+        DB.saveScore()
         
-        //performSegue(withIdentifier: "sendIt", sender: self)
     }
     
     // Delete session data

@@ -485,21 +485,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbO-FA-9DO">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbO-FA-9DO" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="67" y="103" width="241" height="233"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apO-hD-S1m">
-                                        <rect key="frame" x="105.5" y="8" width="30" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="apO-hD-S1m" firstAttribute="centerX" secondItem="DbO-FA-9DO" secondAttribute="centerX" id="X5q-QL-xSM"/>
-                                    <constraint firstItem="apO-hD-S1m" firstAttribute="top" secondItem="DbO-FA-9DO" secondAttribute="topMargin" id="aBa-W9-Lpe"/>
-                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="BoK-T6-Sxn">
                                 <rect key="frame" x="108" y="362" width="159" height="30"/>
@@ -604,6 +592,12 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apO-hD-S1m">
+                                <rect key="frame" x="172" y="74.5" width="31" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -614,8 +608,11 @@
                             <constraint firstItem="AJ6-nv-GPE" firstAttribute="centerX" secondItem="h70-KU-PO5" secondAttribute="centerX" id="MBZ-9H-gxO"/>
                             <constraint firstItem="7Eu-hZ-ePt" firstAttribute="centerX" secondItem="BoK-T6-Sxn" secondAttribute="centerX" id="Nk9-wM-k49"/>
                             <constraint firstItem="BoK-T6-Sxn" firstAttribute="top" secondItem="DbO-FA-9DO" secondAttribute="bottom" constant="26" id="Npo-UP-dgD"/>
+                            <constraint firstItem="apO-hD-S1m" firstAttribute="centerX" secondItem="AJ6-nv-GPE" secondAttribute="centerX" id="UL1-Cz-jVI"/>
                             <constraint firstItem="BoK-T6-Sxn" firstAttribute="leading" secondItem="H8w-yu-c4c" secondAttribute="leading" constant="108" id="c1i-Gu-ezF"/>
+                            <constraint firstItem="apO-hD-S1m" firstAttribute="leading" secondItem="H8w-yu-c4c" secondAttribute="leading" constant="172" id="cRs-fl-Ve9"/>
                             <constraint firstItem="DbO-FA-9DO" firstAttribute="top" secondItem="AJ6-nv-GPE" secondAttribute="bottom" constant="53" id="fiK-MY-F6I"/>
+                            <constraint firstItem="DbO-FA-9DO" firstAttribute="top" secondItem="apO-hD-S1m" secondAttribute="bottom" constant="8" symbolic="YES" id="g0B-fy-x5J"/>
                             <constraint firstItem="AJ6-nv-GPE" firstAttribute="centerX" secondItem="DbO-FA-9DO" secondAttribute="centerX" id="jHm-B2-2XN"/>
                             <constraint firstItem="7Eu-hZ-ePt" firstAttribute="centerX" secondItem="DbO-FA-9DO" secondAttribute="centerX" id="vrm-yK-Cve"/>
                         </constraints>
@@ -623,6 +620,7 @@
                     </view>
                     <connections>
                         <outlet property="ShareButton" destination="bWI-4j-M3y" id="yog-j4-eHi"/>
+                        <outlet property="lineChart" destination="DbO-FA-9DO" id="Qbh-fg-na3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="78U-ZG-Exn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -897,7 +895,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2zV-sZ-Ao8"/>
-        <segue reference="3Lk-Y4-FqU"/>
-        <segue reference="XGK-Rz-dd3"/>
+        <segue reference="jBU-EP-gqq"/>
+        <segue reference="GOk-TC-ljM"/>
     </inferredMetricsTieBreakers>
 </document>
