@@ -8,12 +8,14 @@
 
 import Foundation
 
+
+/// Handles data saving to local documents dir
 class LocalDataManager {
     private static let inst = LocalDataManager()
     internal var lastSaveDir: URL?
     internal let fileManager = FileManager.default
-    internal var rot_rate: ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
-    internal var user_accel: ([Double], [Double], [Double]) = ([],[],[])// = ([-1,0,1,2,4],[-1,0,1,2,4],[-1,0,1,2,4])
+    internal var rot_rate: ([Double], [Double], [Double]) = ([],[],[])
+    internal var user_accel: ([Double], [Double], [Double]) = ([],[],[])
     internal var dataDir:URL!
     internal enum colError: Error {
         case SaveDataEmpty
@@ -23,7 +25,7 @@ class LocalDataManager {
         case NoFilesFound
     }
     
-    // get shared instance
+    /// get shared instance
     class func shared()->LocalDataManager{
         return inst
     }
@@ -34,10 +36,23 @@ class LocalDataManager {
         
     }
     
+    /// 
+    ///
+    /// - returns: URL of last save dir
     public func getLastDir()->URL?{
         return lastSaveDir
     }
     
+    
+    /// saves raw data for one game session
+    ///
+    /// - Parameters:
+    ///   - accel: accel data ([x],[y],[z])
+    ///   - rot: gyro data ([x],[y],[z])
+    ///   - timestamp: Date of game session
+    /// - Throws:
+    ///     - when input data is empty
+    ///     - file i/o errors
     public func saveData(accel:([Double], [Double], [Double])!,rot:([Double], [Double], [Double])!,timestamp:Date? = nil) throws {
         user_accel = accel
         rot_rate = rot
@@ -77,7 +92,8 @@ class LocalDataManager {
         }
     }
     
-    // test saves
+    /// validate last save
+    /// - returns: good = true, bad = false
     public func verifyWritten() -> Bool {
         if (lastSaveDir == nil) {return false};
         var isCorrect: Bool = true;
@@ -98,7 +114,11 @@ class LocalDataManager {
         return isCorrect;
     }
     
-    // compares arrays, true if same
+    /// compares arrays
+    /// - parameters:
+    ///     - src0: array A
+    ///     - src1: array B
+    /// - returns: true = is equal
     internal func arrayCMP(src0:[Double],src1:[Double],index:Int = -1) -> Bool {
         assert(src0.count == src1.count)
         for i in 0..<src0.count{
@@ -112,6 +132,12 @@ class LocalDataManager {
         return true;
     }
     
+    
+    /// reads local file of corresponding timestamp
+    ///
+    /// - Parameter time: int array of size 6
+    /// - Returns: raw data for session (accel [x],[y],[z], gyro [x],[y],[z])
+    /// - Throws: when array size is incorrect, file i/o errors
     public func readData(time: [Int]) throws -> [[Double]] {
         if (time.count != 6) {throw colError.InvalidURL}
         let year = time[0]
@@ -130,6 +156,12 @@ class LocalDataManager {
         }
     }
     
+    
+    ///  reads local file of corresponding url
+    ///
+    /// - Parameter url: dir
+    /// - Returns: raw data for session (accel [x],[y],[z], gyro [x],[y],[z])
+    /// - Throws: incorrect size of input file, file i/o errors
     public func readData(url:URL) throws -> [[Double]] {
         var rArray: [[Double]]  = [[],[],[],[],[],[]]
         
@@ -153,6 +185,13 @@ class LocalDataManager {
         return rArray
     }
     
+    
+    /// find and read all game sessions saved in default dir
+    ///
+    /// - Returns:
+    /// - Data: [Sessions] -> [accel x, y, z, gyro x, y ,z] -> [samples]
+    /// - Timestamp: Sessions -> [year, month, day, hour, min, sec]
+    /// - Throws: when no file found, file i/o errors
     public func readAll() throws -> ([[[Double]]], [[Int]]) {
         let dataURLs = listFiles(dir: dataDir)
         if dataURLs.isEmpty {throw colError.NoFilesFound}
@@ -183,6 +222,11 @@ class LocalDataManager {
         return (rtnArray, rtnTimeStamp)
     }
     
+    
+    /// list all .bin files in dir
+    ///
+    /// - Parameter dir: target dir
+    /// - Returns: array of urls to files
     internal func listFiles(dir:URL)->[URL]{
         var rtnURLs:[URL]!
         do {

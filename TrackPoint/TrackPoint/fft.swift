@@ -49,6 +49,13 @@ class FFT {
         return (bandPassFilter, minIdx, maxIdx)
     }
     
+    
+    /// Normalize, square, and pad data, then analyze power spectrum
+    ///
+    /// - Parameters:
+    ///   - data: input data, multi channel, supports arbitrary channel count
+    ///   - _fps: sample rate
+    /// - Returns: (power spectrum array (freq, power), peak freq, peak power)
     func process(_ data: [[Double]], _fps: Double) -> (([Double],[Double]),Double,Double){
         let data_norm:[Double] = normalizeSquare(data)
         var size:Int = 1
@@ -62,6 +69,11 @@ class FFT {
         return rtn
     }
     
+    
+    /// element wise sum
+    ///
+    /// - Parameter _data: input, multi channel
+    /// - Returns: array of sumed elements
     internal func dotsum(_ _data:[[Double]]) -> [Double]{
         var data_norm:[Double] = []
         for i in 0..<_data[0].count {
@@ -74,6 +86,11 @@ class FFT {
         return data_norm
     }
     
+    
+    /// normalize all elements
+    ///
+    /// - Parameter _data: input multi channel
+    /// - Returns: array of normalized elements
     internal func normalizeSquare(_ _data:[[Double]]) -> [Double]{
         var data_norm:[Double] = []
         for i in 0..<_data[0].count {
@@ -86,6 +103,13 @@ class FFT {
         return data_norm
     }
     
+    
+    /// applies FFT to wave
+    ///
+    /// - Parameters:
+    ///   - _values: input data, single channel, size must be 2^n, zero padding ok
+    ///   - fps: sample rate
+    /// - Returns: (power spectrum array (freq, power), peak freq, peak power)
     func calculate(_ _values: [Double], fps: Double) -> (([Double],[Double]),Double,Double) {
         // ----------------------------------------------------------------
         // Copy of our input

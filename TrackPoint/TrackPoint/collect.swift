@@ -11,6 +11,9 @@
 import Foundation
 import CoreMotion
 
+
+/// - Aquires sensor data at a fixed frequency
+/// - Writes data to memory buffer
 class DataRun {
     private static let inst = DataRun()
     fileprivate let motionManager : CMMotionManager
@@ -28,14 +31,24 @@ class DataRun {
     fileprivate var fps:Double = 100
     internal var isDebug = false
     
+    /// get global instance
+    ///
+    /// - Returns: shared instace of class DataRun
     class func shared()->DataRun{
         return inst
     }
     
+    
+    /// get last game session timestamp
+    ///
+    /// - Returns: game start Date?
     public func getDate()->Date?{
         return data_timestamp
     }
     
+    
+    /// - class initializer
+    /// - set isDebug = true to generate test data
     private init()
     {
         motionManager = CMMotionManager()
@@ -67,7 +80,7 @@ class DataRun {
         }
     }
     
-    // set sample rate, and possible others in future
+    /// set sample rate, and possible others in future
     func config(_fps:Double = 100)
     {
         if (fps == _fps) {return};
@@ -82,19 +95,19 @@ class DataRun {
         }
     }
     
-    // disable recording, but acquire keeps running
+    /// disable recording, but acquire keeps running
     func suspend()
     {
         isSuspended = true
     }
     
-    // enable recording
+    /// enable recording
     func resume()
     {
         isSuspended = false
     }
     
-    // start acquire
+    /// start acquire
     func start() //start the timer
     {
 
@@ -103,14 +116,17 @@ class DataRun {
         dataTimer = Timer.scheduledTimer(timeInterval: 1.0/fps, target: self, selector: #selector(DataRun.get_data), userInfo: nil, repeats: true)
     }
     
-    // stop acquire
+    /// stop acquire
     func end() //stop timer, write to DB
     {
         isRunning = false
         dataTimer?.invalidate()
     }
     
-    //saves current session to disk
+    
+    /// saves current session to disk
+    /// - Parameters:
+    ///     - verify: sets whether to validate saves
     func save(_ verify:Bool = true){
         do{
             try fileMan.saveData(accel: user_accel, rot: rot_rate, timestamp: data_timestamp)
@@ -127,29 +143,34 @@ class DataRun {
         }
     }
     
-    // process current session
-    // returns accel, gyro power spectrum and etc. refer to gdocs for format
+    /// process current session
+    /// - returns:
+    ///     - acceleration, gyroscope processed results
+    ///     - format: (power spectrum array (freq, power), peak freq, peak power)
     func processAll()->[(([Double],[Double]),Double,Double)]{
         let gaccel:[[Double]] = [rot_rate.0, rot_rate.1, rot_rate.2]
         let daccel:[[Double]] = [user_accel.0, user_accel.1, user_accel.2]
         return [procFFT.process(daccel, _fps: fps), procFFT.process(gaccel, _fps: fps)]
     }
     
-    // gets acceleration buffer for saving
-    func return_accel() -> ([Double], [Double], [Double])?//function so that accel data can be accessed after a run
+    /// gets acceleration buffer for saving
+    /// - returns: accel x, y, z
+    func return_accel() -> ([Double], [Double], [Double])?
     {
         let rtn_accel = user_accel;
         return rtn_accel
     }
     
-    // gets gyro buffer for saving
+    /// gets gyro buffer for saving
+    /// - returns: gyro x, y, z
     func return_rotation() -> ([Double], [Double], [Double])?//function so that rotation data can be accessed after a run
     {
         let rtn_gyro = rot_rate;
         return rtn_gyro
     }
     
-    // get latest data sample
+    /// get latest data sample
+    /// - returns: [accel, gyro (x,y,z)]
     func get_last_entry() -> [(Double, Double, Double)]{
         var rtn_val:[(Double, Double, Double)] = [];
         rtn_val.append(accel_curr);
@@ -158,9 +179,8 @@ class DataRun {
         return rtn_val
     }
     
-    //MARK: Private
     
-    // CoreMotion init
+    /// CoreMotion init
     fileprivate func initMotionEvents()
     {
         //make sure deviceMotion is available
@@ -180,7 +200,7 @@ class DataRun {
         
     }
     
-    // aquire sample from CoreMotion
+    /// aquire sample from CoreMotion
     @objc fileprivate func get_data() //gets sensor data when not suspended, push to array
     {
         if let data = self.motionManager.deviceMotion {
