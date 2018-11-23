@@ -36,8 +36,18 @@ class Login: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // Keyboard disappears
-        textField.resignFirstResponder()
+        // Keyboard disappears when return pressed
+        
+        if textField == emailTF {
+            textField.resignFirstResponder()
+            passwordTF.becomeFirstResponder()
+        }
+        
+        else {
+            textField.resignFirstResponder()
+            loginButtonPressed(loginButton)
+        }
+
         return true
     }
     
