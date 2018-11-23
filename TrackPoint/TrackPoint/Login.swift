@@ -13,9 +13,9 @@ class Login: UIViewController, UITextFieldDelegate {
     //MARK: Outlets
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
     
+    let DB = Database.DB
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,42 +42,31 @@ class Login: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: Actions
-    let DB = Database.DB
     @IBAction func loginButtonPressed(_ sender: Any) {
-    let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-    let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        var isValidLogin: Bool
         
-        DB.verifyLogin(emailstring: email, passwordstring: password)
-        DB.loadData()
-        // Saves email and password text fields to database
-//        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
-//
-//        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//
-//        var request = URLRequest(url: url)
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        request.httpMethod = "POST"
-//        let postString = "email=\(email)&password=\(password)"
-//        print(postString)
-//        request.httpBody = postString.data(using: .utf8)
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let datares = data,
-//                error == nil else {                                                 // check for fundamental networking error
-//                print("error loading data")
-//                return
-//            }
-//            do{
-//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                print(myjson)
-//                print((myjson as AnyObject).value(forKey: "email")!)
-//            }catch{
-//                print("ERROR reading json")
-//            }
-//        }
-//        task.resume()
+        isValidLogin = DB.verifyLogin(emailstring: email, passwordstring: password)
+        
+        if (isValidLogin == true){
+            // Login is accepted
+            
+            print("Login is valid...")
+            DB.loadData()
+            performSegue(withIdentifier: "loginSegue", sender: self)
+        }
+        
+        if (isValidLogin == false){
+            // Login rejected
+            
+            print("Incorrect Login...")
+            // create alert for incorrect password
+            let alert = UIAlertController(title: "Invalid Login", message: "Incorrect password, please try again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        }
     }
-    
-    }
+}
     
 

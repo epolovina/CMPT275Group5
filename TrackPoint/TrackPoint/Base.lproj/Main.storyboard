@@ -31,13 +31,13 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="6k7-WO-lB0" eventType="touchUpInside" id="YKp-1e-wOV"/>
-                                    <segue destination="d0S-V0-1er" kind="show" id="XGK-Rz-dd3"/>
+                                    <segue destination="d0S-V0-1er" kind="show" identifier="loginSegue" id="XGK-Rz-dd3"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
                                 <rect key="frame" x="101" y="297" width="173" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
                                 <rect key="frame" x="101" y="232" width="173" height="30"/>
@@ -900,6 +900,6 @@
         <segue reference="1cH-jT-R2W"/>
         <segue reference="2zV-sZ-Ao8"/>
         <segue reference="jBU-EP-gqq"/>
-        <segue reference="Dyz-83-5eW"/>
+        <segue reference="XGK-Rz-dd3"/>
     </inferredMetricsTieBreakers>
 </document>

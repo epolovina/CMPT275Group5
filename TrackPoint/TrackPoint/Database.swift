@@ -120,9 +120,11 @@ class Database {
         task.resume()
     }
     
-    func verifyLogin( emailstring: String, passwordstring: String){
+    func verifyLogin( emailstring: String, passwordstring: String) -> Bool{
         // check email matches password
-        // save email and password to database
+        // save email and password to database if new
+        // return true if valid user
+        // return false if user exists but incorrect password
         
         self.email = emailstring
         self.password = passwordstring
@@ -138,19 +140,19 @@ class Database {
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
         else{
             print("ERROR Problem with json")
-            return
+            return false //////////////////////////////////
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
                     print("ERROR LOADING DATA")
-                    return
+                    return /////////////////////////////////
             }
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
                 print(myjson)
-                self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we van use it later
+                self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we can use it later
                 self.password = ((myjson) as AnyObject).value(forKey: "password")! as? String
             }catch{
                 print("ERROR reading json")
@@ -158,6 +160,7 @@ class Database {
 
         }
         task.resume()
+        return true ///////////////////////
     }
     
     func saveScore(){
@@ -184,12 +187,6 @@ class Database {
                     print("ERROR LOADING DATA")
                     return
             }
-//            do{
-//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                print(myjson)
-//            }catch{
-//                print("ERROR reading json")
-//            }
         }
         task.resume()
     }
