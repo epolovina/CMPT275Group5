@@ -13,15 +13,19 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     //MARK: Variables
     var box = SCNNode()
     var boundary = SCNNode()
+    var innerBoundary = SCNNode()
     var pointer = SCNNode()
     var isInside = true
+    var isInsideInner = true;
     let debugMode = true
     let sceneURL = "Models.scnassets/test.scn"
     let initialDelay:TimeInterval = 3
     let initialPosition = SCNVector3(0, 0, -10)
     let lightPosition = SCNVector3(1.5, 1.5, 1.5)
     let boundaryRadius:CGFloat = 5
+    let innerBoundaryRadius:CGFloat = 2
     let collector:DataRun = DataRun()
+    let physicsWorld = SCNPhysicsWorld()
     fileprivate var updatePositionTimer: Timer!
     
     
@@ -29,7 +33,8 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     enum category:Int{
         case box = 1
         case boundary = 2
-        case pointer = 4
+        case innerBoundary = 4
+        case pointer = 8
     }
     
     enum pointerDimensions:CGFloat{
@@ -86,21 +91,45 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         sceneView.session.pause()
     }
     
+    //Test if the contact is between the two specified objects
+    func testContactBetween(contact: SCNPhysicsContact, nodeA: category, nodeB:category) -> Bool {
+        return (contact.nodeA.physicsBody?.categoryBitMask == nodeA.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == nodeB.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == nodeB.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == nodeA.rawValue)
+    }
+    
+    //returns the length of the distance between contact point and center of specified node
+    func calculateDistanceToContact(contact: SCNPhysicsContact, node: SCNNode) -> CGFloat {
+        let distanceVector = SCNVector3(contact.contactPoint.x - node.position.x, contact.contactPoint.y - node.position.y, contact.contactPoint.z - node.position.z)
+        let length : CGFloat = CGFloat(sqrtf(distanceVector.x * distanceVector.x + distanceVector.y * distanceVector.y + distanceVector.z * distanceVector.z))
+        return length
+    }
+    
     //Tests for and handles out of bounds condition
     func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
-        
+    
         //calculate distance between contact point and center of boundary sphere
-        let distanceVector = SCNVector3(contact.contactPoint.x - boundary.position.x, contact.contactPoint.y - boundary.position.y, contact.contactPoint.z - boundary.position.z)
-        let length : CGFloat = CGFloat(sqrtf(distanceVector.x * distanceVector.x + distanceVector.y * distanceVector.y + distanceVector.z * distanceVector.z))
+        let length = calculateDistanceToContact(contact: contact, node: boundary);
+        
+        //calculate distance between contact point and center of inner boundary sphere
+        let innerLength = calculateDistanceToContact(contact: contact, node: innerBoundary)
+
+        // Only consider update if contact point is outside innerBoundary and was previously inside
+        if (innerLength > innerBoundaryRadius && isInsideInner == true){
+            isInsideInner = false
+            if (testContactBetween(contact: contact, nodeA: category.innerBoundary, nodeB: category.pointer)){
+                print ("inner boundary contact ended")
+                print("Out of inner bounds, halt animation!")
+                
+            }
+        }
         
         //Only consider contact update if the contact point is outside boundary and pointer was previously within bounds
         if (length > boundaryRadius && isInside == true){
             isInside = false
-            if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
+            if (testContactBetween(contact: contact, nodeA: category.boundary, nodeB: category.pointer)){
                 
                 //halt data collection when out of bounds
                 collector.suspend()
-                print ("contact ended")
+                print ("outer boundary contact ended")
                 print("Out of bounds, data collection stopped!")
                 
             }
@@ -111,18 +140,29 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         //calculate distance between contact point and center of boundary sphere
-        let distanceVector = SCNVector3(contact.contactPoint.x - boundary.position.x, contact.contactPoint.y - boundary.position.y, contact.contactPoint.z - boundary.position.z)
-        let length : CGFloat = CGFloat(sqrtf(distanceVector.x * distanceVector.x + distanceVector.y * distanceVector.y + distanceVector.z * distanceVector.z))
+        let length = calculateDistanceToContact(contact: contact, node: boundary)
         
-        //Only consider contact update if the contact point is inside boundary and object was previously out of bounds
-        if (length < boundaryRadius && isInside == false){
+        //calculate distance between contact point and center of inner boundary sphere
+        let innerLength = calculateDistanceToContact(contact: contact, node: innerBoundary)
+        
+        // Only consider update if contact point is inside innerBoundary and was previously inside
+        if (innerLength < innerBoundaryRadius && isInsideInner == false){
+            isInsideInner = true
+            if (testContactBetween(contact: contact, nodeA: category.innerBoundary, nodeB: category.pointer)){
+                
+                print ("inner boundary contact began")
+                print("Inside of inner bounds, start animation!")
+            }
+        }
+        // (if inside inner boundary, skip check for outer boundary) Only consider contact update if the contact point is inside boundary and object was previously out of bounds
+        else if (length < boundaryRadius && isInside == false){
             isInside = true
-            if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
+            if (testContactBetween(contact: contact, nodeA: category.boundary, nodeB: category.pointer)){
                 
                 //resume data collection once within bounds
                 collector.resume()
                 print ("contact happened")
-                print("Back into playable area, data collection resumed!")
+                print("Inside playable area, but animation is disabled!")
                 
             }
         }
@@ -155,6 +195,20 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         boundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
         boundary.position = initialPosition
         
+        //create inner boundary node and make it hidden if not debugging
+        let innerBoundaryGeometry:SCNGeometry = SCNSphere(radius: innerBoundaryRadius)
+        innerBoundaryGeometry.firstMaterial?.diffuse.contents = UIColor.blue
+        innerBoundary = SCNNode(geometry: innerBoundaryGeometry)
+        if (!debugMode){
+            innerBoundary.isHidden = true;
+        }
+        
+        //add inner boundary node to scene and define its physics attributes
+        innerBoundary.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: innerBoundary, options: nil))
+        innerBoundary.physicsBody?.categoryBitMask = category.innerBoundary.rawValue
+        innerBoundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
+        innerBoundary.position = initialPosition
+        
         
         //create pointer node and make it hidden if not debugging
         let pointerGeometry:SCNGeometry
@@ -169,7 +223,7 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         pointer.position = initialPosition
         pointer.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: pointer, options: nil))
         pointer.physicsBody?.categoryBitMask = category.pointer.rawValue
-        pointer.physicsBody?.contactTestBitMask = category.boundary.rawValue
+        pointer.physicsBody?.contactTestBitMask = category.boundary.rawValue | category.innerBoundary.rawValue
         
         
         //add light to scene
