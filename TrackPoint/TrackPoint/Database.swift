@@ -35,6 +35,7 @@ class Database {
     var medicationArray = [String?]()
     var scoreArray = [Double?]()
     var dateArray = [String?]()
+//    var returnvalue: Bool
     //var gameScoreArray: [(Double, String)] = [] //Score and date
     
     //MARK: Functions
@@ -49,7 +50,7 @@ class Database {
         self.medicationArray = medsArr
         print(sendjson)
         // saves first/last names, medications and age to db
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/sendDatatoDB")!
         
         var request = URLRequest(url: url)
 
@@ -63,18 +64,11 @@ class Database {
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let datares = data,
+            guard let _ = data,
                 error == nil else {             // check for fundamental networking error
                 print("ERROR LOADING DATA")
                 return
             }
-//            do{
-//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-//
-////                print(myjson)
-//            }catch{
-//                print("ERROR reading json")
-//            }
         }
         task.resume()
     }
@@ -82,7 +76,7 @@ class Database {
     func loadData(){
         let sendjson = ["email":self.email]
         // get first/last names, medications and age from db and put in variables
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/getDatafromDB")!
         
         var request = URLRequest(url: url)
 
@@ -119,20 +113,21 @@ class Database {
         }
         task.resume()
     }
-    
     func verifyLogin( emailstring: String, passwordstring: String) -> Bool{
         // check email matches password
         // save email and password to database if new
         // return true if valid user
         // return false if user exists but incorrect password
         
-        self.email = emailstring
-        self.password = passwordstring
-
+//        self.email = emailstring
+//        self.password = passwordstring
+        
+        var returnvalue = true
+//        returnvalue = true
         let sendjson = ["email":emailstring, "password":passwordstring]
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/login")!
         var request = URLRequest(url: url)
-
+        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = "POST"
@@ -154,13 +149,23 @@ class Database {
                 print(myjson)
                 self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we can use it later
                 self.password = ((myjson) as AnyObject).value(forKey: "password")! as? String
+                returnvalue = self.checklogin(emailstring: emailstring, passwordstring: passwordstring)
+                print(returnvalue)
             }catch{
                 print("ERROR reading json")
             }
-
         }
         task.resume()
-        return true ///////////////////////
+        print("ret \(returnvalue)")
+        return returnvalue;
+    }
+    
+    func checklogin( emailstring: String, passwordstring: String ) -> Bool{
+        if(self.email == emailstring && self.password == passwordstring){
+            return true
+        }else{
+            return false ///////////////////////
+        }
     }
     
     func saveScore(){
@@ -168,7 +173,7 @@ class Database {
         let sendjson = ["email":self.email, "scoreArray":self.scoreArray, "dateArray":self.dateArray] as [String : Any]
         
         // append new score to gameScoreArray and save to database
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/saveScore")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/saveScore")!
         
         var request = URLRequest(url: url)
 
@@ -182,7 +187,7 @@ class Database {
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let datares = data,
+            guard let _ = data,
                 error == nil else {  // check for fundamental networking error
                     print("ERROR LOADING DATA")
                     return

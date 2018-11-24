@@ -59,6 +59,7 @@ class Login: UIViewController, UITextFieldDelegate {
         
         isValidLogin = DB.verifyLogin(emailstring: email, passwordstring: password)
         
+        print("isvalidlogin \(isValidLogin)")
         if (isValidLogin == true){
             // Login is accepted
             
