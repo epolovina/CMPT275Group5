@@ -113,6 +113,7 @@ class Database {
         }
         task.resume()
     }
+    var returnvalue = false
     func verifyLogin( emailstring: String, passwordstring: String) -> Bool{
         // check email matches password
         // save email and password to database if new
@@ -122,8 +123,7 @@ class Database {
 //        self.email = emailstring
 //        self.password = passwordstring
         
-        var returnvalue = true
-//        returnvalue = true
+//        self.returnvalue = false
         let sendjson = ["email":emailstring, "password":passwordstring]
         let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/login")!
         var request = URLRequest(url: url)
@@ -145,19 +145,21 @@ class Database {
                     return /////////////////////////////////
             }
             do{
+                var ret: Bool
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
                 print(myjson)
                 self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we can use it later
                 self.password = ((myjson) as AnyObject).value(forKey: "password")! as? String
-                returnvalue = self.checklogin(emailstring: emailstring, passwordstring: passwordstring)
-                print(returnvalue)
+                ret = self.checklogin(emailstring: emailstring, passwordstring: passwordstring)
+                self.returnvalue = ret
+                print(self.returnvalue)
             }catch{
                 print("ERROR reading json")
             }
         }
         task.resume()
-        print("ret \(returnvalue)")
-        return returnvalue;
+        print("ret \(self.returnvalue)")
+        return self.returnvalue;
     }
     
     func checklogin( emailstring: String, passwordstring: String ) -> Bool{
