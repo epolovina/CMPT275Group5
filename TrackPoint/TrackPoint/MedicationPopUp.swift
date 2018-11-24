@@ -46,9 +46,15 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy"
             let strDate = dateFormatter.string(from: self.startDateScroller.date)
-            profileVC.medNameAndDateArray.append((self.medicationNameTF.text!, strDate))
-            profileVC.medicationArray.append(self.medicationNameTF.text!)
+            let strMedName = self.medicationNameTF.text!
+            
+            profileVC.medNameAndDateArray.append((strMedName, strDate))
+            
+            let displayStr = strMedName + " (" + strDate + ")"
+    
+            profileVC.medicationArray.append(displayStr)
             profileVC.tableView.reloadData()
+            
             DB.saveProfileData(firstNamestring: DB.firstName, lastNamestring: DB.lastName, agestring: DB.age, medsArr: profileVC.medicationArray as! [String])
         }
         dismiss(animated: true, completion: nil)
