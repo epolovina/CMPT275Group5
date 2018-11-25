@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6k7-WO-lB0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d0S-V0-1er">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -77,6 +77,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background (1)" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VWA-wM-gTT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-zH-7eJ">
                                 <rect key="frame" x="145.5" y="20" width="84.5" height="20.5"/>
                                 <subviews>
@@ -130,6 +133,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoV1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c4u-lf-V6o">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+                                        <color key="backgroundColor" red="0.15294117647058825" green="0.2196078431372549" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="MdC-Zz-H17"/>
                                             <constraint firstAttribute="height" constant="170" id="jmx-Q1-SUL"/>
@@ -158,10 +162,12 @@
                         <color key="backgroundColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xUh-l4-ZDc" firstAttribute="centerY" secondItem="TKv-39-OgO" secondAttribute="centerY" constant="-79.5" id="8tT-4m-d6J"/>
+                            <constraint firstItem="VWA-wM-gTT" firstAttribute="centerY" secondItem="TKv-39-OgO" secondAttribute="centerY" id="BBu-4O-YZe"/>
                             <constraint firstItem="xUh-l4-ZDc" firstAttribute="centerX" secondItem="TKv-39-OgO" secondAttribute="centerX" id="CUQ-Kc-oJg"/>
                             <constraint firstItem="xUh-l4-ZDc" firstAttribute="centerX" secondItem="TKv-39-OgO" secondAttribute="centerX" id="LTn-ax-pwR"/>
                             <constraint firstItem="CTP-zH-7eJ" firstAttribute="top" secondItem="mlx-9o-wLr" secondAttribute="top" id="Nom-9Z-q4J"/>
                             <constraint firstItem="xUh-l4-ZDc" firstAttribute="centerY" secondItem="TKv-39-OgO" secondAttribute="centerY" constant="-79.5" id="exP-Zl-liw"/>
+                            <constraint firstItem="VWA-wM-gTT" firstAttribute="centerX" secondItem="TKv-39-OgO" secondAttribute="centerX" id="hIt-Ff-Bdm"/>
                             <constraint firstItem="CTP-zH-7eJ" firstAttribute="centerX" secondItem="xUh-l4-ZDc" secondAttribute="centerX" id="ivm-7i-MzU"/>
                             <constraint firstItem="w0A-h2-6N6" firstAttribute="leading" secondItem="mlx-9o-wLr" secondAttribute="leading" constant="56" id="jx9-0I-Qcy"/>
                             <constraint firstItem="CTP-zH-7eJ" firstAttribute="centerX" secondItem="w0A-h2-6N6" secondAttribute="centerX" id="vNe-t1-ErH"/>
@@ -169,6 +175,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mlx-9o-wLr"/>
                     </view>
+                    <connections>
+                        <outlet property="logoImage" destination="c4u-lf-V6o" id="aL0-cH-4H1"/>
+                        <outlet property="playButton" destination="XOv-Sg-bRX" id="VfL-cN-RwR"/>
+                        <outlet property="profileButton" destination="jwe-Ju-VKF" id="hbA-TA-ULy"/>
+                        <outlet property="progressButton" destination="2mG-yB-09A" id="CJx-fY-6hs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxL-TJ-w3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -893,13 +905,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background (1)" width="70.866142272949219" height="126"/>
         <image name="LogoV1" width="340" height="340"/>
         <image name="target_PNG9.png" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1cH-jT-R2W"/>
+        <segue reference="X4L-Sx-yz3"/>
         <segue reference="2zV-sZ-Ao8"/>
-        <segue reference="jBU-EP-gqq"/>
+        <segue reference="3Lk-Y4-FqU"/>
         <segue reference="XGK-Rz-dd3"/>
     </inferredMetricsTieBreakers>
 </document>

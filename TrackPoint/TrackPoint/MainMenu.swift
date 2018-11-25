@@ -8,28 +8,34 @@ import UIKit
 
 class MainMenu: UIViewController {
 
+    @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var progressButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        logoImage.layer.cornerRadius = logoImage.frame.size.width / 2
+        logoImage.clipsToBounds = true
+        let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
+        logoImage.layer.borderColor = borderColour.cgColor
+        logoImage.layer.borderWidth = 4
+        
+        profileButton.layer.borderColor = borderColour.cgColor
+        profileButton.layer.borderWidth = 4
+        
+        progressButton.layer.borderColor = borderColour.cgColor
+        progressButton.layer.borderWidth = 4
+        
+        playButton.layer.borderColor = borderColour.cgColor
+        playButton.layer.borderWidth = 4
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func closePopUp(_ sender: Any) {
+    func setBorder(){
+        
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
