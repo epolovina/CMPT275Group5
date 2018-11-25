@@ -113,17 +113,13 @@ class Database {
         }
         task.resume()
     }
-    var returnvalue = false
-    func verifyLogin( emailstring: String, passwordstring: String) -> Bool{
+    var isFunctionFin: Bool? = false
+    func verifyLogin( emailstring: String, passwordstring: String){
         // check email matches password
         // save email and password to database if new
         // return true if valid user
         // return false if user exists but incorrect password
         
-//        self.email = emailstring
-//        self.password = passwordstring
-        
-//        self.returnvalue = false
         let sendjson = ["email":emailstring, "password":passwordstring]
         let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/login")!
         var request = URLRequest(url: url)
@@ -135,7 +131,7 @@ class Database {
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
         else{
             print("ERROR Problem with json")
-            return false //////////////////////////////////
+            return //false //////////////////////////////////
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -145,21 +141,18 @@ class Database {
                     return /////////////////////////////////
             }
             do{
-                var ret: Bool
+//                print("data \(datares)")
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+                print("login JSON: ")
                 print(myjson)
-                self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we can use it later
+                self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String
                 self.password = ((myjson) as AnyObject).value(forKey: "password")! as? String
-                ret = self.checklogin(emailstring: emailstring, passwordstring: passwordstring)
-                self.returnvalue = ret
-                print(self.returnvalue)
+                self.isFunctionFin = true
             }catch{
                 print("ERROR reading json")
             }
         }
         task.resume()
-        print("ret \(self.returnvalue)")
-        return self.returnvalue;
     }
     
     func checklogin( emailstring: String, passwordstring: String ) -> Bool{

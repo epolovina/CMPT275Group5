@@ -55,29 +55,34 @@ class Login: UIViewController, UITextFieldDelegate {
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        var isValidLogin: Bool
+        var isValidLogin: Bool = false
         
-        isValidLogin = DB.verifyLogin(emailstring: email, passwordstring: password)
+        DB.verifyLogin(emailstring: email, passwordstring: password)
         
-        print("isvalidlogin \(isValidLogin)")
-        if (isValidLogin == true){
-            // Login is accepted
-            
-            print("Login is valid...")
-            DB.loadData()
-            performSegue(withIdentifier: "loginSegue", sender: self)
-        }
-        
-        if (isValidLogin == false){
-            // Login rejected
-            
-            print("Incorrect Login...")
-            // create alert for incorrect password
-            let alert = UIAlertController(title: "Invalid Login", message: "Incorrect password, please try again", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        while(DB.isFunctionFin == false){
+//            print("hi")
+            while (DB.isFunctionFin != false) {
+                isValidLogin = DB.checklogin(emailstring: email, passwordstring: password)
+                print("isvalid \(isValidLogin)")
+                if (isValidLogin == true){
+                    // Login is accepted
+                    
+                    print("Login is valid...")
+                    DB.loadData()
+                    performSegue(withIdentifier: "loginSegue", sender: self)
+                }else{
+                    // Login rejected
+                    
+                    print("Incorrect Login...")
+                    // create alert for incorrect password
+                    let alert = UIAlertController(title: "Invalid Login", message: "Incorrect password, please try again", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                }
+//                DB.isFunctionFin = false
+                break
+            }
+            if(DB.isFunctionFin == true){break }
         }
     }
 }
-    
-
