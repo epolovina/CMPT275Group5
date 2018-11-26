@@ -22,6 +22,10 @@ class Login: UIViewController, UITextFieldDelegate {
         emailTF.delegate = self
         passwordTF.delegate = self
         self.emailTF.becomeFirstResponder()
+        
+        let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
+        loginButton.layer.borderColor = borderColour.cgColor
+        loginButton.layer.borderWidth = 4
 
     }
     

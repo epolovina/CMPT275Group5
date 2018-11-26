@@ -13,8 +13,12 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
 
     //MARK: Outlets
     @IBOutlet weak var ShareButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var lineChart: LineChartView!
-    
+    @IBOutlet weak var weeksButton: UIButton!
+    @IBOutlet weak var monthsButton: UIButton!
+    @IBOutlet weak var yearsButton: UIButton!
     //MARK: Variables
     var all_data : [(Date, Double)] = [] //will be the (x,y) coordinates to graph
     let DB = Database.DB
@@ -23,6 +27,20 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         super.viewDidLoad()
         fetchData()
         setChart()
+        
+        let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
+        ShareButton.layer.borderColor = borderColour.cgColor
+        ShareButton.layer.borderWidth = 4
+        menuButton.layer.borderColor = borderColour.cgColor
+        menuButton.layer.borderWidth = 2
+        profileButton.layer.borderColor = borderColour.cgColor
+        profileButton.layer.borderWidth = 2
+        weeksButton.layer.borderColor = borderColour.cgColor
+        weeksButton.layer.borderWidth = 2
+        monthsButton.layer.borderColor = borderColour.cgColor
+        monthsButton.layer.borderWidth = 2
+        yearsButton.layer.borderColor = borderColour.cgColor
+        yearsButton.layer.borderWidth = 2
 
     }
     

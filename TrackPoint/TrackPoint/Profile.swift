@@ -15,7 +15,8 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var ageTF: UITextField!
     @IBOutlet weak var addButton: UIButton!
-    
+    @IBOutlet weak var progressButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     //MARK: Variables
     var medicationArray = [String?]() // name and start date
     var medNameAndDateArray: [(String, String)] = []
@@ -28,6 +29,14 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         firstNameTF.delegate = self
         lastNameTF.delegate = self
         ageTF.delegate = self
+        
+        let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
+        progressButton.layer.borderColor = borderColour.cgColor
+        progressButton.layer.borderWidth = 4
+        addButton.layer.borderColor = borderColour.cgColor
+        addButton.layer.borderWidth = 4
+        menuButton.layer.borderColor = borderColour.cgColor
+        menuButton.layer.borderWidth = 2
         
         //load in data from database and set text fields
         self.lastNameTF.text = DB.lastName

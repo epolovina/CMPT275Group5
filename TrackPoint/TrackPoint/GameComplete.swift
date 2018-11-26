@@ -24,6 +24,16 @@ class GameComplete: UIViewController {
         //Disable buttons until game saved or deleted
         PlayAgainButton.isEnabled = false
         MenuButton.isEnabled = false
+        
+        let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
+        SaveButton.layer.borderColor = borderColour.cgColor
+        SaveButton.layer.borderWidth = 4
+        DeleteButton.layer.borderColor = borderColour.cgColor
+        DeleteButton.layer.borderWidth = 4
+        PlayAgainButton.layer.borderColor = borderColour.cgColor
+        PlayAgainButton.layer.borderWidth = 4
+        MenuButton.layer.borderColor = borderColour.cgColor
+        MenuButton.layer.borderWidth = 4
 
     }
     
