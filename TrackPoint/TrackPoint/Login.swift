@@ -16,6 +16,7 @@ class Login: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     
     let DB = Database.DB
+    var isValidLogin: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class Login: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // check login before moving to the main menu
+        return isValidLogin
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Allows keyboard to disappear when touch something else
         self.view.endEditing(true)
@@ -46,29 +52,25 @@ class Login: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
             passwordTF.becomeFirstResponder()
         }
-        
         else {
             textField.resignFirstResponder()
             loginButtonPressed(loginButton)
         }
-
         return true
     }
     
     //MARK: Actions
     @IBAction func loginButtonPressed(_ sender: Any) {
-        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        var isValidLogin: Bool
-        
-        isValidLogin = DB.verifyLogin(emailstring: email, passwordstring: password)
-        
+//        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+//
+        //isValidLogin = DB.verifyLogin(emailstring: email, passwordstring: password)
+        isValidLogin = true // for testing
         if (isValidLogin == true){
             // Login is accepted
             
             print("Login is valid...")
             DB.loadData()
-            performSegue(withIdentifier: "loginSegue", sender: self)
         }
         
         if (isValidLogin == false){
@@ -79,6 +81,7 @@ class Login: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "Invalid Login", message: "Incorrect password, please try again", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
