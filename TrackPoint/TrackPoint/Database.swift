@@ -36,6 +36,8 @@ class Database {
     var scoreArray = [Double?]()
     var dateArray = [String?]()
     //var gameScoreArray: [(Double, String)] = [] //Score and date
+    var loginFinished: Bool = false
+    var loginValid: Bool = false
     
     //MARK: Functions
     func saveProfileData(firstNamestring: String, lastNamestring: String, agestring: String, medsArr: [String]){
@@ -63,18 +65,11 @@ class Database {
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let datares = data,
+            guard let _ = data,
                 error == nil else {             // check for fundamental networking error
                 print("ERROR LOADING DATA")
                 return
             }
-//            do{
-//                let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
-//
-////                print(myjson)
-//            }catch{
-//                print("ERROR reading json")
-//            }
         }
         task.resume()
     }
@@ -82,7 +77,7 @@ class Database {
     func loadData(){
         let sendjson = ["email":self.email]
         // get first/last names, medications and age from db and put in variables
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/getDatafromDB")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/getDatafromDB")!
         
         var request = URLRequest(url: url)
 
@@ -111,56 +106,60 @@ class Database {
                 self.dateArray = (((myjson) as AnyObject).value(forKey: "dateArray")! as? [String?] ?? [])
                 
 //                print(myjson)
-                
+        
             }catch{
                 print("ERROR reading json")
             }
-
         }
         task.resume()
     }
     
-    func verifyLogin( emailstring: String, passwordstring: String) -> Bool{
+    func verifyLogin(emailstring: String, passwordstring: String){
         // check email matches password
         // save email and password to database if new
-        // return true if valid user
-        // return false if user exists but incorrect password
         
-        self.email = emailstring
-        self.password = passwordstring
-
         let sendjson = ["email":emailstring, "password":passwordstring]
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/login")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/login")!
         var request = URLRequest(url: url)
-
+        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         request.httpMethod = "POST"
-
+        
         guard let httpbody = try? JSONSerialization.data(withJSONObject: sendjson, options: [])
-        else{
-            print("ERROR Problem with json")
-            return false //////////////////////////////////
+            else{
+                print("ERROR Problem with json")
+                return
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let datares = data,
                 error == nil else {             // check for fundamental networking error
                     print("ERROR LOADING DATA")
-                    return /////////////////////////////////
+                    return
             }
             do{
                 let myjson = try JSONSerialization.jsonObject(with: datares, options: JSONSerialization.ReadingOptions.mutableContainers)
+                print("login JSON: ")
                 print(myjson)
-                self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String // idk if this works, should save email so we can use it later
+                self.email = ((myjson) as AnyObject).value(forKey: "email")! as? String
                 self.password = ((myjson) as AnyObject).value(forKey: "password")! as? String
+                
+                if (self.password == passwordstring){
+                    self.loginValid = true
+                    
+                }
+                if (self.password != passwordstring){
+                    self.loginValid = false
+                    
+                }
+                
             }catch{
-                print("ERROR reading json")
+                print("ERROR\(error)")
             }
-
         }
         task.resume()
-        return true ///////////////////////
+        self.loginFinished = true
     }
     
     func saveScore(){

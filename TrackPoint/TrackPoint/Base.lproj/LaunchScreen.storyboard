@@ -17,6 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background-NoPlanet" translatesAutoresizingMaskIntoConstraints="NO" id="40f-w1-RWQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoV1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hn-7t-Yeg">
                                 <rect key="frame" x="103" y="102" width="169" height="169"/>
                                 <constraints>
@@ -32,24 +35,25 @@
                                             <constraint firstAttribute="height" constant="58" id="XwH-sj-3CK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="47"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Ready, Steady, Go!&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdp-Um-Shh">
                                         <rect key="frame" x="0.0" y="96" width="213" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.84794042410000003" green="1" blue="0.98637846959999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.84794042408504333" green="1" blue="0.98637846962709308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="40f-w1-RWQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="44D-fO-cMY"/>
                             <constraint firstItem="8hn-7t-Yeg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="82" id="520-1d-PP8"/>
                             <constraint firstItem="wMg-uo-97V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="BH6-Kl-YTs"/>
                             <constraint firstItem="wMg-uo-97V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="C2B-Ot-JHz"/>
                             <constraint firstItem="wMg-uo-97V" firstAttribute="centerX" secondItem="8hn-7t-Yeg" secondAttribute="centerX" id="OTe-91-7RH"/>
+                            <constraint firstItem="40f-w1-RWQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UxF-ph-dOL"/>
                             <constraint firstItem="8hn-7t-Yeg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="lCW-sj-wX1"/>
                             <constraint firstItem="8hn-7t-Yeg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vg7-od-h70"/>
                         </constraints>
@@ -62,6 +66,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoV1" width="170" height="170"/>
+        <image name="Background-NoPlanet" width="70.866142272949219" height="126"/>
+        <image name="LogoV1" width="340" height="340"/>
     </resources>
 </document>

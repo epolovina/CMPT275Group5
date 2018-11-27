@@ -16,7 +16,6 @@ class Login: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     
     let DB = Database.DB
-    var isValidLogin: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +36,7 @@ class Login: UIViewController, UITextFieldDelegate {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // check login before moving to the main menu
-        return isValidLogin
+        return DB.loginValid
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,19 +60,25 @@ class Login: UIViewController, UITextFieldDelegate {
     
     //MARK: Actions
     @IBAction func loginButtonPressed(_ sender: Any) {
-//        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//
-        //isValidLogin = DB.verifyLogin(emailstring: email, passwordstring: password)
-        isValidLogin = true // for testing
-        if (isValidLogin == true){
+        let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        
+        DB.verifyLogin(emailstring: email, passwordstring: password)
+        sleep(1)
+        // Loop until login is finished
+        while(DB.loginFinished == false){
+        }
+        
+        if (DB.loginValid == true){
             // Login is accepted
             
             print("Login is valid...")
             DB.loadData()
+            performSegue(withIdentifier: "loginSegue", sender: nil)
         }
         
-        if (isValidLogin == false){
+        if (DB.loginValid == false){
             // Login rejected
             
             print("Incorrect Login...")
@@ -85,5 +90,3 @@ class Login: UIViewController, UITextFieldDelegate {
         }
     }
 }
-    
-
