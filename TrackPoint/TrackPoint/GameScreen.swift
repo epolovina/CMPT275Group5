@@ -86,6 +86,19 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         sceneView.session.pause()
     }
     
+    func animate(node:SCNNode, duration: CFTimeInterval){
+        let translation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        translation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        translation.values = [-3, 3, -2, 2, -1, 1, 0]
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [translation]
+        animationGroup.duration = duration
+        
+        node.addAnimation(animationGroup, forKey: "shake")
+        
+    }
+    
     //Tests for and handles out of bounds condition
     func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
         
@@ -100,6 +113,7 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
                 
                 //halt data collection when out of bounds
                 collector.suspend()
+                boundary.removeAnimation(forKey: "shake")
                 print ("contact ended")
                 print("Out of bounds, data collection stopped!")
                 
@@ -121,6 +135,7 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
                 
                 //resume data collection once within bounds
                 collector.resume()
+                animate(node: boundary, duration: 4)
                 print ("contact happened")
                 print("Back into playable area, data collection resumed!")
                 
