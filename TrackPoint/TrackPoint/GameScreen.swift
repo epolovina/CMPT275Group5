@@ -18,9 +18,9 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     let debugMode = true
     let sceneURL = "Models.scnassets/test.scn"
     let initialDelay:TimeInterval = 3
-    let initialPosition = SCNVector3(0, 0, -10)
+    let initialPosition = SCNVector3(0, 0, -15)
     let lightPosition = SCNVector3(1.5, 1.5, 1.5)
-    let boundaryRadius:CGFloat = 5
+    let boundaryRadius:CGFloat = 3
     let collector:DataRun = DataRun()
     fileprivate var updatePositionTimer: Timer!
     
@@ -42,6 +42,8 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var PopUpView: UIView!
+    @IBOutlet weak var PopUpLabel: UILabel!
     
     
     
@@ -56,6 +58,8 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         
         sceneView.delegate = self
         stopButton.isEnabled = false
+        PopUpView.isHidden = true
+        PopUpLabel.isHidden = true
         
         //show statistics such as fps
         sceneView.showsStatistics = true
@@ -86,16 +90,14 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         sceneView.session.pause()
     }
     
-    func animate(node:SCNNode, duration: CFTimeInterval){
+    func animate(node:SCNNode){
         let translation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         translation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-        translation.values = [-3, 3, -2, 2, -1, 1, 0]
+        translation.values = [-1, 1, -0.75, 0.75, -0.5, 0.5, -0.25, 0.25, 0]
+        translation.isRemovedOnCompletion = false
+        translation.repeatCount = 100
         
-        let animationGroup = CAAnimationGroup()
-        animationGroup.animations = [translation]
-        animationGroup.duration = duration
-        
-        node.addAnimation(animationGroup, forKey: "shake")
+        node.addAnimation(translation, forKey: "shake")
         
     }
     
@@ -112,6 +114,8 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
             if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
                 
                 //halt data collection when out of bounds
+                PopUpView.isHidden = false
+                PopUpLabel.isHidden = false
                 collector.suspend()
                 boundary.removeAnimation(forKey: "shake")
                 print ("contact ended")
@@ -134,8 +138,10 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
             if ( (contact.nodeA.physicsBody?.categoryBitMask == category.boundary.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.pointer.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == category.pointer.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == category.boundary.rawValue) ){
                 
                 //resume data collection once within bounds
+                PopUpView.isHidden = true
+                PopUpLabel.isHidden = true
                 collector.resume()
-                animate(node: boundary, duration: 4)
+                animate(node: boundary)
                 print ("contact happened")
                 print("Back into playable area, data collection resumed!")
                 
@@ -160,15 +166,16 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         let boundaryGeometry:SCNGeometry = SCNSphere(radius: boundaryRadius)
         boundaryGeometry.firstMaterial?.diffuse.contents = UIColor.red
         boundary = SCNNode(geometry: boundaryGeometry)
-        if (!debugMode){
-            boundary.isHidden = true;
-        }
+        //if (!debugMode){
+        //    boundary.isHidden = true;
+        //}
         
         //add boundary node to scene and define its physics attributes
         boundary.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: boundary, options: nil))
         boundary.physicsBody?.categoryBitMask = category.boundary.rawValue
         boundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
         boundary.position = initialPosition
+        sceneView.scene.rootNode.addChildNode(boundary)
         
         
         //create pointer node and make it hidden if not debugging
@@ -176,9 +183,9 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         pointerGeometry = SCNBox(width: pointerDimensions.width.rawValue, height: pointerDimensions.height.rawValue, length: pointerDimensions.length.rawValue, chamferRadius: 0)
         pointerGeometry.firstMaterial?.diffuse.contents = UIColor.green
         pointer = SCNNode(geometry: pointerGeometry)
-        if (!debugMode){
-            pointer.isHidden = true;
-        }
+        //if (!debugMode){
+        //    pointer.isHidden = true;
+        //}
         //attach pointer node to camera and define its physics attributes
         sceneView.pointOfView?.addChildNode(pointer)
         pointer.position = initialPosition
