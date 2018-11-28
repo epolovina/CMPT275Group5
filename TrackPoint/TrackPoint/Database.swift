@@ -51,7 +51,7 @@ class Database {
         self.medicationArray = medsArr
         print(sendjson)
         // saves first/last names, medications and age to db
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/sendDatatoDB")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/sendDatatoDB")!
         
         var request = URLRequest(url: url)
 
