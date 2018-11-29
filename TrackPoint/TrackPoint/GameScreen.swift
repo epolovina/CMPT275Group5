@@ -194,6 +194,7 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         boundary.physicsBody?.categoryBitMask = category.boundary.rawValue
         boundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
         boundary.position = initialPosition
+        sceneView.scene.rootNode.addChildNode(boundary)
         
         //create inner boundary node and make it hidden if not debugging
         let innerBoundaryGeometry:SCNGeometry = SCNSphere(radius: innerBoundaryRadius)
@@ -208,6 +209,8 @@ class GameScreen: UIViewController , ARSCNViewDelegate, SCNPhysicsContactDelegat
         innerBoundary.physicsBody?.categoryBitMask = category.innerBoundary.rawValue
         innerBoundary.physicsBody?.contactTestBitMask = category.pointer.rawValue
         innerBoundary.position = initialPosition
+        sceneView.scene.rootNode.addChildNode(innerBoundary)
+
         
         
         //create pointer node and make it hidden if not debugging
