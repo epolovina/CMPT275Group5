@@ -24,7 +24,7 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
     var all_data : [(Date, Double)] = [] //will be the (x,y) coordinates to graph
     var meds : [(String, Date)] = [] //will be used for the horizontal markers on the graph
     let DB = Database.DB
-    let medColours = [UIColor.red, UIColor.blue, UIColor.green, UIColor.purple, UIColor.orange, UIColor.magenta] //colours that will be used for the limitlines on the graph
+    let medColours = [UIColor.red, UIColor.blue, UIColor.purple, UIColor.orange, UIColor.magenta, UIColor.green] //colours that will be used for the limitlines on the graph
     var chartDataSet : LineChartDataSet?
     var chartData : LineChartData?
     var dataEntries: [ChartDataEntry] = []
@@ -47,7 +47,7 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         yearsButton.layer.borderWidth = 2
         
         //for testing purposes
-        /*DB.dateArray.append("30/12/2016 00:00")
+       /* DB.dateArray.append("30/12/2016 00:00")
         DB.scoreArray.append(10)
         DB.dateArray.append("30/12/2017 00:00")
         DB.scoreArray.append(15.0)
@@ -68,8 +68,11 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         DB.dateArray.append("24/11/2018 00:00")
         DB.scoreArray.append(45.5)
         DB.dateArray.append("26/11/2018 00:00")
+        DB.scoreArray.append(47.0)
+        DB.dateArray.append("28/11/2018 00:00")
         DB.scoreArray.append(50.0)*/
         //DB.saveScore()
+        //fetchData()
         fetchData()
         setChart()
         
@@ -108,30 +111,22 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBAction func plotWeek(_ sender: Any) {
         //upon clicking the "weeks" button we will only display data from the past week
-        //lineChart.clear()
         fetchWeek()
-        //resetChart()
         setChart()
-        //lineChart.xAxis.removeAllLimitLines()
-        //lineChart.animate(xAxisDuration: 0.00001)
     }
     
     
     @IBAction func plotMonth(_ sender: Any) {
         //upon clicking the "months" button we will only display data from the past month
-        //lineChart.clear()
         fetchMonth()
         setChart()
-        //resetChart()
     }
     
     
     @IBAction func plotYear(_ sender: Any) {
         //upon clicking the "years" button we will only display data from the past year
-        //lineChart.clear()
         fetchYear()
         setChart()
-        //resetChart()
     }
     
     
@@ -214,10 +209,6 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
             {
                 all_data.append((tempDate, DB.scoreArray[i]!))
             }
-            else
-            {
-                break
-            }
         }
         
         //reset dateFormat for medication
@@ -275,10 +266,6 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
             {
                 all_data.append((tempDate, DB.scoreArray[i]!))
             }
-            else
-            {
-                break
-            }
         }
         
         //reset dateFormat for medication
@@ -333,13 +320,11 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         for i in 0...(DB.dateArray.count - 1)
         {
             let tempDate = dateFormatter.date(from:DB.dateArray[i]!)!
+            //print((currentDate.timeIntervalSince1970) - (tempDate.timeIntervalSince1970))
             if (((currentDate.timeIntervalSince1970) - (tempDate.timeIntervalSince1970)) < 604800)
             {
+                //print(i)
                 all_data.append((tempDate, DB.scoreArray[i]!))
-            }
-            else
-            {
-                break
             }
         }
         
@@ -423,22 +408,13 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         chartData = LineChartData(dataSets: [chartDataSet!])
         lineChart.data = chartData
         
-        chartDataSet!.notifyDataSetChanged()
-        chartData!.notifyDataChanged()
-        lineChart.notifyDataSetChanged()
-        
-        //lineChart.data?.notifyDataChanged()
-        //lineChart.notifyDataSetChanged()
-        //lineChart.animate(xAxisDuration: 0.01)
-        
-        
         //here we will add the limit lines for the medications
         if (meds.count == 0) //no meds to add
         {
             return
         }
         
-        //lineChart.xAxis.removeAllLimitLines()
+        lineChart.xAxis.removeAllLimitLines()
         for i in 0..<meds.count
         {
             let limitLine = ChartLimitLine()
@@ -447,42 +423,38 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
             limitLine.label = meds[i].0
             limitLine.lineWidth = 0.8
             limitLine.lineDashLengths = [1,2]
-            limitLine.valueTextColor = UIColor.lightGray
+            limitLine.valueTextColor = medColours[i%6] //match with the line colour
+            
+            //try to make it so that labels for limit lines won't overlap???
+            if (i < meds.count/2)
+            {
+                if (i%2 == 0)
+                {
+                    limitLine.labelPosition = .rightTop
+                }
+                else
+                {
+                    limitLine.labelPosition = .rightBottom
+                }
+            }
+            else
+            {
+                if (i%2 == 0)
+                {
+                    limitLine.labelPosition = .leftTop
+                }
+                else
+                {
+                    limitLine.labelPosition = .leftBottom
+                }
+            }
+            //limitLine.labelPosition = .leftTop
             lineChart.xAxis.addLimitLine(limitLine)
         }
         
-        //lineChart.animate(xAxisDuration: 0.00001)
-        //lineChart.animate(yAxisDuration: 0.00001)
-        
-    }
-    
-    func resetChart()
-    {
-        var dataEntries: [ChartDataEntry] = []
-        
-        for i in 0..<all_data.count {
-            let dataEntry = ChartDataEntry(x: (all_data[i].0).timeIntervalSince1970, y: all_data[i].1)
-            dataEntries.append(dataEntry)
-        }
-        
-        chartDataSet = LineChartDataSet(values: dataEntries, label: "Tremor Severity")
-        chartDataSet!.drawCirclesEnabled = true
-        chartDataSet!.setColor(UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1))
-        chartDataSet!.setCircleColor(UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1))
-        chartDataSet!.lineWidth = 1.5
-        chartDataSet!.drawValuesEnabled = false
-        chartDataSet!.drawCircleHoleEnabled = false
-        chartDataSet!.circleRadius = 3.5
-        chartData = LineChartData(dataSets: [chartDataSet!])
-        lineChart.data = chartData
-        
-        //chartDataSet!.notifyDataSetChanged()
-        //chartData!.notifyDataChanged()
-        //lineChart.notifyDataSetChanged()
-        //lineChart.animate(xAxisDuration: 0.05)
-        lineChart.data?.notifyDataChanged()
-        lineChart.notifyDataSetChanged()
-        lineChart.animate(xAxisDuration: 0.01)
+        //need this to update the new line chart data and limit lines
+        lineChart.animate(xAxisDuration: 0.00001)
+        lineChart.animate(yAxisDuration: 0.00001)
         
     }
     
