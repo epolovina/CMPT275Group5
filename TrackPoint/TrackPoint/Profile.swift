@@ -19,7 +19,6 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
     @IBOutlet weak var menuButton: UIButton!
     //MARK: Variables
     var medicationArray = [String?]() // name and start date
-    var medNameAndDateArray: [(String, String)] = []
     let DB = Database.DB
     
     override func viewDidLoad() {

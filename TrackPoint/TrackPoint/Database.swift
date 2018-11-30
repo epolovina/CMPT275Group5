@@ -167,7 +167,7 @@ class Database {
         let sendjson = ["email":self.email, "scoreArray":self.scoreArray, "dateArray":self.dateArray] as [String : Any]
         
         // append new score to gameScoreArray and save to database
-        let url = URL(string: "https://trackpointcmpt275.herokuapp.com/saveScore")!
+        let url = URL(string: "https://trackpointcmpt275v3.herokuapp.com/saveScore")!
         
         var request = URLRequest(url: url)
 

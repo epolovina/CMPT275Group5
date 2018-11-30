@@ -48,8 +48,6 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
             let strDate = dateFormatter.string(from: self.startDateScroller.date)
             let strMedName = self.medicationNameTF.text!
             
-            //profileVC.medNameAndDateArray.append((strMedName, strDate))
-            
             let displayStr = strMedName + ", " + strDate
     
             profileVC.medicationArray.append(displayStr)
