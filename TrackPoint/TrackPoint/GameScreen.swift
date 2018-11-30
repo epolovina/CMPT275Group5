@@ -14,7 +14,26 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
     private var sensor_timer: Timer!
     let gameComplete = GameComplete()
     let ARconfig = ARWorldTrackingConfiguration()
+    var boundary = SCNNode()
+    var pointer = SCNNode()
+    var isInside = true
+    let debugMode = false
+    let boundaryRadius:CGFloat = 2
     //let ARconfig = AROrientationTrackingConfiguration()
+    
+    enum BodyType:Int{
+        case target = 1
+        case rocket = 2
+        case pointer = 4
+        case boundary = 8
+        
+    }
+    
+    enum pointerDimensions:CGFloat{
+        case width = 0.1
+        case height = 0.11
+        case length = 15
+    }
     
     //MARK: Outlets
     @IBOutlet weak var StopButton: UIButton!
@@ -22,6 +41,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
     @IBOutlet weak var readyButton: UIButton!
     @IBOutlet weak var instructionScreen: UIView!
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var PopUpView: UIView!
     
     @IBAction func readyButton(_ sender: Any) {
         startTimer()
@@ -36,6 +56,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
         super.viewDidLoad()
         addTargetNodes()
         StopButton.isHidden=true //hide stop button..easier to do segue
+        PopUpView.isHidden = true
         
         sceneView.scene.physicsWorld.contactDelegate = self //contact physics
     }
@@ -57,7 +78,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
             timer.invalidate()
             removeAudioPlayer()
             gameOver()
-        }else{
+        }else if (isInside){
             seconds -= 1
             shootObj()
             playCannon()
@@ -76,7 +97,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
         let scene = SCNScene(named: "art.scnassets/rocketship.scn")
         let rocketNode = (scene?.rootNode.childNode(withName: "rocketship", recursively: false)!)! //press the obj and scenegraph
         // laserNode.camera.
-        print("tapped")
+        //print("tapped")
         //shape
         
         
@@ -143,19 +164,98 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
         
         //add to scene
         sceneView.scene.rootNode.addChildNode(targetNode)
+        
+        //create boundary node and make it hidden if not debugging
+        let boundaryGeometry:SCNGeometry = SCNSphere(radius: boundaryRadius)
+        boundaryGeometry.firstMaterial?.diffuse.contents = UIColor.red
+        boundary = SCNNode(geometry: boundaryGeometry)
+        if (!debugMode){
+            boundary.opacity = 0
+        }
+        
+        //add boundary node to scene and define its physics attributes
+        boundary.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: boundary, options: nil))
+        boundary.physicsBody?.categoryBitMask = BodyType.boundary.rawValue
+        boundary.physicsBody?.contactTestBitMask = BodyType.pointer.rawValue
+        boundary.physicsBody?.collisionBitMask = BodyType.pointer.rawValue
+        boundary.position = SCNVector3(x:0,y:0,z:-5)
+        
+        sceneView.scene.rootNode.addChildNode(boundary)
+        
+        //create pointer node and make it hidden if not debugging
+        let pointerGeometry:SCNGeometry
+        pointerGeometry = SCNBox(width: pointerDimensions.width.rawValue, height: pointerDimensions.height.rawValue, length: pointerDimensions.length.rawValue, chamferRadius: 0)
+        pointerGeometry.firstMaterial?.diffuse.contents = UIColor.green
+        pointer = SCNNode(geometry: pointerGeometry)
+        if (!debugMode){
+            pointer.opacity = 0
+        }
+        //attach pointer node to camera and define its physics attributes
+        pointer.position = SCNVector3(x:0,y:0,z:-5)
+        //pointer.rotation = SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi / 4))
+        pointer.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: pointer, options: nil))
+        pointer.physicsBody?.categoryBitMask = BodyType.pointer.rawValue
+        pointer.physicsBody?.contactTestBitMask = BodyType.boundary.rawValue
+        pointer.physicsBody?.collisionBitMask = BodyType.boundary.rawValue
+        
+        sceneView.pointOfView?.addChildNode(pointer)
     
     }
     
+    //Test if the contact is between the two specified objects
+    func testContactBetween(contact: SCNPhysicsContact, nodeA: BodyType, nodeB:BodyType) -> Bool {
+        return (contact.nodeA.physicsBody?.categoryBitMask == nodeA.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == nodeB.rawValue) || (contact.nodeA.physicsBody?.categoryBitMask == nodeB.rawValue &&  contact.nodeB.physicsBody?.categoryBitMask == nodeA.rawValue)
+    }
+    
+    //returns the length of the distance between contact point and center of specified node
+    func calculateDistanceToContact(contact: SCNPhysicsContact, node: SCNNode) -> CGFloat {
+        let distanceVector = SCNVector3(contact.contactPoint.x - node.position.x, contact.contactPoint.y - node.position.y, contact.contactPoint.z - node.position.z)
+        let length : CGFloat = CGFloat(sqrtf(distanceVector.x * distanceVector.x + distanceVector.y * distanceVector.y + distanceVector.z * distanceVector.z))
+        return length
+    }
+
     //contact detection
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        //handle rocket and target collison
+        if (testContactBetween(contact: contact, nodeA: BodyType.target, nodeB: BodyType.rocket)){
+            //print("Collision")
+            let explodeAnimation = SCNParticleSystem(named:"Explosion", inDirectory:"art.scnassets")
+            playExplosion()
+            contact.nodeB.addParticleSystem(explodeAnimation!)
+            contact.nodeA.removeFromParentNode() //remove rocket
+        }
         
-        print("Collision")
-        let explodeAnimation = SCNParticleSystem(named:"Explosion", inDirectory:"art.scnassets")
-        playExplosion()
-        contact.nodeB.addParticleSystem(explodeAnimation!)
-        contact.nodeA.removeFromParentNode() //remove rocket
+        //handle out of bounds condition
+        else if (testContactBetween(contact: contact, nodeA: BodyType.pointer, nodeB: BodyType.boundary)){
+            //calculate distance between contact point and center of boundary sphere
+            let length = calculateDistanceToContact(contact: contact, node: boundary);
+            if (length < boundaryRadius && isInside == false){
+                isInside = true
+                //halt data collection when out of bounds
+                collector.resume()
+                PopUpView.isHidden = true
+                print("Back into playable area, data collection resumed!")
+                
+            }
+        }
     }
     
+    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
+        //handle out of bounds condition
+        if (testContactBetween(contact: contact, nodeA: BodyType.pointer, nodeB: BodyType.boundary)){
+            //calculate distance between contact point and center of boundary sphere
+            let length = calculateDistanceToContact(contact: contact, node: boundary);
+            if (length > boundaryRadius && isInside == true){
+                isInside = false
+                //halt data collection when out of bounds
+                collector.suspend()
+                PopUpView.isHidden = false
+                print("Out of bounds, data collection stopped!")
+                    
+                
+            }
+        }
+    }
     func playBGM(){
         let audioNode = SCNNode()
         let audioSource = SCNAudioSource(fileNamed: "Sounds/ukulele.mp3")!
@@ -204,8 +304,4 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
     }
 }
 
-enum BodyType:Int{
-    case target=1
-    case rocket=2
-    
-}
+
