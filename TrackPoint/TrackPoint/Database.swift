@@ -181,7 +181,7 @@ class Database {
         }
         request.httpBody = httpbody
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let datares = data,
+            guard let _ = data,
                 error == nil else {  // check for fundamental networking error
                     print("ERROR LOADING DATA")
                     return
