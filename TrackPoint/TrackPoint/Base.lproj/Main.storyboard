@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6k7-WO-lB0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6k7-WO-lB0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,11 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background-NoPlanet" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C2n-D1-s0T">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background-NoPlanet" translatesAutoresizingMaskIntoConstraints="NO" id="gND-Ct-P8O">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoV1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEG-X4-O27">
+                                <rect key="frame" x="104" y="101" width="170" height="170"/>
+                                <color key="backgroundColor" red="0.1529411765" green="0.21960784310000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="20b-V4-2A6"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VW-wm-g6B">
-                                <rect key="frame" x="121" y="440" width="133" height="54"/>
+                                <rect key="frame" x="101" y="474" width="173" height="54"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.65156431479999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <state key="normal" title="Login">
@@ -38,40 +45,44 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
-                                <rect key="frame" x="101" y="297" width="173" height="30"/>
+                                <rect key="frame" x="101" y="397" width="173" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
-                                <rect key="frame" x="101" y="232" width="173" height="30"/>
+                                <rect key="frame" x="101" y="338" width="173" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="C2n-D1-s0T" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="4kE-sv-iwD"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="212" id="5J5-vs-Khp"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="trailing" secondItem="Zxp-Pv-vlV" secondAttribute="trailing" id="7jS-qM-6Fu"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="Zxp-Pv-vlV" secondAttribute="leading" id="HvR-mK-TTQ"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="420" id="M3K-rm-AxX"/>
-                            <constraint firstItem="Zxp-Pv-vlV" firstAttribute="top" secondItem="RW2-dV-KSC" secondAttribute="bottom" constant="35" id="XT8-Sv-nuu"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="101" id="ZGM-Kw-njn"/>
-                            <constraint firstItem="C2n-D1-s0T" firstAttribute="centerY" secondItem="W8K-Ai-Hxl" secondAttribute="centerY" id="keS-XS-gbh"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="centerX" secondItem="4VW-wm-g6B" secondAttribute="centerX" id="ohz-au-cry"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="rhG-lp-gmV"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="121" id="zCN-1Q-gL6"/>
+                            <constraint firstItem="dEG-X4-O27" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="104" id="AZE-oN-j9g"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RW2-dV-KSC" secondAttribute="leading" id="KKQ-uZ-72U"/>
+                            <constraint firstItem="aJD-ek-eti" firstAttribute="trailing" secondItem="dEG-X4-O27" secondAttribute="trailing" constant="101" id="MJh-aE-BFi"/>
+                            <constraint firstItem="dEG-X4-O27" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="81" id="Med-05-J37"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="trailing" secondItem="Zxp-Pv-vlV" secondAttribute="trailing" id="MqD-59-ku4"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" secondItem="Zxp-Pv-vlV" secondAttribute="leading" id="RST-1Y-mtD"/>
+                            <constraint firstItem="dEG-X4-O27" firstAttribute="trailing" secondItem="RW2-dV-KSC" secondAttribute="trailing" id="Ym6-aH-8ii"/>
+                            <constraint firstItem="gND-Ct-P8O" firstAttribute="centerY" secondItem="W8K-Ai-Hxl" secondAttribute="centerY" id="a9J-BV-bVm"/>
+                            <constraint firstItem="aJD-ek-eti" firstAttribute="bottom" secondItem="4VW-wm-g6B" secondAttribute="bottom" constant="139" id="aw8-9w-iUh"/>
+                            <constraint firstItem="gND-Ct-P8O" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="dTy-eL-B73"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RW2-dV-KSC" secondAttribute="trailing" id="g2Z-H9-3KY"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="centerX" secondItem="gND-Ct-P8O" secondAttribute="centerX" id="lTX-GU-96u"/>
+                            <constraint firstItem="RW2-dV-KSC" firstAttribute="top" secondItem="dEG-X4-O27" secondAttribute="bottom" constant="67" id="ye6-mF-EQ2"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="Zxp-Pv-vlV" secondAttribute="bottom" constant="47" id="zKl-g9-gcx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aJD-ek-eti"/>
                     </view>
                     <connections>
                         <outlet property="emailTF" destination="RW2-dV-KSC" id="wjK-Io-p9W"/>
                         <outlet property="loginButton" destination="4VW-wm-g6B" id="etf-6P-bgQ"/>
+                        <outlet property="logoImage" destination="dEG-X4-O27" id="tgw-nH-RsC"/>
                         <outlet property="passwordTF" destination="Zxp-Pv-vlV" id="Tba-3R-YcD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozQ-1B-9va" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1332" y="26.53673163418291"/>
+            <point key="canvasLocation" x="-1309.5999999999999" y="26.53673163418291"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="1FY-v3-M4X">
@@ -978,15 +989,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="750" height="1334"/>
-        <image name="Background-NoPlanet" width="750" height="1334"/>
-        <image name="LogoV1" width="170" height="170"/>
+        <image name="Background" width="70.866142272949219" height="126"/>
+        <image name="Background-NoPlanet" width="70.866142272949219" height="126"/>
+        <image name="LogoV1" width="340" height="340"/>
         <image name="target_PNG9.png" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="X4L-Sx-yz3"/>
         <segue reference="2zV-sZ-Ao8"/>
-        <segue reference="jBU-EP-gqq"/>
-        <segue reference="GOk-TC-ljM"/>
+        <segue reference="3Lk-Y4-FqU"/>
+        <segue reference="XGK-Rz-dd3"/>
     </inferredMetricsTieBreakers>
 </document>

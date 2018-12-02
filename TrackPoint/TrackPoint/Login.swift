@@ -14,6 +14,7 @@ class Login: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var logoImage: UIImageView!
     
     let DB = Database.DB
 
@@ -22,6 +23,13 @@ class Login: UIViewController, UITextFieldDelegate {
         emailTF.delegate = self
         passwordTF.delegate = self
         self.emailTF.becomeFirstResponder()
+        
+        logoImage.layer.cornerRadius = logoImage.frame.size.width / 2
+        logoImage.clipsToBounds = true
+        
+        let logoBorderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
+        logoImage.layer.borderColor = logoBorderColour.cgColor
+        logoImage.layer.borderWidth = 4
         
         let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
         loginButton.layer.borderColor = borderColour.cgColor
