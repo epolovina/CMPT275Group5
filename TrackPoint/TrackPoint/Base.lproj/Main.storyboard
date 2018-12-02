@@ -829,9 +829,8 @@
                                             <constraint firstAttribute="height" constant="100" id="czK-JM-TpQ"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background-NoPlanet" translatesAutoresizingMaskIntoConstraints="NO" id="jZ0-3z-W0w">
+                                    <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background-NoPlanet" translatesAutoresizingMaskIntoConstraints="NO" id="jZ0-3z-W0w">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BxK-P2-U6w">
                                         <rect key="frame" x="0.0" y="625" width="61" height="48"/>
@@ -937,6 +936,8 @@
                                     <constraint firstItem="YHQ-Sd-zbL" firstAttribute="leading" secondItem="8JY-Up-Sgn" secondAttribute="leading" id="j1G-mt-nau"/>
                                     <constraint firstAttribute="trailing" secondItem="YHQ-Sd-zbL" secondAttribute="trailing" id="lTA-NY-RTF"/>
                                     <constraint firstItem="UDp-mG-CXN" firstAttribute="top" secondItem="8JY-Up-Sgn" secondAttribute="topMargin" id="srY-i7-kx6"/>
+                                    <constraint firstItem="jZ0-3z-W0w" firstAttribute="centerY" secondItem="8JY-Up-Sgn" secondAttribute="centerY" id="tKb-yZ-2gV"/>
+                                    <constraint firstItem="jZ0-3z-W0w" firstAttribute="centerX" secondItem="8JY-Up-Sgn" secondAttribute="centerX" id="vpQ-kr-6OI"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BxK-P2-U6w" secondAttribute="trailing" constant="20" symbolic="YES" id="xLg-cH-1rD"/>
                                 </constraints>
                             </view>
