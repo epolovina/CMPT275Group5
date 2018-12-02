@@ -49,7 +49,6 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
             let strMedName = self.medicationNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
             if (strMedName == ""){
-                print("Anysa loves nutbutter")
                 dismiss(animated: true, completion: nil)
                 return
             }

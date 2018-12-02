@@ -70,7 +70,14 @@ class Login: UIViewController, UITextFieldDelegate {
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email: String = self.emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password: String = self.passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-
+        
+        if (email == "" || password == ""){
+            let blankAlert = UIAlertController(title: "Invalid Login", message: "Incomplete field, please try again", preferredStyle: .alert)
+            
+            blankAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(blankAlert, animated: true, completion: nil)
+            return
+        }
         
         DB.verifyLogin(emailstring: email, passwordstring: password)
         sleep(1)
