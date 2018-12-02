@@ -31,9 +31,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource, UIT
         
         let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
         progressButton.layer.borderColor = borderColour.cgColor
-        progressButton.layer.borderWidth = 4
+        progressButton.layer.borderWidth = 2
         addButton.layer.borderColor = borderColour.cgColor
-        addButton.layer.borderWidth = 4
+        addButton.layer.borderWidth = 2
         menuButton.layer.borderColor = borderColour.cgColor
         menuButton.layer.borderWidth = 2
         

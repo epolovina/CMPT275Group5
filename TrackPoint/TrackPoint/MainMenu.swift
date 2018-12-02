@@ -22,10 +22,10 @@ class MainMenu: UIViewController {
         logoImage.layer.borderWidth = 4
         
         profileButton.layer.borderColor = borderColour.cgColor
-        profileButton.layer.borderWidth = 4
+        profileButton.layer.borderWidth = 2
         
         progressButton.layer.borderColor = borderColour.cgColor
-        progressButton.layer.borderWidth = 4
+        progressButton.layer.borderWidth = 2
         
         playButton.layer.borderColor = borderColour.cgColor
         playButton.layer.borderWidth = 4

@@ -34,7 +34,7 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         
         let borderColour = UIColor(red: 125/255, green: 18/255, blue: 81/255, alpha: 1)
         ShareButton.layer.borderColor = borderColour.cgColor
-        ShareButton.layer.borderWidth = 4
+        ShareButton.layer.borderWidth = 2
         menuButton.layer.borderColor = borderColour.cgColor
         menuButton.layer.borderWidth = 2
         profileButton.layer.borderColor = borderColour.cgColor

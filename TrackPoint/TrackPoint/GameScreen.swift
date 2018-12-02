@@ -18,7 +18,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
     var pointer = SCNNode()
     var isInside = true
     let debugMode = false
-    let boundaryRadius:CGFloat = 2
+    let boundaryRadius:CGFloat = 4
     //let ARconfig = AROrientationTrackingConfiguration()
     
     enum BodyType:Int{
@@ -80,7 +80,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
             gameOver()
         }else if (isInside){
             seconds -= 1
-            shootObj()
+            //shootObj()
             playCannon()
             timeLabel.text = "\(seconds)"
         }
@@ -177,7 +177,6 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
         boundary.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: boundary, options: nil))
         boundary.physicsBody?.categoryBitMask = BodyType.boundary.rawValue
         boundary.physicsBody?.contactTestBitMask = BodyType.pointer.rawValue
-        boundary.physicsBody?.collisionBitMask = BodyType.pointer.rawValue
         boundary.position = SCNVector3(x:0,y:0,z:-5)
         
         sceneView.scene.rootNode.addChildNode(boundary)
@@ -196,7 +195,6 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
         pointer.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: pointer, options: nil))
         pointer.physicsBody?.categoryBitMask = BodyType.pointer.rawValue
         pointer.physicsBody?.contactTestBitMask = BodyType.boundary.rawValue
-        pointer.physicsBody?.collisionBitMask = BodyType.boundary.rawValue
         
         sceneView.pointOfView?.addChildNode(pointer)
     
