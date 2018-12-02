@@ -92,7 +92,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VWA-wM-gTT">
+                            <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background-NoPlanet" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VWA-wM-gTT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-zH-7eJ">
@@ -947,7 +947,6 @@
                                         <rect key="frame" x="63" y="51.5" width="114" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="ffA-Kj-1QR"/>
-                                            <constraint firstAttribute="width" constant="114" id="qMy-Ad-bBd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -989,7 +988,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="70.866142272949219" height="126"/>
         <image name="Background-NoPlanet" width="70.866142272949219" height="126"/>
         <image name="LogoV1" width="340" height="340"/>
         <image name="target_PNG9.png" width="200" height="200"/>

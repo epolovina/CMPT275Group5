@@ -89,9 +89,11 @@ class Progress: UIViewController, MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            //mail.delegate = self
-            mail.setToRecipients(["sample@someEmail.com"])
-            mail.setMessageBody("<p>Here's my progress!</p>", isHTML: true)
+            
+            //mail.setToRecipients(["sample@someEmail.com"])
+            
+            mail.setSubject("TrackPoint Progress")
+            mail.setMessageBody("<p>Here's my tremor progress using TrackPoint:</p>", isHTML: true)
             let imageView = lineChart.getChartImage(transparent:false)!
             let imageData = imageView.pngData()!
             mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "tremorProgress.png")
