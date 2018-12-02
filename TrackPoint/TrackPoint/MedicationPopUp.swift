@@ -46,7 +46,13 @@ class MedicationPopUp: UIViewController, UITextFieldDelegate {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy"
             let strDate = dateFormatter.string(from: self.startDateScroller.date)
-            let strMedName = self.medicationNameTF.text!
+            let strMedName = self.medicationNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if (strMedName == ""){
+                print("Anysa loves nutbutter")
+                dismiss(animated: true, completion: nil)
+                return
+            }
             
             let displayStr = strMedName + ", " + strDate
     

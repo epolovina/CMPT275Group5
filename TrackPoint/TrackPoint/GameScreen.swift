@@ -80,7 +80,7 @@ class GameScreen: UIViewController, SCNPhysicsContactDelegate {
             gameOver()
         }else if (isInside){
             seconds -= 1
-            //shootObj()
+            shootObj()
             playCannon()
             timeLabel.text = "\(seconds)"
         }
