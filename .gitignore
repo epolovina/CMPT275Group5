@@ -78,3 +78,4 @@ fastlane/test_output
 iOSInjectionProject/
 
 Backend/node_modules/*
+Backendv3/node_modules/*
