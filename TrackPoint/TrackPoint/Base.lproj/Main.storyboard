@@ -25,20 +25,29 @@
                                 <color key="backgroundColor" red="0.1529411765" green="0.21960784310000001" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="170" id="20b-V4-2A6"/>
+                                    <constraint firstAttribute="width" secondItem="dEG-X4-O27" secondAttribute="height" multiplier="1:1" id="MRU-xg-1Qt"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
-                                <rect key="frame" x="101" y="363" width="173" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
-                                <rect key="frame" x="101" y="306" width="173" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="soi-Ok-LQy">
+                                <rect key="frame" x="101" y="307" width="173" height="81"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW2-dV-KSC">
+                                        <rect key="frame" x="0.0" y="0.0" width="173" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-Pv-vlV">
+                                        <rect key="frame" x="0.0" y="51" width="173" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="173" id="CIZ-bo-yDF"/>
+                                </constraints>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VW-wm-g6B">
-                                <rect key="frame" x="101" y="435" width="173" height="54"/>
+                                <rect key="frame" x="101" y="437" width="173" height="54"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.65156431479999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <state key="normal" title="Login">
@@ -56,20 +65,17 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="soi-Ok-LQy" firstAttribute="trailing" secondItem="dEG-X4-O27" secondAttribute="trailing" id="91b-EW-fAT"/>
                             <constraint firstItem="dEG-X4-O27" firstAttribute="leading" secondItem="aJD-ek-eti" secondAttribute="leading" constant="104" id="AZE-oN-j9g"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RW2-dV-KSC" secondAttribute="leading" id="KKQ-uZ-72U"/>
                             <constraint firstItem="aJD-ek-eti" firstAttribute="trailing" secondItem="dEG-X4-O27" secondAttribute="trailing" constant="101" id="MJh-aE-BFi"/>
                             <constraint firstItem="dEG-X4-O27" firstAttribute="top" secondItem="aJD-ek-eti" secondAttribute="top" constant="81" id="Med-05-J37"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="trailing" secondItem="Zxp-Pv-vlV" secondAttribute="trailing" id="MqD-59-ku4"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" secondItem="Zxp-Pv-vlV" secondAttribute="leading" id="RST-1Y-mtD"/>
-                            <constraint firstItem="dEG-X4-O27" firstAttribute="trailing" secondItem="RW2-dV-KSC" secondAttribute="trailing" id="Ym6-aH-8ii"/>
+                            <constraint firstItem="soi-Ok-LQy" firstAttribute="top" secondItem="dEG-X4-O27" secondAttribute="bottom" constant="36" id="Owh-JD-1ox"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="trailing" secondItem="soi-Ok-LQy" secondAttribute="trailing" id="PYX-YE-6h5"/>
                             <constraint firstItem="gND-Ct-P8O" firstAttribute="centerY" secondItem="W8K-Ai-Hxl" secondAttribute="centerY" id="a9J-BV-bVm"/>
-                            <constraint firstItem="aJD-ek-eti" firstAttribute="bottom" secondItem="4VW-wm-g6B" secondAttribute="bottom" constant="178" id="aw8-9w-iUh"/>
+                            <constraint firstItem="soi-Ok-LQy" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="cdx-Uj-eEB"/>
                             <constraint firstItem="gND-Ct-P8O" firstAttribute="centerX" secondItem="W8K-Ai-Hxl" secondAttribute="centerX" id="dTy-eL-B73"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RW2-dV-KSC" secondAttribute="trailing" id="g2Z-H9-3KY"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="centerX" secondItem="gND-Ct-P8O" secondAttribute="centerX" id="lTX-GU-96u"/>
-                            <constraint firstItem="RW2-dV-KSC" firstAttribute="top" secondItem="dEG-X4-O27" secondAttribute="bottom" constant="35" id="ye6-mF-EQ2"/>
-                            <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="Zxp-Pv-vlV" secondAttribute="bottom" constant="42" id="zKl-g9-gcx"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="top" secondItem="soi-Ok-LQy" secondAttribute="bottom" constant="49" id="gfa-Hq-1Fk"/>
+                            <constraint firstItem="4VW-wm-g6B" firstAttribute="leading" secondItem="soi-Ok-LQy" secondAttribute="leading" id="j6H-u8-7sW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aJD-ek-eti"/>
                     </view>
@@ -142,6 +148,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="w0A-h2-6N6" secondAttribute="height" multiplier="263:54" id="jHs-CS-tpY"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="xUh-l4-ZDc">
                                 <rect key="frame" x="102.5" y="99" width="170" height="310"/>
@@ -172,6 +181,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xUh-l4-ZDc" secondAttribute="height" multiplier="17:31" id="xCb-Ta-i5v"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <constraints>
