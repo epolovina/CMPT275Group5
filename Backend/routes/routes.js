@@ -18,74 +18,38 @@ router.post('/sendDatatoDB', (req, res)=>{
 		const db = client.db('cmpt275v3');
 		var collection = db.collection('userdata');
 		console.log("firstname", req.body);
-		// var myobj = {
-		// 	firstName: req.body.firstName,
-		// 	lastName: req.body.lastName,
-		// 	email: req.body.email,
-		// 	password:req.body.password,
-		// 	age: req.body.age,
-		// 	scoreArray: [],
-		// 	// diagnosisDate: req.body.diagnosisDate, 
-		// 	// diagnosisStatus: req.body.diagnosisStatus,
-		// 	medication: [],
-		// 	dateArray: []
-		// };	// console.log("lastname", req.body.lastName);
-		// if(req.body.medicationArr){
-		// 	myobj.medication = req.body.medicationArr;
-
-		// }
-
-
-		// if(req.body.scoreArray && req.body.dateArray){
-		// 	myobj.scoreArray = req.body.scoreArray;
-		// 	myobj.dateArray = req.body.dateArray;			
-		// }
-		// collection.insert(myobj, ()=>{
-		// 	console.log('Document inserted');
-		// 	res.send(200);
-		// });
-		// collection.find({email:req.body.email}, (err, result)=>{
-			// result.medication.push(req.body.medicationArr)
-			// for(var i = 0; i< result.medication[0].length;i++){
-			// 	for(var  j = 0; j<req.body.medicationArr.length; j++){
-			// 		result.medication[0].push(req.body.medicationArr[i])
-			// 	}
-			// }
-
-			collection.findOne({email:req.body.email}, (err,result)=>{
-				if(req.body.firstName){
-					result.firstName = req.body.firstName;
-				}
-				if(req.body.lastName){
-					result.lastName = req.body.lastName;
-				}
-				if(req.body.password){
-					result.password = req.body.password;
-				}
-				if(req.body.age){
-					result.age = req.body.age;
-				}
-				if(req.body.scoreArray){
-					result.scoreArray = req.body.scoreArray;
-				}
-				if(req.body.medicationArr){
-					result.medication = req.body.medicationArr
-				}
-				if(req.body.dateArray){
-					result.dateArray = req.body.dateArray;
-				}
+		collection.findOne({email:req.body.email}, (err,result)=>{
+		if(req.body.firstName){
+			result.firstName = req.body.firstName;
+		}
+		if(req.body.lastName){
+			result.lastName = req.body.lastName;
+		}
+		if(req.body.password){
+			result.password = req.body.password;
+		}
+		if(req.body.age){
+			result.age = req.body.age;
+		}
+		if(req.body.scoreArray){
+			result.scoreArray = req.body.scoreArray;
+		}
+		if(req.body.medicationArr){
+			result.medication = req.body.medicationArr
+		}
+		if(req.body.dateArray){
+			result.dateArray = req.body.dateArray;
+		}
 
 
-				collection.update({email:req.body.email}, result, (err,res)=>{
-					console.log("updated score");
-				});
-			});
-		// });
+		collection.update({email:req.body.email}, result, (err,res)=>{
+			console.log("updated score");
+		});
+	});
 		res.setHeader('Content-Type', 'application/json');
 		res.send(200);
 
 	});
-	// res.send("hi");
 });
 
 router.post('/getDatafromDB', (req, res)=>{
@@ -103,13 +67,7 @@ router.post('/getDatafromDB', (req, res)=>{
 			res.setHeader('Content-Type', 'application/json');
 			console.log("result from getData: ",result);
 			res.send(result);
-			// res.send(result);
 		});
-		// collection.findOne({email:req.body.email}, function (err, result){
-		// 	console.log(result);
-		// 	res.setHeader('Content-Type', 'application/json');
-		// 	res.json(result);
-		// });
 	});
 });
 
@@ -141,8 +99,6 @@ router.post("/login", (req,res)=>{
 					password:req.body.password,
 					age: req.body.age,
 					scoreArray: [],
-					// diagnosisDate: req.body.diagnosisDate, 
-					// diagnosisStatus: req.body.diagnosisStatus,
 					medication: [],
 					dateArray: []
 				};
@@ -154,13 +110,6 @@ router.post("/login", (req,res)=>{
 			}else{
 				res.send(result);
 			}
-			// else if(result.password != req.body.password){
-			// 	var jsonToSend = {response: "Wrong Password"}
-			// 	res.send((jsonToSend));
-			// }else{
-			// 	res.send((result));
-			// }
-			// res.send(result);
 		});
 	});
 });
